@@ -1,0 +1,9 @@
+{
+    "hostname": "localhost",
+    "observabilityDomain": 120,
+    "lgpStackConfig": {
+        "grafanaPort": 3000,
+        "prometheusPort": 9090,
+        "lokiPort": 3100
+    }
+}
