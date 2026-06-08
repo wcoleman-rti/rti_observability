@@ -1,0 +1,84 @@
+
+volumes:
+    prometheus_data: {}
+    grafana_data: {}
+
+services:
+
+
+
+  prometheus:
+    image: prom/prometheus:v2.45.1
+    container_name: prometheus_observability
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--query.lookback-delta=30s'
+      - '--web.enable-lifecycle'
+      - '--web.enable-admin-api'
+      - '--web.listen-address=0.0.0.0:9090'
+    restart: unless-stopped
+    network_mode: "host"
+    labels:
+      org.label-schema.group: "observability"
+
+  grafana:
+    image: grafana/grafana-enterprise:10.1.4
+    container_name: grafana_observability
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./img/RTI_Logo_RGB-Color.png:/usr/share/grafana/public/img/RTI_Logo_RGB-Color.png
+    environment:
+      - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_SERVER_HTTP_PORT=3000
+      - GF_SERVER_DOMAIN=localhost
+      - GF_USERS_HOME_PAGE=/d/Hj4nnyOnk/alert-home?orgId=1&refresh=10s
+      - GF_INSTALL_PLUGINS=https://github.com/VolkovLabs/volkovlabs-form-panel/releases/download/v3.2.1/volkovlabs-form-panel-3.2.1.zip;volkovlabs-form-panel
+    restart: unless-stopped
+    network_mode: "host"
+    labels:
+      org.label-schema.group: "observability"
+
+  # loki:
+  #   image: grafana/loki:2.8.5
+  #   container_name: loki_observability
+  #   volumes:
+  #     - ./loki:/mnt/config 
+  #   command:
+  #     - '-config.file=/mnt/config/loki-config.yaml'
+  #   restart: unless-stopped
+  #   network_mode: "host"
+  #   labels:
+  #     org.label-schema.group: "observability"
+
+  collector-service:
+    image: rticom/collector-service:7.3.1.3
+    container_name: collector_service_observability
+    stop_signal: SIGINT
+    stop_grace_period: 50s
+    volumes:
+      - $RTI_LICENSE_FILE:/opt/rti.com/rti_connext_dds-7.3.0/rti_license.dat
+    command:
+      - "-verbosity"
+      - "WARN"
+    environment:
+      - CFG_NAME="NonSecureLAN"
+      - OBSERVABILITY_DOMAIN=101
+      - OBSERVABILITY_PROMETHEUS_EXPORTER_PORT=19090
+    restart: unless-stopped
+    network_mode: "host"
+    ipc: host
+    labels:
+      org.label-schema.group: "observability"
+    tty: true
+    stdin_open: true

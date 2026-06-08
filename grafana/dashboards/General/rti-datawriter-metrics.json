@@ -1,0 +1,973 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<div style=\"color: rgb(115, 191, 105)\" style=\"display:flex;justify-content:center\" class=\"container\"><h4 style=\"margin: 0\"><center>${datawriter_name}</center></h4></div>",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.1.4",
+      "title": "DataWriter Name",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "id": 5,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<p style=\"font-size:20px; color:#ccccdc; text-align: center\">\n  The RTI Collector Service at <span style=\"color: #ffffff; font-weight:bold\" >${control_url}</span> is <span style=\"color: #ffffff; font-weight:bold\" >${server_status}</span>. ${server_message}\n</p>",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.1.4",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "gridPos": {
+        "h": 48,
+        "w": 12,
+        "x": 6,
+        "y": 5
+      },
+      "id": 2,
+      "options": {
+        "buttonGroup": {
+          "orientation": "center",
+          "size": "md"
+        },
+        "elements": [
+          {
+            "id": "serverStatus",
+            "labelWidth": 12,
+            "options": [],
+            "section": "",
+            "showIf": "return false",
+            "title": "RTI Collector",
+            "tooltip": "",
+            "type": "disabled",
+            "uid": "928b7ffb-0bb4-44ca-bb6e-ec816a3ef1d5",
+            "unit": ""
+          },
+          {
+            "id": "dds_data_writer_protocol_sent_heartbeats_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / Protocol Writer Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Sent Heartbeats",
+            "tooltip": "dds_data_writer_protocol_sent_heartbeats_total",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_protocol_received_nacks_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / Protocol Writer Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Received Nacks",
+            "tooltip": "dds_data_writer_protocol_received_nacks_total",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_protocol_received_nack_bytes_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / Protocol Writer Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Received Nack Bytes",
+            "tooltip": "dds_data_writer_protocol_received_nack_bytes_total",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_protocol_received_nack_fragments_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / Protocol Writer Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Received Nack Fragments",
+            "tooltip": "dds_data_writer_protocol_received_nack_fragments_total",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_protocol_received_nack_fragment_bytes_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / Protocol Writer Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Received Nack Fragment Bytes",
+            "tooltip": "dds_data_writer_protocol_received_nack_fragment_bytes_total",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_protocol_pulled_samples_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / User Data Writer Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Pulled Samples",
+            "tooltip": "dds_data_writer_protocol_pulled_samples_total",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_protocol_pulled_sample_bytes_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / User Data Writer Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Pulled Sample Bytes",
+            "tooltip": "dds_data_writer_protocol_pulled_sample_bytes_total",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_protocol_pulled_fragments_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / User Data Writer Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Pulled Fragments",
+            "tooltip": "dds_data_writer_protocol_pulled_fragments_total",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_protocol_pulled_fragment_bytes_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / User Data Writer Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Pulled Fragment Bytes",
+            "tooltip": "dds_data_writer_protocol_pulled_fragment_bytes_total",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_protocol_pushed_samples_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / User Data Writer Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Pushed Samples",
+            "tooltip": "dds_data_writer_protocol_pushed_samples_total",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_protocol_pushed_sample_bytes_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / User Data Writer Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Pushed Sample Bytes",
+            "tooltip": "dds_data_writer_protocol_pushed_sample_bytes_total",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_protocol_pushed_fragments_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / User Data Writer Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Pushed Fragments",
+            "tooltip": "dds_data_writer_protocol_pushed_fragments_total",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_protocol_pushed_fragment_bytes_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / User Data Writer Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Pushed Fragment Bytes",
+            "tooltip": "dds_data_writer_protocol_pushed_fragment_bytes_total",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_reliable_cache_full_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Send Window",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Full Window",
+            "tooltip": "dds_data_writer_reliable_cache_full_total",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_reliable_cache_high_watermark_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Send Window",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Crossed High Water Mark",
+            "tooltip": "dds_data_writer_reliable_cache_high_watermark_total",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_reliable_cache_unack_samples",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Send Window",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Unacked Samples",
+            "tooltip": "dds_data_writer_reliable_cache_unack_samples",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_reliable_cache_unack_samples_peak",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Send Window",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Unacked Samples Peak",
+            "tooltip": "dds_data_writer_reliable_cache_unack_samples_peak",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_protocol_send_window_size",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Send Window",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Window Size",
+            "tooltip": "dds_data_writer_protocol_send_window_size",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_cache_samples",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Writer Cache",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Samples",
+            "tooltip": "dds_data_writer_cache_samples",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_cache_samples_peak",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Writer Cache",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Samples Peak",
+            "tooltip": "dds_data_writer_cache_samples_peak",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_cache_alive_instances",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Writer Cache",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Alive Instances",
+            "tooltip": "dds_data_writer_cache_alive_instances",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_cache_alive_instances_peak",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Writer Cache",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Alive Instances Peak",
+            "tooltip": "dds_data_writer_cache_alive_instances_peak",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_reliable_cache_replaced_unack_samples_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Data Loss / Writer Data Loss",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Replaced Unacked Samples",
+            "tooltip": "dds_data_writer_reliable_cache_replaced_unack_samples_total",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_incompatible_qos_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "System Errors / Configuration",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Incompatible Writer QoS",
+            "tooltip": "dds_data_writer_incompatible_qos_total",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_liveliness_lost_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "System Errors / Connection",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Writer Liveliness Assertion",
+            "tooltip": "dds_data_writer_liveliness_lost_total",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_reliable_reader_activity_inactive_count",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "System Errors / Connection",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Inactive Reliable Readers",
+            "tooltip": "dds_data_writer_reliable_reader_activity_inactive_count",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_writer_deadline_missed_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Delays / Missed Deadline",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Missed Writer Deadline",
+            "tooltip": "dds_data_writer_deadline_missed_total",
+            "type": "radio",
+            "value": "Enable",
+            "width": 40
+          }
+        ],
+        "initial": {
+          "code": "console.log(\"** Running DataWriter Metrics Initial Custom Code **\");\n\n// Build URL from variables, update for each dashboard\nconst url = `${control_url}/rti/collector_service/rest1/metrics:get_subscription_state?resource_selector=/applications/GUID(${application_guid})//data_writers/GUID(${datawriter_guid})`;\n\n// get resource_guid from variable\nconst resource_guid = `${datawriter_guid}`;\n// list of metric names for the entity\nconst metricNames = new Set([\n  'dds_data_writer_liveliness_lost_total',\n  'dds_data_writer_deadline_missed_total',\n  'dds_data_writer_incompatible_qos_total',\n  'dds_data_writer_reliable_cache_full_total',\n  'dds_data_writer_reliable_cache_high_watermark_total',\n  'dds_data_writer_reliable_cache_unack_samples',\n  'dds_data_writer_reliable_cache_unack_samples_peak',\n  'dds_data_writer_reliable_cache_replaced_unack_samples_total',\n  'dds_data_writer_reliable_reader_activity_inactive_count',\n  'dds_data_writer_cache_samples_peak',\n  'dds_data_writer_cache_samples',\n  'dds_data_writer_cache_alive_instances',\n  'dds_data_writer_cache_alive_instances_peak',\n  'dds_data_writer_protocol_pushed_samples_total',\n  'dds_data_writer_protocol_pushed_sample_bytes_total',\n  'dds_data_writer_protocol_sent_heartbeats_total',\n  'dds_data_writer_protocol_pulled_samples_total',\n  'dds_data_writer_protocol_pulled_sample_bytes_total',\n  'dds_data_writer_protocol_received_nacks_total',\n  'dds_data_writer_protocol_received_nack_bytes_total',\n  'dds_data_writer_protocol_send_window_size',\n  'dds_data_writer_protocol_pushed_fragments_total',\n  'dds_data_writer_protocol_pushed_fragment_bytes_total',\n  'dds_data_writer_protocol_pulled_fragments_total',\n  'dds_data_writer_protocol_pulled_fragment_bytes_total',\n  'dds_data_writer_protocol_received_nack_fragments_total',\n  'dds_data_writer_protocol_received_nack_fragment_bytes_total',\n]);\n\n/*\n * This function will create the request header\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction createHeaders(authentication) {\n\n  const authArray = authentication.split(\":\")\n  const headers = new Headers()\n\n  headers.append('Content-Type', 'application/json')\n  if (authArray.length === 2) {\n    console.log(\"Adding authorization header\")\n    headers.append(authArray[0], authArray[1])\n  }\n\n  return headers\n}\n\n/*\n * This function will process the fetch response\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction processResponse(jsonRsp) {\n  // create empty initial value object\n  let init = {};\n\n  // set all values to Disable\n  metricNames.forEach(function (name) {\n    init[name] = 'Disable';\n  });\n\n  // iterate over each metric configuration\n  jsonRsp.forEach((metricCfg) => {\n    // only process if this configuration matches the resource\n    if (metricCfg['resource_guid'] === resource_guid) {\n      // iterate over settings and save locally\n      metricCfg['metrics'].forEach((setting) => {\n        if (setting in init) {\n          init[setting] = 'Enable';\n        }\n      });\n    }\n  });\n\n  return init;\n}\n\n/*\n * This function will set the server status message for the dashboard and hide the panel elements.\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction disablePlugin() {\n  // create empty initial value object\n  let init = {};\n  // Set the value for 'serverStatus panel element. This value will hide the other elements\n  init['serverStatus'] = 'NOT AVAILABLE';\n  // update the \"initial\" values so the plugin logic works\n  setInitial(init);\n\n  // update the server status dashboard variables\n  locationService.partial({ 'var-server_status': 'NOT AVAILABLE' }, true);\n  locationService.partial({ 'var-server_message': 'Configuration changes can NOT be made!' }, true);\n\n  // Update element values so they match the initial values\n  onChange(elements.map((element) => ({\n    ...element,\n    value: init[element.id],\n  })));\n\n  // notify of options update\n  onOptionsChange(options);\n}\n\n/*\n * This function will handle errors caught in the fetch request\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction handleError(error) {\n  if (error.name === 'TypeError') {\n    // could get here because ERR_CONNECTION_REFUSED \n    // could get here because ERR_NAME_NOT_RESOLVED \n    console.log('fetch() failed to access the server.');\n    notifyError(['Initialize', 'Server not found or request refused.']);\n  } else if (error.name === 'AbortError') {\n    console.log('The fetch()() operation timed out');\n    notifyError(['Initialize', 'Request timed out.']);\n  } else {\n    console.log('fetch() failed');\n    console.log(error);\n    notifyError(['Initialize', 'Unknown failure.']);\n  }\n  // the request failed, disable the plugin functionality\n  disablePlugin();\n}\n\n/*\n * This function will send an HTTP query to get the forwarding verbosity\n *\n * Note: Should not need to be modified for each dashboard\n */\nasync function getInitializationData() {\n  console.log(\"getInitializationData()\");\n\n  const timeout = 3000;\n  const controller = new AbortController();\n  const id = setTimeout(() => controller.abort(), timeout);\n  const reqHeaders = createHeaders(`${authentication_header}`);\n\n  fetch(url, {\n    method: 'GET',\n    headers: reqHeaders,\n    signal: controller.signal\n  })\n    .then(async response => {\n      const responseJson = await response.json();\n      if (response.ok) {\n        console.log(\"getInitializationData() - response.ok\");\n\n        // clear the abort controller\n        clearTimeout(id);\n\n        // process the fetch response into the init struct\n        let init = processResponse(responseJson);\n        // Set the value for 'serverStatus panel element. This value will enable the other elements\n        init['serverStatus'] = 'AVAILABLE';\n\n        // update the \"initial\" values so the plugin logic works\n        setInitial(init);\n\n        // update the server status dashboard variables\n        locationService.partial({ 'var-server_status': 'AVAILABLE' }, true);\n        locationService.partial({ 'var-server_message': 'Configuration changes can be made.' }, true);\n\n        // Update element values so they match the initial values\n        onChange(elements.map((element) => ({\n          ...element,\n          value: init[element.id],\n        })));\n\n        // notify of options update\n        onOptionsChange(options);\n\n        notifySuccess(['Initialize', 'Data initialized successfully.']);\n      } else {\n        console.log(`getInitializationData() - fetch() operation returned ${response.status}.`);\n        if (response.status === 501) {\n          notifyWarning([responseJson['code'], responseJson['message']]);\n        } else {\n          notifyError([responseJson['code'], responseJson['message']]);\n        }\n        // the request failed, disable the plugin functionality\n        disablePlugin();\n      }\n    })\n    .catch(error => {\n      handleError(error);\n    });\n}\n\ngetInitializationData();",
+          "contentType": "application/json",
+          "getPayload": "return {\n  rawSql: '',\n  format: 'table',\n}",
+          "highlight": true,
+          "highlightColor": "light-green",
+          "method": "-"
+        },
+        "layout": {
+          "orientation": "vertical",
+          "padding": 0,
+          "sections": [
+            {
+              "name": "Bandwidth / Protocol Writer Traffic"
+            },
+            {
+              "name": "Bandwidth / User Data Writer Traffic"
+            },
+            {
+              "name": "Saturation / Send Window"
+            },
+            {
+              "name": "Saturation / Writer Cache"
+            },
+            {
+              "name": "Data Loss / Writer Data Loss"
+            },
+            {
+              "name": "System Errors / Configuration"
+            },
+            {
+              "name": "System Errors / Connection"
+            },
+            {
+              "name": "Delays / Missed Deadline"
+            }
+          ],
+          "variant": "split"
+        },
+        "reset": {
+          "backgroundColor": "purple",
+          "foregroundColor": "yellow",
+          "icon": "process",
+          "text": "Reset",
+          "variant": "primary"
+        },
+        "resetAction": {
+          "code": "console.log(data, response, initial, elements);",
+          "mode": "initial"
+        },
+        "saveDefault": {
+          "icon": "save",
+          "text": "Save Default",
+          "variant": "hidden"
+        },
+        "submit": {
+          "backgroundColor": "purple",
+          "foregroundColor": "yellow",
+          "icon": "cog",
+          "text": "Configure Metrics",
+          "variant": "primary"
+        },
+        "update": {
+          "code": "console.log(\"** Running DataWriter Metrics Update Custom Code **\");\n\n// Build URL from variables, update for each dashboard\nconst url = `${control_url}/rti/collector_service/rest1/metrics:set_subscription_state`;\n\n/*\n * This function will create the request header\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction createHeaders(authentication) {\n\n  const authArray = authentication.split(\":\")\n  const headers = new Headers()\n\n  headers.append('Content-Type', 'application/json')\n  if (authArray.length === 2) {\n    console.log(\"Adding authorization header\")\n    headers.append(authArray[0], authArray[1])\n  }\n\n  return headers\n}\n\n/*\n * This function will build the body for the HTTP request\n *\n * Note: Custom implementation for each dashboard\n */\nfunction buildRequestBody() {\n  // the json body for the POST request\n  let body = [];\n  // local variable to collect the modified metric settings\n  let metricSettings = [];\n  // local init object to update the \"initial\" values with\n  // the current values if the POST is successful\n  let init = {};\n\n  // gather up the modified metric settings\n  elements.forEach((element) => {\n\n    // update the local init structure with all of the current values\n    init[element.id] = element.value;\n\n    // capture all elements that are enabled\n    if (element.value === `Enable`) {\n      metricSettings.push(element.id)\n    }\n\n  });\n\n  // create the metricSettingEntry object\n  let metricSettingEntry = {};\n  metricSettingEntry['resource_selector'] = `/applications/GUID(${application_guid})//data_writers/GUID(${datawriter_guid})`;\n  metricSettingEntry['subscribe_metrics_selectors'] = metricSettings;\n  // add the metricSettingEntry object to the body\n  body.push(metricSettingEntry);\n\n  return body\n}\n\n/*\n * This function will handle errors caught in the fetch request\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction handleError(error) {\n  if (error.name === 'TypeError') {\n    // could get here because ERR_CONNECTION_REFUSED \n    // could get here because ERR_NAME_NOT_RESOLVED \n    console.log('fetch() failed to access the server.');\n    notifyError(['Initialize', 'Server not found or request refused.']);\n  } else if (error.name === 'AbortError') {\n    console.log('The fetch()() operation timed out');\n    notifyError(['Initialize', 'Request timed out.']);\n  } else {\n    console.log('fetch() failed');\n    console.log(error);\n    notifyError(['Initialize', 'Unknown failure.']);\n  }\n}\n\n/*\n * This function will send an HTTP query to update the data\n *\n * Note: Should not need to be modified for each dashboard\n */\nasync function updateData() {\n\n  const timeout = 3000;\n  const controller = new AbortController();\n  const id = setTimeout(() => controller.abort(), timeout);\n  const reqHeaders = createHeaders(`${authentication_header}`);\n\n  // local object to update the \"initial\" values with\n  // the current values if the POST is successful\n  let currentValues = {};\n  elements.forEach((element) => {\n    // update the local currentValues structure with all of the current values\n    currentValues[element.id] = element.value;\n  });\n\n  // create the request body\n  let body = buildRequestBody();\n\n  fetch(url, {\n    method: 'POST',\n    headers: reqHeaders,\n    signal: controller.signal,\n    body: JSON.stringify(body),\n  })\n    .then(async response => {\n      if (response.ok) {\n        console.log(\"Successful Update!!\");\n        // update the \"initial\" values with the successful updates\n        setInitial(currentValues);\n        notifySuccess(['Update', 'Values updated successfully.']);\n      } else {\n        console.log(\"Unsuccessful Update!!\");\n        responseJson = await response.json();\n        notifyError([responseJson['code'], responseJson['message']]);\n        // the request failed call the initialRequest() code to get current values\n        initialRequest();\n      }\n    })\n    .catch(error => {\n      handleError(error);\n      // the request failed call the initialRequest() code to get current values\n      initialRequest();\n    });\n}\n\nupdateData();",
+          "confirm": true,
+          "contentType": "application/json",
+          "getPayload": "const payload = {};\n\nelements.forEach((element) => {\n  if (!element.value) {\n    return;\n  }\n\n  payload[element.id] = element.value;\n})\n\nreturn payload;\n\n/**\n * Data Source payload\n */ \nreturn {\n  rawSql: '',\n  format: 'table',\n};",
+          "method": "-",
+          "payloadMode": "all",
+          "updatedOnly": false
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "absent(dds_data_writer_protocol_sent_heartbeats_total{guid=~\"$datawriter_guid\"}) or vector(0)",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Configure DataWriter Metrics",
+      "type": "volkovlabs-form-panel"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_application_presence{guid=~\"$application_guid\"},controllability_url)",
+        "description": "Control URL",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Control URL",
+        "multi": false,
+        "name": "control_url",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_application_presence{guid=~\"$application_guid\"},controllability_url)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "description": "Authentication Header",
+        "hide": 2,
+        "label": "Authentication Header",
+        "name": "authentication_header",
+        "query": "",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_data_writer_presence{guid=~\"$datawriter_guid\"}, name)",
+        "description": "DataReader Resource Name",
+        "hide": 2,
+        "includeAll": false,
+        "label": "DataWriter Name",
+        "multi": false,
+        "name": "datawriter_name",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_data_writer_presence{guid=~\"$datawriter_guid\"}, name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "description": "Unique DataWriter Resource GUID",
+        "hide": 2,
+        "label": "DataWriter GUID",
+        "name": "datawriter_guid",
+        "query": "${VAR_DATAWRITER_GUID}",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_data_writer_presence{guid=~\"$datawriter_guid\"}, participant_guid)",
+        "description": "Participant Resource GUID",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Participant GUID",
+        "multi": false,
+        "name": "participant_guid",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_data_writer_presence{guid=~\"$datawriter_guid\"}, participant_guid)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_domain_participant_presence{guid=~\"$participant_guid\"}, owner_guid)",
+        "description": "Application Resource GUID",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Application GUID",
+        "multi": false,
+        "name": "application_guid",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_domain_participant_presence{guid=~\"$participant_guid\"}, owner_guid)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "description": "This is the Server status",
+        "hide": 2,
+        "label": "Server Status",
+        "name": "server_status",
+        "query": "${VAR_SERVER_STATUS}",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "description": "This is the Server message",
+        "hide": 2,
+        "label": "Server Message",
+        "name": "server_message",
+        "query": "${VAR_SERVER_MESSAGE}",
+        "skipUrlSync": false,
+        "type": "constant"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "DataWriter Metrics",
+  "uid": "_WexYqLVz",
+  "version": 1,
+  "weekStart": ""
+}

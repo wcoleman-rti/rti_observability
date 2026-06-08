@@ -1,0 +1,1594 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 19,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# /[${application_name}](/d/xAliKiFVk/alert-application-status?orgId=1&var-application_guid=${application_guid}&from=now-1h&to=now&refresh=10s)/[${participant_name}](/d/-vP48r27k/alert-participant-status?orgId=1&var-participant_guid=${participant_guid}&from=now-1h&to=now&refresh=10s)/${topic_name}",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.1.4",
+      "title": "Topic Name",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Name"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": "\\/applications\\/(.*?)\\/domain_participants\\/(.*?)",
+                      "result": {
+                        "index": 0,
+                        "text": "$1/$2"
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 4,
+        "x": 0,
+        "y": 3
+      },
+      "id": 22,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Host Name$/",
+          "values": false
+        },
+        "text": {
+          "valueSize": 16
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "dds_domain_participant_presence{guid=~\"$participant_guid\"}",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Host Name",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "datareader_guid": true,
+              "dds_guid": true,
+              "guid": true,
+              "host_id": true,
+              "instance": true,
+              "job": true,
+              "owner_guid": true,
+              "participant_guid": true
+            },
+            "indexByName": {
+              "Time": 0,
+              "Value": 9,
+              "__name__": 10,
+              "dds_guid": 11,
+              "domain_id": 4,
+              "guid": 12,
+              "hostname": 2,
+              "instance": 7,
+              "job": 8,
+              "name": 1,
+              "owner_guid": 13,
+              "platform": 5,
+              "process_id": 3,
+              "product_version": 6
+            },
+            "renameByName": {
+              "datareader_name": "Name",
+              "datareader_role_name": "Role Name",
+              "domain_id": "Domain Id",
+              "guid": "",
+              "hostname": "Host Name",
+              "name": "Name",
+              "participant_name": "Participant Name",
+              "participant_role_name": "Participant Role Name",
+              "platform": "Platform",
+              "process_id": "Process Id",
+              "product_version": "Product Version",
+              "target": "Architecture",
+              "topic_name": "Topic Name",
+              "type_name": "Type Name",
+              "version": "Version"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Name"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": "\\/applications\\/(.*?)\\/domain_participants\\/(.*?)",
+                      "result": {
+                        "index": 0,
+                        "text": "$1/$2"
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 4,
+        "y": 3
+      },
+      "id": 23,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Process Id$/",
+          "values": false
+        },
+        "text": {
+          "valueSize": 16
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "dds_domain_participant_presence{guid=~\"$participant_guid\"}",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Process Id",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "datareader_guid": true,
+              "dds_guid": true,
+              "guid": true,
+              "host_id": true,
+              "instance": true,
+              "job": true,
+              "owner_guid": true,
+              "participant_guid": true
+            },
+            "indexByName": {
+              "Time": 0,
+              "Value": 9,
+              "__name__": 10,
+              "dds_guid": 11,
+              "domain_id": 4,
+              "guid": 12,
+              "hostname": 2,
+              "instance": 7,
+              "job": 8,
+              "name": 1,
+              "owner_guid": 13,
+              "platform": 5,
+              "process_id": 3,
+              "product_version": 6
+            },
+            "renameByName": {
+              "datareader_name": "Name",
+              "datareader_role_name": "Role Name",
+              "domain_id": "Domain Id",
+              "guid": "",
+              "hostname": "Host Name",
+              "name": "Name",
+              "participant_name": "Participant Name",
+              "participant_role_name": "Participant Role Name",
+              "platform": "Platform",
+              "process_id": "Process Id",
+              "product_version": "Product Version",
+              "target": "Architecture",
+              "topic_name": "Topic Name",
+              "type_name": "Type Name",
+              "version": "Version"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Name"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": "\\/applications\\/(.*?)\\/domain_participants\\/(.*?)\\/[^.*]+\\/(.*?)$",
+                      "result": {
+                        "index": 0,
+                        "text": "$1/$2/$3"
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 5,
+        "x": 6,
+        "y": 3
+      },
+      "id": 29,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Topic Name$/",
+          "values": false
+        },
+        "text": {
+          "valueSize": 16
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "dds_topic_presence{guid=~\"$topic_guid\"}",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Topic Name",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "dds_domain_participant_guid": true,
+              "dds_guid": false,
+              "domain_id": true,
+              "guid": true,
+              "host_id": true,
+              "hostname": true,
+              "instance": true,
+              "job": true,
+              "owner_guid": true,
+              "participant_guid": true,
+              "participant_name": true,
+              "process_id": true,
+              "publisher_guid": true
+            },
+            "indexByName": {
+              "Time": 0,
+              "Value": 9,
+              "__name__": 10,
+              "dds_guid": 11,
+              "domain_id": 4,
+              "guid": 12,
+              "hostname": 5,
+              "instance": 7,
+              "job": 8,
+              "name": 1,
+              "owner_guid": 13,
+              "participant_name": 14,
+              "process_id": 6,
+              "registered_type_name": 3,
+              "topic_name": 2
+            },
+            "renameByName": {
+              "datawriter_guid": "GUID",
+              "datawriter_name": "Name",
+              "datawriter_role_name": "Role Name",
+              "dds_guid": "DDS GUID",
+              "domain_id": "Domain Id",
+              "guid": "",
+              "hostname": "Host Name",
+              "name": "Name",
+              "process_id": "Process Id",
+              "registered_type_name": "Registered Type Name",
+              "topic_name": "Topic Name",
+              "type_name": "Type Name"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 11,
+        "y": 3
+      },
+      "id": 27,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Registered Type Name$/",
+          "values": false
+        },
+        "text": {
+          "valueSize": 16
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "dds_topic_presence{guid=~\"$topic_guid\"}",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Registered Type Name",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "datareader_guid": true,
+              "dds_domain_participant_guid": true,
+              "dds_guid": false,
+              "domain_id": true,
+              "guid": true,
+              "host_id": true,
+              "hostname": true,
+              "instance": true,
+              "job": true,
+              "name": true,
+              "owner_guid": true,
+              "participant_guid": true,
+              "participant_name": true,
+              "participant_role_name": true,
+              "process_id": true,
+              "target": true,
+              "topic_name": false,
+              "version": true
+            },
+            "indexByName": {
+              "Time": 0,
+              "Value": 8,
+              "__name__": 9,
+              "dds_guid": 3,
+              "domain_id": 4,
+              "guid": 10,
+              "hostname": 5,
+              "instance": 6,
+              "job": 7,
+              "name": 12,
+              "owner_guid": 11,
+              "registered_type_name": 2,
+              "topic_name": 1
+            },
+            "renameByName": {
+              "datareader_name": "Name",
+              "datareader_role_name": "Role Name",
+              "dds_guid": "DDS GUID",
+              "domain_id": "",
+              "guid": "",
+              "hostname": "",
+              "name": "",
+              "participant_guid": "",
+              "participant_name": "",
+              "participant_role_name": "Participant Role Name",
+              "process_id": "",
+              "registered_type_name": "Registered Type Name",
+              "topic_guid": "GUID",
+              "topic_name": "Topic Name",
+              "type_name": "Type Name"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Name"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": "\\/applications\\/(.*?)\\/domain_participants\\/(.*?)",
+                      "result": {
+                        "index": 0,
+                        "text": "$1/$2"
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 17,
+        "y": 3
+      },
+      "id": 24,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Domain Id$/",
+          "values": false
+        },
+        "text": {
+          "valueSize": 16
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "dds_domain_participant_presence{guid=~\"$participant_guid\"}",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Domain Id",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "datareader_guid": true,
+              "dds_guid": true,
+              "guid": true,
+              "host_id": true,
+              "instance": true,
+              "job": true,
+              "owner_guid": true,
+              "participant_guid": true
+            },
+            "indexByName": {
+              "Time": 0,
+              "Value": 9,
+              "__name__": 10,
+              "dds_guid": 11,
+              "domain_id": 4,
+              "guid": 12,
+              "hostname": 2,
+              "instance": 7,
+              "job": 8,
+              "name": 1,
+              "owner_guid": 13,
+              "platform": 5,
+              "process_id": 3,
+              "product_version": 6
+            },
+            "renameByName": {
+              "datareader_name": "Name",
+              "datareader_role_name": "Role Name",
+              "domain_id": "Domain Id",
+              "guid": "",
+              "hostname": "Host Name",
+              "name": "Name",
+              "participant_name": "Participant Name",
+              "participant_role_name": "Participant Role Name",
+              "platform": "Platform",
+              "process_id": "Process Id",
+              "product_version": "Product Version",
+              "target": "Architecture",
+              "topic_name": "Topic Name",
+              "type_name": "Type Name",
+              "version": "Version"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 5,
+        "x": 19,
+        "y": 3
+      },
+      "id": 28,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^DDS GUID$/",
+          "values": false
+        },
+        "text": {
+          "valueSize": 16
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "dds_topic_presence{guid=~\"$topic_guid\"}",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "DDS GUID",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "datareader_guid": true,
+              "dds_domain_participant_guid": true,
+              "dds_guid": false,
+              "domain_id": true,
+              "guid": true,
+              "host_id": true,
+              "hostname": true,
+              "instance": true,
+              "job": true,
+              "name": true,
+              "owner_guid": true,
+              "participant_guid": true,
+              "participant_name": true,
+              "participant_role_name": true,
+              "process_id": true,
+              "target": true,
+              "topic_name": false,
+              "version": true
+            },
+            "indexByName": {
+              "Time": 0,
+              "Value": 8,
+              "__name__": 9,
+              "dds_guid": 3,
+              "domain_id": 4,
+              "guid": 10,
+              "hostname": 5,
+              "instance": 6,
+              "job": 7,
+              "name": 12,
+              "owner_guid": 11,
+              "registered_type_name": 2,
+              "topic_name": 1
+            },
+            "renameByName": {
+              "datareader_name": "Name",
+              "datareader_role_name": "Role Name",
+              "dds_guid": "DDS GUID",
+              "domain_id": "",
+              "guid": "",
+              "hostname": "",
+              "name": "",
+              "participant_guid": "",
+              "participant_name": "",
+              "participant_role_name": "Participant Role Name",
+              "process_id": "",
+              "registered_type_name": "Registered Type Name",
+              "topic_guid": "GUID",
+              "topic_name": "Topic Name",
+              "type_name": "Type Name"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Name"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": "\\/applications\\/(.*?)\\/domain_participants\\/(.*?)",
+                      "result": {
+                        "index": 0,
+                        "text": "$1/$2"
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 4,
+        "x": 0,
+        "y": 5
+      },
+      "id": 25,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Platform$/",
+          "values": false
+        },
+        "text": {
+          "valueSize": 16
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "dds_domain_participant_presence{guid=~\"$participant_guid\"}",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Platform",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "datareader_guid": true,
+              "dds_guid": true,
+              "guid": true,
+              "host_id": true,
+              "instance": true,
+              "job": true,
+              "owner_guid": true,
+              "participant_guid": true
+            },
+            "indexByName": {
+              "Time": 0,
+              "Value": 9,
+              "__name__": 10,
+              "dds_guid": 11,
+              "domain_id": 4,
+              "guid": 12,
+              "hostname": 2,
+              "instance": 7,
+              "job": 8,
+              "name": 1,
+              "owner_guid": 13,
+              "platform": 5,
+              "process_id": 3,
+              "product_version": 6
+            },
+            "renameByName": {
+              "datareader_name": "Name",
+              "datareader_role_name": "Role Name",
+              "domain_id": "Domain Id",
+              "guid": "",
+              "hostname": "Host Name",
+              "name": "Name",
+              "participant_name": "Participant Name",
+              "participant_role_name": "Participant Role Name",
+              "platform": "Platform",
+              "process_id": "Process Id",
+              "product_version": "Product Version",
+              "target": "Architecture",
+              "topic_name": "Topic Name",
+              "type_name": "Type Name",
+              "version": "Version"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Name"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": "\\/applications\\/(.*?)\\/domain_participants\\/(.*?)",
+                      "result": {
+                        "index": 0,
+                        "text": "$1/$2"
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 3,
+        "x": 4,
+        "y": 5
+      },
+      "id": 26,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^Product Version$/",
+          "values": false
+        },
+        "text": {
+          "valueSize": 16
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "dds_domain_participant_presence{guid=~\"$participant_guid\"}",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Product Version",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "datareader_guid": true,
+              "dds_guid": true,
+              "guid": true,
+              "host_id": true,
+              "instance": true,
+              "job": true,
+              "owner_guid": true,
+              "participant_guid": true
+            },
+            "indexByName": {
+              "Time": 0,
+              "Value": 9,
+              "__name__": 10,
+              "dds_guid": 11,
+              "domain_id": 4,
+              "guid": 12,
+              "hostname": 2,
+              "instance": 7,
+              "job": 8,
+              "name": 1,
+              "owner_guid": 13,
+              "platform": 5,
+              "process_id": 3,
+              "product_version": 6
+            },
+            "renameByName": {
+              "datareader_name": "Name",
+              "datareader_role_name": "Role Name",
+              "domain_id": "Domain Id",
+              "guid": "",
+              "hostname": "Host Name",
+              "name": "Name",
+              "participant_name": "Participant Name",
+              "participant_role_name": "Participant Role Name",
+              "platform": "Platform",
+              "process_id": "Process Id",
+              "product_version": "Product Version",
+              "target": "Architecture",
+              "topic_name": "Topic Name",
+              "type_name": "Type Name",
+              "version": "Version"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "id": 21,
+      "panels": [],
+      "title": "Metric Configuration (click on panel to select metrics)",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "dark-blue",
+            "mode": "fixed"
+          },
+          "links": [
+            {
+              "title": "Topic Metrics Dashboard",
+              "url": "/d/pGKD5REVz/topic-metrics?orgid=1&var-topic_guid=${topic_guid}&${__url_time_range}"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 4,
+        "x": 0,
+        "y": 8
+      },
+      "id": 17,
+      "links": [],
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "",
+          "values": false
+        },
+        "text": {
+          "valueSize": 20
+        },
+        "textMode": "name"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "dds_topic_empty_metric",
+          "instant": true,
+          "legendFormat": "Configure Topic Metrics",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 13,
+      "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "System Errors / Configuration",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "super-light-blue",
+            "mode": "fixed",
+            "seriesBy": "max"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 5,
+            "axisSoftMin": 0,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "stepAfter",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-green",
+                "value": null
+              },
+              {
+                "color": "light-red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "count"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 11
+      },
+      "id": 15,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "exemplar": true,
+          "expr": "dds_topic_inconsistent_total{guid=~\"$topic_guid\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Inconsistent Topics",
+          "refId": "B"
+        }
+      ],
+      "title": "Inconsistent Topics",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "description": "Unique Identifier for an entity",
+        "hide": 2,
+        "label": "Topic GUID",
+        "name": "topic_guid",
+        "query": "${VAR_TOPIC_GUID}",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_topic_presence{guid=\"$topic_guid\"}, owner_guid)",
+        "description": "the participant_guid for the participant this entity belongs to",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Participant GUID",
+        "multi": false,
+        "name": "participant_guid",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_topic_presence{guid=\"$topic_guid\"}, owner_guid)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_domain_participant_presence{guid=\"$participant_guid\"}, owner_guid)",
+        "description": "Application Resource GUID",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Application GUID",
+        "multi": false,
+        "name": "application_guid",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_domain_participant_presence{guid=\"$participant_guid\"}, owner_guid)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_application_presence{guid=~\"$application_guid\"}, name)",
+        "description": "Application Name",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Application Name",
+        "multi": false,
+        "name": "application_name",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_application_presence{guid=~\"$application_guid\"}, name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "\\/applications\\/(.*?)$",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_domain_participant_presence{guid=~\"$participant_guid\"}, name)",
+        "description": "Participant Name",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Participant Name",
+        "multi": false,
+        "name": "participant_name",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_domain_participant_presence{guid=~\"$participant_guid\"}, name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "\\/applications\\/[^.*]+\\/(.*?)$",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_topic_presence{guid=~\"$topic_guid\"}, name)",
+        "description": "Topic Name",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Topic Name",
+        "multi": false,
+        "name": "topic_name",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_topic_presence{guid=~\"$topic_guid\"}, name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "\\/applications\\/[^.*]+\\/(.*?)$",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Alert Topic Status",
+  "uid": "P8Jpwrhnk",
+  "version": 1,
+  "weekStart": ""
+}

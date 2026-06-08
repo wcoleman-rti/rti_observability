@@ -1,0 +1,1255 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<div style=\"color: rgb(115, 191, 105)\" style=\"display:flex;justify-content:center\" class=\"container\"><h4 style=\"margin: 0\"><center>${datareader_name}</center></h4></div>",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.1.4",
+      "title": "DataReader Name",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "id": 5,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<p style=\"font-size:20px; color:#ccccdc; text-align: center\">\n  The RTI Collector Service at <span style=\"color: #ffffff; font-weight:bold\" >${control_url}</span> is <span style=\"color: #ffffff; font-weight:bold\" >${server_status}</span>. ${server_message}\n</p>",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.1.4",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "gridPos": {
+        "h": 59,
+        "w": 12,
+        "x": 6,
+        "y": 5
+      },
+      "id": 2,
+      "options": {
+        "buttonGroup": {
+          "orientation": "center",
+          "size": "md"
+        },
+        "elements": [
+          {
+            "id": "serverStatus",
+            "labelWidth": 12,
+            "options": [],
+            "section": "",
+            "showIf": "return false",
+            "title": "RTI Collector",
+            "tooltip": "",
+            "type": "disabled",
+            "uid": "928b7ffb-0bb4-44ca-bb6e-ec816a3ef1d5",
+            "unit": ""
+          },
+          {
+            "id": "dds_data_reader_protocol_received_heartbeats_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / Protocol Reader Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Received Heartbeats",
+            "tooltip": "dds_data_reader_protocol_received_heartbeats_total",
+            "type": "radio",
+            "uid": "f4b5ce87-8b68-482f-98c1-b46bb57d2ef6",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_protocol_sent_nacks_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / Protocol Reader Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Sent Nacks",
+            "tooltip": "dds_data_reader_protocol_sent_nacks_total",
+            "type": "radio",
+            "uid": "b4f158c6-764d-4df6-9120-29ddcbf4c1bb",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_protocol_sent_nack_bytes_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / Protocol Reader Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Sent Nack Bytes",
+            "tooltip": "dds_data_reader_protocol_sent_nack_bytes_total",
+            "type": "radio",
+            "uid": "f4149792-9195-4ee2-acb0-ccd6698d9c4d",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_protocol_sent_nack_fragments_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / Protocol Reader Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Sent Nack Fragments",
+            "tooltip": "dds_data_reader_protocol_sent_nack_fragments_total",
+            "type": "radio",
+            "uid": "3786ca5b-7058-4d56-bf3f-bfd8cbf0f509",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_protocol_sent_nack_fragment_bytes_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / Protocol Reader Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Sent Nack Fragment Bytes",
+            "tooltip": "dds_data_reader_protocol_sent_nack_fragment_bytes_total",
+            "type": "radio",
+            "uid": "87fd44fd-3d33-4383-9200-1286087a0b4f",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_cache_content_filter_dropped_samples_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / User Data Reader Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Content Filter Dropped Samples",
+            "tooltip": "dds_data_reader_cache_content_filter_dropped_samples_total",
+            "type": "radio",
+            "uid": "685a2d21-5071-4f94-90c0-9a6f47946b39",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_cache_compressed_samples_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / User Data Reader Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Compressed Samples",
+            "tooltip": "dds_data_reader_cache_compressed_samples_total",
+            "type": "radio",
+            "uid": "f744d4ee-4c49-417c-939a-693338d6264d",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_protocol_duplicate_samples_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / User Data Reader Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Duplicate Samples",
+            "tooltip": "dds_data_reader_protocol_duplicate_samples_total",
+            "type": "radio",
+            "uid": "5c352870-b0a6-46da-9109-3f7e62927fb4",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_protocol_duplicate_sample_bytes_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / User Data Reader Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Duplicate Samples Bytes",
+            "tooltip": "dds_data_reader_protocol_duplicate_sample_bytes_total",
+            "type": "radio",
+            "uid": "97d39a08-72d2-4ae6-b086-5f8b8522a9db",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_protocol_received_samples_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / User Data Reader Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Received Samples",
+            "tooltip": "dds_data_reader_protocol_received_samples_total",
+            "type": "radio",
+            "uid": "0e63be65-9ceb-403f-9793-3bcd64717e43",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_protocol_received_sample_bytes_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / User Data Reader Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Received Sample Bytes",
+            "tooltip": "dds_data_reader_protocol_received_sample_bytes_total",
+            "type": "radio",
+            "uid": "995607e5-d5a8-434f-a300-b200249561e5",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_protocol_received_fragments_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / User Data Reader Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Received Fragments",
+            "tooltip": "dds_data_reader_protocol_received_fragments_total",
+            "type": "radio",
+            "uid": "b76f3355-6e71-45f2-a44e-a683a716caea",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_protocol_reassembled_samples_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Bandwidth / User Data Reader Traffic",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Reassembled Samples",
+            "tooltip": "dds_data_reader_protocol_reassembled_samples_total",
+            "type": "radio",
+            "uid": "cc4fa68d-a0ac-41c4-aca3-1aac53bdb47d",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_sample_rejected_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Reader Cache",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Rejected Samples",
+            "tooltip": "dds_data_reader_sample_rejected_total",
+            "type": "radio",
+            "uid": "0fee29ca-b531-4468-acb1-4ff6cffdfd6b",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_cache_samples",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Reader Cache",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Samples",
+            "tooltip": "dds_data_reader_cache_samples",
+            "type": "radio",
+            "uid": "3b911086-24dd-40f8-85ec-7a87e11969d2",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_cache_samples_peak",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Reader Cache",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Samples Peak",
+            "tooltip": "dds_data_reader_cache_samples_peak",
+            "type": "radio",
+            "uid": "707a134a-e2a4-4b07-9ad3-51cc6868a81d",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_cache_replaced_dropped_samples_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Reader Cache",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Dropped Samples due to History Depth",
+            "tooltip": "dds_data_reader_cache_replaced_dropped_samples_total",
+            "type": "radio",
+            "uid": "3b156e52-a91a-4311-a6f8-ec52c3d163fe",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_cache_samples_dropped_by_instance_replaced_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Reader Cache",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Dropped Samples due to Instance Replacement",
+            "tooltip": "dds_data_reader_cache_samples_dropped_by_instance_replaced_total",
+            "type": "radio",
+            "uid": "88ac49b1-8859-41a4-aa1e-9d76f3c088a6",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_cache_alive_instances",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Reader Cache",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Alive Instances",
+            "tooltip": "dds_data_reader_cache_alive_instances",
+            "type": "radio",
+            "uid": "fd334adc-b2fb-433c-84dc-9805264a5859",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_cache_alive_instances_peak",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Reader Cache",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Alive Instances Peak",
+            "tooltip": "dds_data_reader_cache_alive_instances_peak",
+            "type": "radio",
+            "uid": "0b760fa4-be81-4aff-8916-141e876402e9",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_cache_no_writers_instances",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Reader Cache",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "No Writers Instances",
+            "tooltip": "dds_data_reader_cache_no_writers_instances",
+            "type": "radio",
+            "uid": "2a69f306-99bd-48e5-9e38-74710fa9e26a",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_cache_no_writers_instances_peak",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Reader Cache",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "No Writers Instances Peak",
+            "tooltip": "dds_data_reader_cache_no_writers_instances_peak",
+            "type": "radio",
+            "uid": "1b1d46d0-ccd6-4d9a-9515-a8c70fc46326",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_cache_disposed_instances",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Reader Cache",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Disposed Instances",
+            "tooltip": "dds_data_reader_cache_disposed_instances",
+            "type": "radio",
+            "uid": "51ef677d-bad8-4042-a62f-3fe3d3edb718",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_cache_disposed_instances_peak",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Reader Cache",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Displosed Instances Peak",
+            "tooltip": "dds_data_reader_cache_disposed_instances_peak",
+            "type": "radio",
+            "uid": "b9f6ee80-c389-4d88-862c-570e09ad1170",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_protocol_rejected_samples_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Reader Protocol Resources",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Rejected Samples",
+            "tooltip": "dds_data_reader_protocol_rejected_samples_total",
+            "type": "radio",
+            "uid": "724c53bb-bfa5-495f-a70d-f2360064c84a",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_protocol_out_of_range_rejected_samples_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Reader Protocol Resources",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Rejected Samples Out Of Range",
+            "tooltip": "dds_data_reader_protocol_out_of_range_rejected_samples_total",
+            "type": "radio",
+            "uid": "69f5ecbc-914c-47e6-ae9d-1f9e8c1dfd91",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_protocol_dropped_fragments_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Saturation / Reader Protocol Resources",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Dropped Sample Fragments",
+            "tooltip": "dds_data_reader_protocol_dropped_fragments_total",
+            "type": "radio",
+            "uid": "fa46660b-db2f-4c98-af9e-920c1c2b9a79",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_sample_lost_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Data Loss / Reader Data Loss",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Lost Samples",
+            "tooltip": "dds_data_reader_sample_lost_total",
+            "type": "radio",
+            "uid": "cc8f59c1-43b3-4bd6-9520-75ed30a7f1e5",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_incompatible_qos_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "System Errors / Configuration",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Incompatible Reader QoS",
+            "tooltip": "dds_data_reader_incompatible_qos_total",
+            "type": "radio",
+            "uid": "e65ee788-a027-4a27-9b76-132f55f92fc5",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_liveliness_not_alive_count",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "System Errors / Connection",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Writer Liveliness Lost",
+            "tooltip": "dds_data_reader_liveliness_not_alive_count",
+            "type": "radio",
+            "uid": "81289d0e-75eb-4210-9a48-076a451a2046",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_cache_old_source_ts_dropped_samples_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "System Errors / Time",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Dropped Samples old Timestamp",
+            "tooltip": "dds_data_reader_cache_old_source_ts_dropped_samples_total",
+            "type": "radio",
+            "uid": "7354cb16-ac81-4001-8c4f-74ac0a5e31c3",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_cache_tolerance_source_ts_dropped_samples_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "System Errors / Time",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Dropped Samples due to Time Sync",
+            "tooltip": "dds_data_reader_cache_tolerance_source_ts_dropped_samples_total",
+            "type": "radio",
+            "uid": "9222848d-f800-45fd-985a-69fbe6e5d5a2",
+            "value": "Enable",
+            "width": 40
+          },
+          {
+            "id": "dds_data_reader_deadline_missed_total",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              }
+            ],
+            "section": "Delays / Missed Deadline",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Missed Reader Deadline",
+            "tooltip": "dds_data_reader_deadline_missed_total",
+            "type": "radio",
+            "uid": "235b11b3-12ce-4575-8464-b5e243324df4",
+            "value": "Enable",
+            "width": 40
+          }
+        ],
+        "initial": {
+          "code": "console.log(\"** Running DataReader Metrics Initial Custom Code **\");\n\n// Build URL from variables, update for each dashboard\nconst url = `${control_url}/rti/collector_service/rest1/metrics:get_subscription_state?resource_selector=/applications/GUID(${application_guid})//data_readers/GUID(${datareader_guid})`;\n\n// get resource_guid from variable\nconst resource_guid = `${datareader_guid}`;\n// list of metric names for the entity\nconst metricNames = new Set([\n  'dds_data_reader_sample_rejected_total',\n  'dds_data_reader_liveliness_not_alive_count',\n  'dds_data_reader_deadline_missed_total',\n  'dds_data_reader_incompatible_qos_total',\n  'dds_data_reader_sample_lost_total',\n  'dds_data_reader_cache_samples_peak',\n  'dds_data_reader_cache_samples',\n  'dds_data_reader_cache_old_source_ts_dropped_samples_total',\n  'dds_data_reader_cache_tolerance_source_ts_dropped_samples_total',\n  'dds_data_reader_cache_content_filter_dropped_samples_total',\n  'dds_data_reader_cache_replaced_dropped_samples_total',\n  'dds_data_reader_cache_samples_dropped_by_instance_replaced_total',\n  'dds_data_reader_cache_alive_instances',\n  'dds_data_reader_cache_alive_instances_peak',\n  'dds_data_reader_cache_no_writers_instances',\n  'dds_data_reader_cache_no_writers_instances_peak',\n  'dds_data_reader_cache_disposed_instances',\n  'dds_data_reader_cache_disposed_instances_peak',\n  'dds_data_reader_cache_compressed_samples_total',\n  'dds_data_reader_protocol_received_samples_total',\n  'dds_data_reader_protocol_received_sample_bytes_total',\n  'dds_data_reader_protocol_duplicate_samples_total',\n  'dds_data_reader_protocol_duplicate_sample_bytes_total',\n  'dds_data_reader_protocol_received_heartbeats_total',\n  'dds_data_reader_protocol_sent_nacks_total',\n  'dds_data_reader_protocol_sent_nack_bytes_total',\n  'dds_data_reader_protocol_rejected_samples_total',\n  'dds_data_reader_protocol_out_of_range_rejected_samples_total',\n  'dds_data_reader_protocol_received_fragments_total',\n  'dds_data_reader_protocol_dropped_fragments_total',\n  'dds_data_reader_protocol_reassembled_samples_total',\n  'dds_data_reader_protocol_sent_nack_fragments_total',\n  'dds_data_reader_protocol_sent_nack_fragment_bytes_total'\n]);\n\n/*\n * This function will create the request header\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction createHeaders(authentication) {\n\n  const authArray = authentication.split(\":\")\n  const headers = new Headers()\n\n  headers.append('Content-Type', 'application/json')\n  if (authArray.length === 2) {\n    console.log(\"Adding authorization header\")\n    headers.append(authArray[0], authArray[1])\n  }\n\n  return headers\n}\n\n/*\n * This function will process the fetch response\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction processResponse(jsonRsp) {\n  // create empty initial value object\n  let init = {};\n\n  // set all values to Disable\n  metricNames.forEach(function (name) {\n    init[name] = 'Disable';\n  });\n\n  // iterate over each metric configuration\n  jsonRsp.forEach((metricCfg) => {\n    // only process if this configuration matches the resource\n    if (metricCfg['resource_guid'] === resource_guid) {\n      // iterate over settings and save locally\n      metricCfg['metrics'].forEach((setting) => {\n        if (setting in init) {\n          init[setting] = 'Enable';\n        }\n      });\n    }\n  });\n\n  return init;\n}\n\n/*\n * This function will set the server status message for the dashboard and hide the panel elements.\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction disablePlugin() {\n  // create empty initial value object\n  let init = {};\n  // Set the value for 'serverStatus panel element. This value will hide the other elements\n  init['serverStatus'] = 'NOT AVAILABLE';\n  // update the \"initial\" values so the plugin logic works\n  setInitial(init);\n\n  // update the server status dashboard variables\n  locationService.partial({ 'var-server_status': 'NOT AVAILABLE' }, true);\n  locationService.partial({ 'var-server_message': 'Configuration changes can NOT be made!' }, true);\n\n  // Update element values so they match the initial values\n  onChange(elements.map((element) => ({\n    ...element,\n    value: init[element.id],\n  })));\n\n  // notify of options update\n  onOptionsChange(options);\n}\n\n/*\n * This function will handle errors caught in the fetch request\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction handleError(error) {\n  if (error.name === 'TypeError') {\n    // could get here because ERR_CONNECTION_REFUSED \n    // could get here because ERR_NAME_NOT_RESOLVED \n    console.log('fetch() failed to access the server.');\n    notifyError(['Initialize', 'Server not found or request refused.']);\n  } else if (error.name === 'AbortError') {\n    console.log('The fetch()() operation timed out');\n    notifyError(['Initialize', 'Request timed out.']);\n  } else {\n    console.log('fetch() failed');\n    console.log(error);\n    notifyError(['Initialize', 'Unknown failure.']);\n  }\n  // the request failed, disable the plugin functionality\n  disablePlugin();\n}\n\n/*\n * This function will send an HTTP query to get the forwarding verbosity\n *\n * Note: Should not need to be modified for each dashboard\n */\nasync function getInitializationData() {\n  console.log(\"getInitializationData()\");\n\n  const timeout = 3000;\n  const controller = new AbortController();\n  const id = setTimeout(() => controller.abort(), timeout);\n  const reqHeaders = createHeaders(`${authentication_header}`);\n\n  fetch(url, {\n    method: 'GET',\n    headers: reqHeaders,\n    signal: controller.signal\n  })\n    .then(async response => {\n      const responseJson = await response.json();\n      if (response.ok) {\n        console.log(\"getInitializationData() - response.ok\");\n\n        // clear the abort controller\n        clearTimeout(id);\n\n        // process the fetch response into the init struct\n        let init = processResponse(responseJson);\n        // Set the value for 'serverStatus panel element. This value will enable the other elements\n        init['serverStatus'] = 'AVAILABLE';\n\n        // update the \"initial\" values so the plugin logic works\n        setInitial(init);\n\n        // update the server status dashboard variables\n        locationService.partial({ 'var-server_status': 'AVAILABLE' }, true);\n        locationService.partial({ 'var-server_message': 'Configuration changes can be made.' }, true);\n\n        // Update element values so they match the initial values\n        onChange(elements.map((element) => ({\n          ...element,\n          value: init[element.id],\n        })));\n\n        // notify of options update\n        onOptionsChange(options);\n\n        notifySuccess(['Initialize', 'Data initialized successfully.']);\n      } else {\n        console.log(`getInitializationData() - fetch() operation returned ${response.status}.`);\n        if (response.status === 501) {\n          notifyWarning([responseJson['code'], responseJson['message']]);\n        } else {\n          notifyError([responseJson['code'], responseJson['message']]);\n        }\n        // the request failed, disable the plugin functionality\n        disablePlugin();\n      }\n    })\n    .catch(error => {\n      handleError(error);\n    });\n}\n\ngetInitializationData();",
+          "contentType": "application/json",
+          "getPayload": "return {\n  rawSql: '',\n  format: 'table',\n}",
+          "highlight": true,
+          "highlightColor": "light-green",
+          "method": "-"
+        },
+        "layout": {
+          "orientation": "vertical",
+          "padding": 0,
+          "sections": [
+            {
+              "name": "Bandwidth / Protocol Reader Traffic"
+            },
+            {
+              "name": "Bandwidth / User Data Reader Traffic"
+            },
+            {
+              "name": "Saturation / Reader Cache"
+            },
+            {
+              "name": "Saturation / Reader Protocol Resources"
+            },
+            {
+              "name": "Data Loss / Reader Data Loss"
+            },
+            {
+              "name": "System Errors / Configuration"
+            },
+            {
+              "name": "System Errors / Connection"
+            },
+            {
+              "name": "System Errors / Time"
+            },
+            {
+              "name": "Delays / Missed Deadline"
+            }
+          ],
+          "variant": "split"
+        },
+        "reset": {
+          "backgroundColor": "purple",
+          "foregroundColor": "yellow",
+          "icon": "process",
+          "text": "Reset",
+          "variant": "primary"
+        },
+        "resetAction": {
+          "code": "console.log(data, response, initial, elements);",
+          "mode": "initial"
+        },
+        "saveDefault": {
+          "icon": "save",
+          "text": "Save Default",
+          "variant": "hidden"
+        },
+        "submit": {
+          "backgroundColor": "purple",
+          "foregroundColor": "yellow",
+          "icon": "cog",
+          "text": "Configure Metrics",
+          "variant": "primary"
+        },
+        "update": {
+          "code": "console.log(\"** Running TBD Update Custom Code **\");\n\n// Build URL from variables, update for each dashboard\nconst url = `${control_url}/rti/collector_service/rest1/metrics:set_subscription_state`;\n\n/*\n * This function will create the request header\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction createHeaders(authentication) {\n\n  const authArray = authentication.split(\":\")\n  const headers = new Headers()\n\n  headers.append('Content-Type', 'application/json')\n  if (authArray.length === 2) {\n    console.log(\"Adding authorization header\")\n    headers.append(authArray[0], authArray[1])\n  }\n\n  return headers\n}\n\n/*\n * This function will build the body for the HTTP request\n *\n * Note: Custom implementation for each dashboard\n */\nfunction buildRequestBody() {\n  // the json body for the POST request\n  let body = [];\n  // local variable to collect the modified metric settings\n  let metricSettings = [];\n  // local init object to update the \"initial\" values with\n  // the current values if the POST is successful\n  let init = {};\n\n  // gather up the modified metric settings\n  elements.forEach((element) => {\n\n    // update the local init structure with all of the current values\n    init[element.id] = element.value;\n\n    // capture all elements that are enabled\n    if (element.value === `Enable`) {\n      metricSettings.push(element.id)\n    }\n\n  });\n\n  // create the metricSettingEntry object\n  let metricSettingEntry = {};\n  metricSettingEntry['resource_selector'] = `/applications/GUID(${application_guid})//data_readers/GUID(${datareader_guid})`;\n  metricSettingEntry['subscribe_metrics_selectors'] = metricSettings;\n  // add the metricSettingEntry object to the body\n  body.push(metricSettingEntry);\n\n  return body\n}\n\n/*\n * This function will handle errors caught in the fetch request\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction handleError(error) {\n  if (error.name === 'TypeError') {\n    // could get here because ERR_CONNECTION_REFUSED \n    // could get here because ERR_NAME_NOT_RESOLVED \n    console.log('fetch() failed to access the server.');\n    notifyError(['Initialize', 'Server not found or request refused.']);\n  } else if (error.name === 'AbortError') {\n    console.log('The fetch()() operation timed out');\n    notifyError(['Initialize', 'Request timed out.']);\n  } else {\n    console.log('fetch() failed');\n    console.log(error);\n    notifyError(['Initialize', 'Unknown failure.']);\n  }\n}\n\n/*\n * This function will send an HTTP query to update the data\n *\n * Note: Should not need to be modified for each dashboard\n */\nasync function updateData() {\n\n  const timeout = 3000;\n  const controller = new AbortController();\n  const id = setTimeout(() => controller.abort(), timeout);\n  const reqHeaders = createHeaders(`${authentication_header}`);\n\n  // local object to update the \"initial\" values with\n  // the current values if the POST is successful\n  let currentValues = {};\n  elements.forEach((element) => {\n    // update the local currentValues structure with all of the current values\n    currentValues[element.id] = element.value;\n  });\n\n  // create the request body\n  let body = buildRequestBody();\n\n  fetch(url, {\n    method: 'POST',\n    headers: reqHeaders,\n    signal: controller.signal,\n    body: JSON.stringify(body),\n  })\n    .then(async response => {\n      if (response.ok) {\n        console.log(\"Successful Update!!\");\n        // update the \"initial\" values with the successful updates\n        setInitial(currentValues);\n        notifySuccess(['Update', 'Values updated successfully.']);\n      } else {\n        console.log(\"Unsuccessful Update!!\");\n        responseJson = await response.json();\n        notifyError([responseJson['code'], responseJson['message']]);\n        // the request failed call the initialRequest() code to get current values\n        initialRequest();\n      }\n    })\n    .catch(error => {\n      handleError(error);\n      // the request failed call the initialRequest() code to get current values\n      initialRequest();\n    });\n}\n\nupdateData();",
+          "confirm": true,
+          "contentType": "application/json",
+          "getPayload": "const payload = {};\n\nelements.forEach((element) => {\n  if (!element.value) {\n    return;\n  }\n\n  payload[element.id] = element.value;\n})\n\nreturn payload;\n\n/**\n * Data Source payload\n */ \nreturn {\n  rawSql: '',\n  format: 'table',\n};",
+          "method": "-",
+          "payloadMode": "all",
+          "updatedOnly": false
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "absent(dds_data_reader_protocol_received_heartbeats_total{guid=~\"$datareader_guid\"}) or vector(0)",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "absent(dds_data_reader_protocol_sent_nacks_total{guid=~\"$datareader_guid\"}) or vector(0)",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "absent(dds_data_reader_protocol_sent_nack_bytes_total{guid=~\"$datareader_guid\"}) or vector(0)",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "absent(dds_data_reader_does_not_exist_total{guid=~\"$datareader_guid\"}) or vector(0)",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "D"
+        }
+      ],
+      "title": "Configure DataReader Metrics",
+      "type": "volkovlabs-form-panel"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_application_presence{guid=~\"$application_guid\"},controllability_url)",
+        "description": "Control URL",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Control URL",
+        "multi": false,
+        "name": "control_url",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_application_presence{guid=~\"$application_guid\"},controllability_url)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "description": "Authentication Header",
+        "hide": 2,
+        "label": "Authentication Header",
+        "name": "authentication_header",
+        "query": "",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "description": "Unique DataReader Resource GUID",
+        "hide": 2,
+        "label": "DataReader GUID",
+        "name": "datareader_guid",
+        "query": "${VAR_DATAREADER_GUID}",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_data_reader_presence{guid=~\"$datareader_guid\"}, name)",
+        "description": "DataReader Resource Name",
+        "hide": 2,
+        "includeAll": false,
+        "label": "DataReader Name",
+        "multi": false,
+        "name": "datareader_name",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_data_reader_presence{guid=~\"$datareader_guid\"}, name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_data_reader_presence{guid=~\"$datareader_guid\"}, participant_guid)",
+        "description": "Participant Resource GUID",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Participant GUID",
+        "multi": false,
+        "name": "participant_guid",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_data_reader_presence{guid=~\"$datareader_guid\"}, participant_guid)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_domain_participant_presence{guid=~\"$participant_guid\"}, owner_guid)",
+        "description": "Application Resource GUIDS",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Application GUID",
+        "multi": false,
+        "name": "application_guid",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_domain_participant_presence{guid=~\"$participant_guid\"}, owner_guid)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "description": "This is the Server status",
+        "hide": 2,
+        "label": "Server Status",
+        "name": "server_status",
+        "query": "${VAR_SERVER_STATUS}",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "description": "This is the Server message",
+        "hide": 2,
+        "label": "Server Message",
+        "name": "server_message",
+        "query": "${VAR_SERVER_MESSAGE}",
+        "skipUrlSync": false,
+        "type": "constant"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "DataReader Metrics",
+  "uid": "vNYdBCY4k",
+  "version": 1,
+  "weekStart": ""
+}

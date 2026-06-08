@@ -1,0 +1,996 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 10,
+        "x": 0,
+        "y": 0
+      },
+      "id": 10,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^name$/",
+          "values": false
+        },
+        "text": {
+          "valueSize": 16
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "dds_application_presence{guid=~\"$application_guid\"}",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Application Name",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "guid": false,
+              "instance": true,
+              "job": true,
+              "name": false,
+              "process_id": false,
+              "{__name__=\"dds_application_presence\", guid=\"1E8BF517.E6F74C95.A88B9C22.D04B9F15\", hostname=\"applePi\", instance=\"sugarloaf:19090\", job=\"dds\", name=\"/applications/applepi-sub\", process_id=\"23844\"}": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 10,
+        "y": 0
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^hostname$/",
+          "values": false
+        },
+        "text": {
+          "valueSize": 16
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "dds_application_presence{guid=~\"$application_guid\"}",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Host Name",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "guid": false,
+              "instance": true,
+              "job": true,
+              "name": false,
+              "process_id": false,
+              "{__name__=\"dds_application_presence\", guid=\"1E8BF517.E6F74C95.A88B9C22.D04B9F15\", hostname=\"applePi\", instance=\"sugarloaf:19090\", job=\"dds\", name=\"/applications/applepi-sub\", process_id=\"23844\"}": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 2,
+        "x": 16,
+        "y": 0
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^process_id$/",
+          "values": false
+        },
+        "text": {
+          "valueSize": 16
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "dds_application_presence{guid=~\"$application_guid\"}",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "Process Id",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "guid": false,
+              "instance": true,
+              "job": true,
+              "name": false,
+              "process_id": false,
+              "{__name__=\"dds_application_presence\", guid=\"1E8BF517.E6F74C95.A88B9C22.D04B9F15\", hostname=\"applePi\", instance=\"sugarloaf:19090\", job=\"dds\", name=\"/applications/applepi-sub\", process_id=\"23844\"}": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^guid$/",
+          "values": false
+        },
+        "text": {
+          "valueSize": 16
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "dds_application_presence{guid=~\"$application_guid\"}",
+          "instant": true,
+          "legendFormat": "__auto",
+          "range": false,
+          "refId": "A"
+        }
+      ],
+      "title": "GUID",
+      "transformations": [
+        {
+          "id": "labelsToFields",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "__name__": true,
+              "guid": false,
+              "instance": true,
+              "job": true,
+              "name": false,
+              "process_id": false,
+              "{__name__=\"dds_application_presence\", guid=\"1E8BF517.E6F74C95.A88B9C22.D04B9F15\", hostname=\"applePi\", instance=\"sugarloaf:19090\", job=\"dds\", name=\"/applications/applepi-sub\", process_id=\"23844\"}": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 15,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<p style=\"font-size:20px; color:#ccccdc; text-align: center\">\n  The RTI Collector Service at <span style=\"color: #ffffff; font-weight:bold\" >${control_url}</span> is <span style=\"color: #ffffff; font-weight:bold\" >${server_status}</span>. ${server_message}\n</p>",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.1.4",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 4,
+        "y": 4
+      },
+      "id": 14,
+      "options": {
+        "buttonGroup": {
+          "orientation": "center",
+          "size": "md"
+        },
+        "elements": [
+          {
+            "id": "serverStatus",
+            "labelWidth": 20,
+            "options": [],
+            "section": "",
+            "showIf": "return false",
+            "title": "RTI Collector",
+            "tooltip": "",
+            "type": "disabled",
+            "uid": "928b7ffb-0bb4-44ca-bb6e-ec816a3ef1d5",
+            "unit": "",
+            "value": ""
+          },
+          {
+            "id": "middlewareCollectionVerbosity",
+            "labelWidth": 20,
+            "options": [
+              {
+                "id": "SILENT",
+                "label": "SILENT",
+                "value": "SILENT"
+              },
+              {
+                "id": "ERROR",
+                "label": "ERROR",
+                "value": "ERROR"
+              },
+              {
+                "id": "WARNING",
+                "label": "WARNING",
+                "value": "WARNING"
+              },
+              {
+                "id": "INFORMATIONAL",
+                "label": "INFORMATIONAL",
+                "value": "INFORMATIONAL"
+              },
+              {
+                "id": "DEBUG",
+                "label": "DEBUG",
+                "value": "DEBUG"
+              }
+            ],
+            "section": "",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "MIDDLEWARE",
+            "tooltip": "",
+            "type": "select",
+            "uid": "83db7e69-e6b5-4500-8ba7-47af9268714c",
+            "value": "INFORMATIONAL",
+            "width": 20
+          },
+          {
+            "id": "securityEventCollectionVerbosity",
+            "labelWidth": 20,
+            "options": [
+              {
+                "id": "SILENT",
+                "label": "SILENT",
+                "value": "SILENT"
+              },
+              {
+                "id": "ERROR",
+                "label": "ERROR",
+                "value": "ERROR"
+              },
+              {
+                "id": "WARNING",
+                "label": "WARNING",
+                "value": "WARNING"
+              },
+              {
+                "id": "INFORMATIONAL",
+                "label": "INFORMATIONAL",
+                "value": "INFORMATIONAL"
+              },
+              {
+                "id": "DEBUG",
+                "label": "DEBUG",
+                "value": "DEBUG"
+              }
+            ],
+            "section": "",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "SECURITY EVENT",
+            "tooltip": "",
+            "type": "select",
+            "uid": "a47b3f64-6369-4ad4-8722-8016a873935e",
+            "value": "INFORMATIONAL",
+            "width": 20
+          },
+          {
+            "id": "serviceCollectionVerbosity",
+            "labelWidth": 20,
+            "options": [
+              {
+                "id": "SILENT",
+                "label": "SILENT",
+                "value": "SILENT"
+              },
+              {
+                "id": "ERROR",
+                "label": "ERROR",
+                "value": "ERROR"
+              },
+              {
+                "id": "WARNING",
+                "label": "WARNING",
+                "value": "WARNING"
+              },
+              {
+                "id": "INFORMATIONAL",
+                "label": "INFORMATIONAL",
+                "value": "INFORMATIONAL"
+              },
+              {
+                "id": "DEBUG",
+                "label": "DEBUG",
+                "value": "DEBUG"
+              }
+            ],
+            "section": "",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "SERVICE",
+            "tooltip": "",
+            "type": "select",
+            "uid": "43cdbf0c-d4e2-4f8a-84b3-9c119034e94e",
+            "value": "INFORMATIONAL",
+            "width": 20
+          },
+          {
+            "id": "userCollectionVerbosity",
+            "labelWidth": 20,
+            "options": [
+              {
+                "id": "SILENT",
+                "label": "SILENT",
+                "value": "SILENT"
+              },
+              {
+                "id": "ERROR",
+                "label": "ERROR",
+                "value": "ERROR"
+              },
+              {
+                "id": "WARNING",
+                "label": "WARNING",
+                "value": "WARNING"
+              },
+              {
+                "id": "INFORMATIONAL",
+                "label": "INFORMATIONAL",
+                "value": "INFORMATIONAL"
+              },
+              {
+                "id": "DEBUG",
+                "label": "DEBUG",
+                "value": "DEBUG"
+              }
+            ],
+            "section": "",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "USER",
+            "tooltip": "",
+            "type": "select",
+            "uid": "273c8156-12c0-4fe7-956c-7a69e6cd8517",
+            "value": "INFORMATIONAL",
+            "width": 20
+          }
+        ],
+        "initial": {
+          "code": "console.log(\"** Running Collection Verbosity Initial Custom Code **\");\n\n// Build URL from variables, update for each dashboard\nconst url = `${control_url}/rti/collector_service/rest1/logging:get_collection_level?application_selector=${application_name}`;\n\n/*\n * This function will create the request header\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction createHeaders(authentication) {\n\n  const authArray = authentication.split(\":\")\n  const headers = new Headers()\n\n  headers.append('Content-Type', 'application/json')\n  if (authArray.length === 2) {\n    console.log(\"Adding authorization header\")\n    headers.append(authArray[0], authArray[1])\n  }\n\n  return headers\n}\n\n/*\n * This function will process the fetch response\n *\n * Note: Custom implementation for each dashboard\n */\nfunction processResponse(jsonRsp) {\n  // create empty initial value object\n  let init = {};\n  // iterate over each log configuration\n  jsonRsp.forEach((logCfg) => {\n    // check to see if this configuration matches the $applicationName we requested\n    // this assumes that there will only be a single entry that matches the $applicationName\n    if (logCfg['application'] === '${application_name}') {\n      // iterate over settings and save locally\n      logCfg['logging_settings'].forEach((setting) => {\n        if (setting['facility'] === 'MIDDLEWARE') {\n          init['middlewareCollectionVerbosity'] = setting['verbosity'];\n        }\n        if (setting['facility'] === 'SECURITY_EVENT') {\n          init['securityEventCollectionVerbosity'] = setting['verbosity'];\n        }\n        if (setting['facility'] === 'USER') {\n          init['userCollectionVerbosity'] = setting['verbosity'];\n        }\n        if (setting['facility'] === 'SERVICE') {\n          init['serviceCollectionVerbosity'] = setting['verbosity'];\n        }\n        console.log(\"Setting \" + setting['facility'] + \":\" + setting['verbosity']);\n      });\n    }\n  });\n\n  return init;\n}\n\n/*\n * This function will set the server status message for the dashboard and hide the panel elements.\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction disablePlugin() {\n  // create empty initial value object\n  let init = {};\n  // Set the value for 'serverStatus panel element. This value will hide the other elements\n  init['serverStatus'] = 'NOT AVAILABLE';\n  // update the \"initial\" values so the plugin logic works\n  setInitial(init);\n\n  // update the server status dashboard variables\n  locationService.partial({ 'var-server_status': 'NOT AVAILABLE' }, true);\n  locationService.partial({ 'var-server_message': 'Configuration changes can NOT be made!' }, true);\n\n  // Update element values so they match the initial values\n  onChange(elements.map((element) => ({\n    ...element,\n    value: init[element.id],\n  })));\n\n  // notify of options update\n  onOptionsChange(options);\n}\n\n/*\n * This function will handle errors caught in the fetch request\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction handleError(error) {\n  if (error.name === 'TypeError') {\n    // could get here because ERR_CONNECTION_REFUSED \n    // could get here because ERR_NAME_NOT_RESOLVED \n    console.log('fetch() failed to access the server.');\n    notifyError(['Initialize', 'Server not found or request refused.']);\n  } else if (error.name === 'AbortError') {\n    console.log('The fetch()() operation timed out');\n    notifyError(['Initialize', 'Request timed out.']);\n  } else {\n    console.log('fetch() failed');\n    console.log(error);\n    notifyError(['Initialize', 'Unknown failure.']);\n  }\n}\n\n/*\n * This function will send an HTTP query to get the forwarding verbosity\n *\n * Note: Should not need to be modified for each dashboard\n */\nasync function getInitializationData() {\n  console.log(\"getInitializationData()\");\n\n  const timeout = 3000;\n  const controller = new AbortController();\n  const id = setTimeout(() => controller.abort(), timeout);\n  const reqHeaders = createHeaders(`${authentication_header}`);\n\n  fetch(url, {\n    method: 'GET',\n    headers: reqHeaders,\n    signal: controller.signal\n  })\n    .then(async response => {\n      const responseJson = await response.json();\n      if (response.ok) {\n        console.log(\"getInitializationData() - response.ok\");\n\n        // clear the abort controller\n        clearTimeout(id);\n\n        // process the fetch response into the init struct\n        let init = processResponse(responseJson);\n        // Set the value for 'serverStatus panel element. This value will enable the other elements\n        init['serverStatus'] = 'AVAILABLE';\n\n        // update the \"initial\" values so the plugin logic works\n        setInitial(init);\n\n        // update the server status dashboard variables\n        locationService.partial({ 'var-server_status': 'AVAILABLE' }, true);\n        locationService.partial({ 'var-server_message': 'Configuration changes can be made.' }, true);\n\n        // Update element values so they match the initial values\n        onChange(elements.map((element) => ({\n          ...element,\n          value: init[element.id],\n        })));\n\n        // notify of options update\n        onOptionsChange(options);\n\n        notifySuccess(['Initialize', 'Data initialized successfully.']);\n      } else {\n        console.log(`getInitializationData() - fetch() operation returned ${response.status}.`);\n        if (response.status === 501) {\n          notifyWarning([responseJson['code'], responseJson['message']]);\n        } else {\n          notifyError([responseJson['code'], responseJson['message']]);\n        }\n        // the request failed, disable the plugin functionality\n        disablePlugin();\n      }\n    })\n    .catch(error => {\n      handleError(error);\n      // the request failed, disable the plugin functionality\n      disablePlugin();\n    });\n}\n\ngetInitializationData();",
+          "contentType": "application/json",
+          "getPayload": "return {\n  rawSql: '',\n  format: 'table',\n}",
+          "header": [],
+          "highlight": true,
+          "highlightColor": "light-green",
+          "method": "-"
+        },
+        "layout": {
+          "orientation": "horizontal",
+          "padding": 10,
+          "sections": [],
+          "variant": "single"
+        },
+        "reset": {
+          "backgroundColor": "purple",
+          "foregroundColor": "yellow",
+          "icon": "process",
+          "text": "Reset",
+          "variant": "primary"
+        },
+        "resetAction": {
+          "code": "console.log(data, response, initial, elements);",
+          "mode": "initial"
+        },
+        "saveDefault": {
+          "icon": "save",
+          "text": "Save Default",
+          "variant": "hidden"
+        },
+        "submit": {
+          "backgroundColor": "purple",
+          "foregroundColor": "yellow",
+          "icon": "cog",
+          "text": "Set Collection Verbosity",
+          "variant": "primary"
+        },
+        "update": {
+          "code": "console.log(\"** Running Collection Verbosity Update Custom Code **\");\n\n// Build URL from variables, update for each dashboard\nconst url = `${control_url}/rti/collector_service/rest1/logging:set_collection_level`;\n\n/*\n * This function will create the request header\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction createHeaders(authentication) {\n\n  const authArray = authentication.split(\":\")\n  const headers = new Headers()\n\n  headers.append('Content-Type', 'application/json')\n  if (authArray.length === 2) {\n    console.log(\"Adding authorization header\")\n    headers.append(authArray[0], authArray[1])\n  }\n\n  return headers\n}\n\n/*\n * This function will build the body for the HTTP request\n *\n * Note: Custom implementation for each dashboard\n */\nfunction buildRequestBody() {\n  // the json body for the POST request\n  let body = [];\n  // local variable to collect the modified log settings\n  let loggingSettings = [];\n\n  // gather up the modified log settings for the application\n  elements.forEach((element) => {\n    // Skip elements that were not updated\n    if (options.update.updatedOnly &&\n      element.value === initial[element.id]) {\n      return;\n    }\n\n    // if we get here the current element was modified so create setting\n    // object and add it to the loggingSettings\n    let setting = {}\n    switch (element.id) {\n      case 'middlewareCollectionVerbosity':\n        setting['facility'] = \"MIDDLEWARE\";\n        setting[`verbosity`] = element.value;\n        loggingSettings.push(setting);\n        break;\n      case 'securityEventCollectionVerbosity':\n        setting['facility'] = \"SECURITY_EVENT\";\n        setting[`verbosity`] = element.value;\n        loggingSettings.push(setting);\n        break;\n      case 'userCollectionVerbosity':\n        setting['facility'] = \"USER\";\n        setting[`verbosity`] = element.value;\n        loggingSettings.push(setting);\n        break;\n      case 'serviceCollectionVerbosity':\n        setting['facility'] = \"SERVICE\";\n        setting[`verbosity`] = element.value;\n        loggingSettings.push(setting);\n        break;\n    }\n  });\n\n  // create the logSettingEntry object\n  let logSettingEntry = {};\n  logSettingEntry['application_selector'] = \"${application_name}\";\n  logSettingEntry['logging_settings'] = loggingSettings;\n  // add the logSettingEntry object to the body\n  body.push(logSettingEntry);\n\n  return body\n}\n\n/*\n * This function will handle errors caught in the fetch request\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction handleError(error) {\n  if (error.name === 'TypeError') {\n    // could get here because ERR_CONNECTION_REFUSED \n    // could get here because ERR_NAME_NOT_RESOLVED \n    console.log('fetch() failed to access the server.');\n    notifyError(['Initialize', 'Server not found or request refused.']);\n  } else if (error.name === 'AbortError') {\n    console.log('The fetch()() operation timed out');\n    notifyError(['Initialize', 'Request timed out.']);\n  } else {\n    console.log('fetch() failed');\n    console.log(error);\n    notifyError(['Initialize', 'Unknown failure.']);\n  }\n}\n\n/*\n * This function will send an HTTP query to update the data\n *\n * Note: Should not need to be modified for each dashboard\n */\nasync function updateData() {\n\n  const timeout = 3000;\n  const controller = new AbortController();\n  const id = setTimeout(() => controller.abort(), timeout);\n  const reqHeaders = createHeaders(`${authentication_header}`);\n\n  // local object to update the \"initial\" values with\n  // the current values if the POST is successful\n  let currentValues = {};\n  elements.forEach((element) => {\n    // update the local currentValues structure with all of the current values\n    currentValues[element.id] = element.value;\n  });\n\n  // create the request body\n  let body = buildRequestBody();\n\n  fetch(url, {\n    method: 'POST',\n    headers: reqHeaders,\n    signal: controller.signal,\n    body: JSON.stringify(body),\n  })\n    .then(async response => {\n      if (response.ok) {\n        console.log(\"Successful Update!!\");\n        // update the \"initial\" values with the successful updates\n        setInitial(currentValues);\n        notifySuccess(['Update', 'Values updated successfully.']);\n      } else {\n        console.log(\"Unsuccessful Update!!\");\n        responseJson = await response.json();\n        notifyError([responseJson['code'], responseJson['message']]);\n        // the request failed call the initialRequest() code to get current values\n        initialRequest();\n      }\n    })\n    .catch(error => {\n      handleError(error)\n      // the request failed call the initialRequest() code to get current values\n      initialRequest();\n    });\n}\n\nupdateData();",
+          "confirm": true,
+          "contentType": "application/json",
+          "getPayload": "const payload = {};\n\nelements.forEach((element) => {\n  if (!element.value) {\n    return;\n  }\n\n  payload[element.id] = element.value;\n})\n\nreturn payload;\n\n/**\n * Data Source payload\n */ \nreturn {\n  rawSql: '',\n  format: 'table',\n};",
+          "method": "-",
+          "payloadMode": "all",
+          "updatedOnly": true
+        }
+      },
+      "title": "Log Collection Verbosity ",
+      "type": "volkovlabs-form-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 12,
+        "y": 4
+      },
+      "id": 7,
+      "options": {
+        "buttonGroup": {
+          "orientation": "center",
+          "size": "md"
+        },
+        "elements": [
+          {
+            "id": "serverStatus",
+            "labelWidth": 20,
+            "options": [],
+            "section": "",
+            "showIf": "return false\n\n\n",
+            "title": "RTI Collector",
+            "tooltip": "",
+            "type": "disabled",
+            "uid": "928b7ffb-0bb4-44ca-bb6e-ec816a3ef1d5",
+            "unit": "",
+            "value": ""
+          },
+          {
+            "id": "middlewareForwardingVerbosity",
+            "labelWidth": 20,
+            "options": [
+              {
+                "id": "SILENT",
+                "label": "SILENT",
+                "value": "SILENT"
+              },
+              {
+                "id": "ERROR",
+                "label": "ERROR",
+                "value": "ERROR"
+              },
+              {
+                "id": "WARNING",
+                "label": "WARNING",
+                "value": "WARNING"
+              },
+              {
+                "id": "INFORMATIONAL",
+                "label": "INFORMATIONAL",
+                "value": "INFORMATIONAL"
+              },
+              {
+                "id": "DEBUG",
+                "label": "DEBUG",
+                "value": "DEBUG"
+              }
+            ],
+            "section": "",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "MIDDLEWARE",
+            "tooltip": "",
+            "type": "select",
+            "uid": "83db7e69-e6b5-4500-8ba7-47af9268714c",
+            "value": "INFORMATIONAL",
+            "width": 20
+          },
+          {
+            "id": "securityEventForwardingVerbosity",
+            "labelWidth": 20,
+            "options": [
+              {
+                "id": "SILENT",
+                "label": "SILENT",
+                "value": "SILENT"
+              },
+              {
+                "id": "ERROR",
+                "label": "ERROR",
+                "value": "ERROR"
+              },
+              {
+                "id": "WARNING",
+                "label": "WARNING",
+                "value": "WARNING"
+              },
+              {
+                "id": "INFORMATIONAL",
+                "label": "INFORMATIONAL",
+                "value": "INFORMATIONAL"
+              },
+              {
+                "id": "DEBUG",
+                "label": "DEBUG",
+                "value": "DEBUG"
+              }
+            ],
+            "section": "",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "SECURITY EVENT",
+            "tooltip": "",
+            "type": "select",
+            "uid": "4d8ef44e-f9c3-428a-a24b-7b7a66c5bfe3",
+            "value": "INFORMATIONAL",
+            "width": 20
+          },
+          {
+            "id": "serviceForwardingVerbosity",
+            "labelWidth": 20,
+            "options": [
+              {
+                "id": "SILENT",
+                "label": "SILENT",
+                "value": "SILENT"
+              },
+              {
+                "id": "ERROR",
+                "label": "ERROR",
+                "value": "ERROR"
+              },
+              {
+                "id": "WARNING",
+                "label": "WARNING",
+                "value": "WARNING"
+              },
+              {
+                "id": "INFORMATIONAL",
+                "label": "INFORMATIONAL",
+                "value": "INFORMATIONAL"
+              },
+              {
+                "id": "DEBUG",
+                "label": "DEBUG",
+                "value": "DEBUG"
+              }
+            ],
+            "section": "",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "SERVICE",
+            "tooltip": "",
+            "type": "select",
+            "uid": "847c8dfe-bb36-401b-b799-c0e8911c6198",
+            "value": "INFORMATIONAL",
+            "width": 20
+          },
+          {
+            "id": "userForwardingVerbosity",
+            "labelWidth": 20,
+            "options": [
+              {
+                "id": "SILENT",
+                "label": "SILENT",
+                "value": "SILENT"
+              },
+              {
+                "id": "ERROR",
+                "label": "ERROR",
+                "value": "ERROR"
+              },
+              {
+                "id": "WARNING",
+                "label": "WARNING",
+                "value": "WARNING"
+              },
+              {
+                "id": "INFORMATIONAL",
+                "label": "INFORMATIONAL",
+                "value": "INFORMATIONAL"
+              },
+              {
+                "id": "DEBUG",
+                "label": "DEBUG",
+                "value": "DEBUG"
+              }
+            ],
+            "section": "",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "USER",
+            "tooltip": "",
+            "type": "select",
+            "uid": "7c3ae188-7454-45ae-9dc1-6c7d39f4a78b",
+            "value": "INFORMATIONAL",
+            "width": 20
+          }
+        ],
+        "initial": {
+          "code": "console.log(\"** Running Forwarding Verbosity Initial Custom Code **\");\n\n// Build URL from variables, update for each dashboard\nconst url = `${control_url}/rti/collector_service/rest1/logging:get_forwarding_level?application_selector=${application_name}`;\n\n/*\n * This function will create the request header\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction createHeaders(authentication) {\n\n  const authArray = authentication.split(\":\")\n  const headers = new Headers()\n\n  headers.append('Content-Type', 'application/json')\n  if (authArray.length === 2) {\n    console.log(\"Adding authorization header\")\n    headers.append(authArray[0], authArray[1])\n  }\n\n  return headers\n}\n\n/*\n * This function will process the fetch response\n *\n * Note: Custom implementation for each dashboard\n */\nfunction processResponse(jsonRsp) {\n  // create empty initial value object\n  let init = {};\n  // iterate over each log configuration\n  jsonRsp.forEach((logCfg) => {\n    // check to see if this configuration matches the $applicationName we requested\n    // this assumes that there will only be a single entry that matches the $applicationName\n    if (logCfg['application'] === '${application_name}') {\n      // iterate over settings and save locally\n      logCfg['logging_settings'].forEach((setting) => {\n        if (setting['facility'] === 'MIDDLEWARE') {\n          init['middlewareForwardingVerbosity'] = setting['verbosity'];\n        }\n        if (setting['facility'] === 'SECURITY_EVENT') {\n          init['securityEventForwardingVerbosity'] = setting['verbosity'];\n        }\n        if (setting['facility'] === 'USER') {\n          init['userForwardingVerbosity'] = setting['verbosity'];\n        }\n        if (setting['facility'] === 'SERVICE') {\n          init['serviceForwardingVerbosity'] = setting['verbosity'];\n        }\n        console.log(\"Received \" + setting['facility'] + \":\" + setting['verbosity']);\n      });\n    }\n  });\n\n  return init;\n}\n\n/*\n * This function will set the server status message for the dashboard and hide the panel elements.\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction disablePlugin() {\n  // create empty initial value object\n  let init = {};\n  // Set the value for 'serverStatus panel element. This value will hide the other elements\n  init['serverStatus'] = 'NOT AVAILABLE';\n  // update the \"initial\" values so the plugin logic works\n  setInitial(init);\n\n  // update the server status dashboard variables\n  locationService.partial({ 'var-server_status': 'NOT AVAILABLE' }, true);\n  locationService.partial({ 'var-server_message': 'Configuration changes can NOT be made!' }, true);\n\n  // Update element values so they match the initial values\n  onChange(elements.map((element) => ({\n    ...element,\n    value: init[element.id],\n  })));\n\n  // notify of options update\n  onOptionsChange(options);\n}\n\n/*\n * This function will handle errors caught in the fetch request\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction handleError(error) {\n  if (error.name === 'TypeError') {\n    // could get here because ERR_CONNECTION_REFUSED \n    // could get here because ERR_NAME_NOT_RESOLVED \n    console.log('fetch() failed to access the server.');\n    notifyError(['Initialize', 'Server not found or request refused.']);\n  } else if (error.name === 'AbortError') {\n    console.log('The fetch()() operation timed out');\n    notifyError(['Initialize', 'Request timed out.']);\n  } else {\n    console.log('fetch() failed');\n    console.log(error);\n    notifyError(['Initialize', 'Unknown failure.']);\n  }\n}\n\n/*\n * This function will send an HTTP query to get the forwarding verbosity\n *\n * Note: Should not need to be modified for each dashboard\n */\nasync function getInitializationData() {\n  console.log(\"getInitializationData()\");\n\n  const timeout = 3000;\n  const controller = new AbortController();\n  const id = setTimeout(() => controller.abort(), timeout);\n  const reqHeaders = createHeaders(`${authentication_header}`);\n\n  fetch(url, {\n    method: 'GET',\n    headers: reqHeaders,\n    signal: controller.signal\n  })\n    .then(async response => {\n      const responseJson = await response.json();\n      if (response.ok) {\n        console.log(\"getInitializationData() - response.ok\");\n\n        // clear the abort controller\n        clearTimeout(id);\n\n        // process the fetch response into the init struct\n        let init = processResponse(responseJson);\n        // Set the value for 'serverStatus panel element. This value will enable the other elements\n        init['serverStatus'] = 'AVAILABLE';\n\n        // update the \"initial\" values so the plugin logic works\n        setInitial(init);\n\n        // update the server status dashboard variables\n        locationService.partial({ 'var-server_status': 'AVAILABLE' }, true);\n        locationService.partial({ 'var-server_message': 'Configuration changes can be made.' }, true);\n\n        // Update element values so they match the initial values\n        onChange(elements.map((element) => ({\n          ...element,\n          value: init[element.id],\n        })));\n\n        // notify of options update\n        onOptionsChange(options);\n\n        notifySuccess(['Initialize', 'Data initialized successfully.']);\n      } else {\n        console.log(`getInitializationData() - fetch() operation returned ${response.status}.`);\n        if (response.status === 501) {\n          notifyWarning([responseJson['code'], responseJson['message']]);\n        } else {\n          notifyError([responseJson['code'], responseJson['message']]);\n        }\n        // the request failed, disable the plugin functionality\n        disablePlugin();\n      }\n    })\n    .catch(error => {\n      handleError(error);\n      // the request failed, disable the plugin functionality\n      disablePlugin();\n    });\n}\n\ngetInitializationData();",
+          "contentType": "application/json",
+          "getPayload": "return {\n  rawSql: '',\n  format: 'table',\n}",
+          "header": [],
+          "highlight": true,
+          "highlightColor": "light-green",
+          "method": "-"
+        },
+        "layout": {
+          "orientation": "horizontal",
+          "padding": 10,
+          "sections": [],
+          "variant": "single"
+        },
+        "reset": {
+          "backgroundColor": "purple",
+          "foregroundColor": "yellow",
+          "icon": "process",
+          "text": "Reset",
+          "variant": "primary"
+        },
+        "resetAction": {
+          "code": "console.log(data, response, initial, elements);",
+          "mode": "initial"
+        },
+        "saveDefault": {
+          "icon": "save",
+          "text": "Save Default",
+          "variant": "hidden"
+        },
+        "submit": {
+          "backgroundColor": "purple",
+          "foregroundColor": "yellow",
+          "icon": "cog",
+          "text": "Set Forwarding Verbosity",
+          "variant": "primary"
+        },
+        "update": {
+          "code": "console.log(\"** Running Forwarding Verbosity Update Custom Code **\");\n\n// Build URL from variables, update for each dashboard\nconst url = `${control_url}/rti/collector_service/rest1/logging:set_forwarding_level`;\n\n/*\n * This function will create the request header\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction createHeaders(authentication) {\n\n  const authArray = authentication.split(\":\")\n  const headers = new Headers()\n\n  headers.append('Content-Type', 'application/json')\n  if (authArray.length === 2) {\n    console.log(\"Adding authorization header\")\n    headers.append(authArray[0], authArray[1])\n  }\n\n  return headers\n}\n\n/*\n * This function will build the body for the HTTP request\n *\n * Note: Custom implementation for each dashboard\n */\nfunction buildRequestBody() {\n  // the json body for the POST request\n  let body = [];\n  // local variable to collect the modified log settings\n  let loggingSettings = [];\n\n  // gather up the modified log settings for the application\n  elements.forEach((element) => {\n    // Skip elements that were not updated\n    if (options.update.updatedOnly &&\n      element.value === initial[element.id]) {\n      return;\n    }\n\n    // if we get here the current element was modified so create setting\n    // object and add it to the loggingSettings\n    let setting = {}\n    switch (element.id) {\n      case 'middlewareForwardingVerbosity':\n        setting['facility'] = \"MIDDLEWARE\";\n        setting[`verbosity`] = element.value;\n        loggingSettings.push(setting);\n        break;\n      case 'securityEventForwardingVerbosity':\n        setting['facility'] = \"SECURITY_EVENT\";\n        setting[`verbosity`] = element.value;\n        loggingSettings.push(setting);\n        break;\n      case 'userForwardingVerbosity':\n        setting['facility'] = \"USER\";\n        setting[`verbosity`] = element.value;\n        loggingSettings.push(setting);\n        break;\n      case 'serviceForwardingVerbosity':\n        setting['facility'] = \"SERVICE\";\n        setting[`verbosity`] = element.value;\n        loggingSettings.push(setting);\n        break;\n    }\n  });\n\n  // create the logSettingEntry object\n  let logSettingEntry = {};\n  logSettingEntry['application_selector'] = \"${application_name}\";\n  logSettingEntry['logging_settings'] = loggingSettings;\n  // add the logSettingEntry object to the body\n  body.push(logSettingEntry);\n\n  return body\n}\n\n/*\n * This function will handle errors caught in the fetch request\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction handleError(error) {\n  if (error.name === 'TypeError') {\n    // could get here because ERR_CONNECTION_REFUSED \n    // could get here because ERR_NAME_NOT_RESOLVED \n    console.log('fetch() failed to access the server.');\n    notifyError(['Initialize', 'Server not found or request refused.']);\n  } else if (error.name === 'AbortError') {\n    console.log('The fetch()() operation timed out');\n    notifyError(['Initialize', 'Request timed out.']);\n  } else {\n    console.log('fetch() failed');\n    console.log(error);\n    notifyError(['Initialize', 'Unknown failure.']);\n  }\n}\n\n/*\n * This function will send an HTTP query to update the data\n *\n * Note: Should not need to be modified for each dashboard\n */\nasync function updateData() {\n\n  const timeout = 3000;\n  const controller = new AbortController();\n  const id = setTimeout(() => controller.abort(), timeout);\n  const reqHeaders = createHeaders(`${authentication_header}`);\n\n  // local object to update the \"initial\" values with\n  // the current values if the POST is successful\n  let currentValues = {};\n  elements.forEach((element) => {\n    // update the local currentValues structure with all of the current values\n    currentValues[element.id] = element.value;\n  });\n\n  // create the request body\n  let body = buildRequestBody();\n\n  fetch(url, {\n    method: 'POST',\n    headers: reqHeaders,\n    signal: controller.signal,\n    body: JSON.stringify(body),\n  })\n    .then(async response => {\n      if (response.ok) {\n        console.log(\"Successful Update!!\");\n        // update the \"initial\" values with the successful updates\n        setInitial(currentValues);\n        notifySuccess(['Update', 'Values updated successfully.']);\n      } else {\n        console.log(\"Unsuccessful Update!!\");\n        responseJson = await response.json();\n        notifyError([responseJson['code'], responseJson['message']]);\n        // the request failed call the initialRequest() code to get current values\n        initialRequest();\n      }\n    })\n    .catch(error => {\n      handleError(error)\n      // the request failed call the initialRequest() code to get current values\n      initialRequest();\n    });\n}\n\nupdateData();",
+          "confirm": true,
+          "contentType": "application/json",
+          "getPayload": "const payload = {};\n\nelements.forEach((element) => {\n  if (!element.value) {\n    return;\n  }\n\n  payload[element.id] = element.value;\n})\n\nreturn payload;\n\n/**\n * Data Source payload\n */ \nreturn {\n  rawSql: '',\n  format: 'table',\n};",
+          "method": "-",
+          "payloadMode": "all",
+          "updatedOnly": true
+        }
+      },
+      "title": "Log Forwarding Verbosity ",
+      "type": "volkovlabs-form-panel"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_application_presence{guid=~\"$application_guid\"},controllability_url)",
+        "description": "Control URL",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Control URL",
+        "multi": false,
+        "name": "control_url",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_application_presence{guid=~\"$application_guid\"},controllability_url)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "description": "Authentication Header",
+        "hide": 2,
+        "label": "Authentication Header",
+        "name": "authentication_header",
+        "query": "",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "description": "The Application GUID",
+        "hide": 2,
+        "label": "Application GUID",
+        "name": "application_guid",
+        "query": "${VAR_APPLICATION_GUID}",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_application_presence{guid=~\"$application_guid\"}, name)",
+        "description": "The current application name",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Application Name",
+        "multi": false,
+        "name": "application_name",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_application_presence{guid=~\"$application_guid\"}, name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "description": "This is the Server status.",
+        "hide": 2,
+        "label": "Server Status",
+        "name": "server_status",
+        "query": "${VAR_SERVER_STATUS}",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "description": "This is the Server message.",
+        "hide": 2,
+        "label": "Server Message",
+        "name": "server_message",
+        "query": "${VAR_SERVER_MESSAGE}",
+        "skipUrlSync": false,
+        "type": "constant"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Log Control",
+  "uid": "9ZlmwXS4z",
+  "version": 1,
+  "weekStart": ""
+}

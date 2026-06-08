@@ -1,0 +1,679 @@
+###########################################################################
+#
+# RTI Prometheus Recording Rules for Observability Monitoring
+#
+# Required for v1.0 dashboards
+#
+###########################################################################
+groups:
+  - name: observability_rules
+    rules:
+    # Create empty entity metrics with labels to deal with empty queries
+      - record: dds_application_empty_metric
+        expr: |
+          vector(0)
+        labels:
+          guid: 00000000.00000000.00000000.00000000
+          hostname: none
+          domain_id: 999
+          
+      - record: dds_domain_participant_empty_metric
+        expr: |
+          vector(0)
+        labels:
+          guid: 00000000.00000000.00000000.00000000
+          hostname: none
+          domain_id: 999
+          
+      - record: dds_topic_empty_metric
+        expr: |
+          vector(0)
+        labels:
+          guid: 00000000.00000000.00000000.00000000
+          hostname: none
+          domain_id: 999
+          topic_name: Unknown
+          
+      - record: dds_data_writer_empty_metric
+        expr: |
+          vector(0)
+        labels:
+          guid: 00000000.00000000.00000000.00000000
+          hostname: none
+          domain_id: 999
+          topic_name: Unknown
+          
+      - record: dds_data_reader_empty_metric
+        expr: |
+          vector(0)
+        labels:
+          guid: 00000000.00000000.00000000.00000000
+          hostname: none
+          domain_id: 999
+          topic_name: Unknown
+
+    ###########################################################################
+    #      
+    # Bandwidth Rules
+    #
+    ###########################################################################
+    
+      # Any custom rule must generate an instance vector with the labels {TBD}
+      - record: dds_custom_excessive_bandwidth_errors
+        expr: >
+          rate(dds_data_reader_empty_metric[1m]) >bool 0
+          
+      #
+      # All metrics labeled User Config require user input to generate an error
+      # condition. The current configuration is intended to return an instant
+      # vector with the appropriate labels, but always a value of 0, which
+      # indicates a "good" condition.
+      #
+
+      #########################################################################
+      # Protocol Writer Traffic
+      #########################################################################
+      
+      # User Config Required
+      - record: dds_data_writer_protocol_sent_heartbeats_errors
+        expr: >
+          rate(dds_data_writer_protocol_sent_heartbeats_total[1m]) <bool 0 or dds_data_writer_empty_metric
+          
+      # User Config Required
+      - record: dds_data_writer_protocol_received_nacks_errors
+        expr: >
+          rate(dds_data_writer_protocol_received_nacks_total[1m]) <bool 0 or dds_data_writer_empty_metric
+          
+      # User Config Required
+      - record: dds_data_writer_protocol_received_nack_bytes_errors
+        expr: >
+          rate(dds_data_writer_protocol_received_nack_bytes_total[1m]) <bool 0 or dds_data_writer_empty_metric
+          
+      # User Config Required
+      - record: dds_data_writer_protocol_received_nack_fragments_errors
+        expr: >
+          rate(dds_data_writer_protocol_received_nack_fragments_total[1m]) <bool 0 or dds_data_writer_empty_metric
+ 
+      # User Config Required
+      - record: dds_data_writer_protocol_received_nack_fragment_bytes_errors
+        expr: >
+          rate(dds_data_writer_protocol_received_nack_fragment_bytes_total[1m]) <bool 0 or dds_data_writer_empty_metric
+ 
+      #########################################################################
+      # Protocol Reader Traffic
+      #########################################################################
+      
+      # User Config Required
+      - record: dds_data_reader_protocol_received_heartbeats_errors
+        expr: >
+          rate(dds_data_reader_protocol_received_heartbeats_total[1m]) <bool 0 or dds_data_reader_empty_metric
+          
+      # User Config Required
+      - record: dds_data_reader_protocol_sent_nacks_errors
+        expr: >
+          rate(dds_data_reader_protocol_sent_nacks_total[1m]) <bool 0 or dds_data_reader_empty_metric
+          
+      # User Config Required
+      - record: dds_data_reader_protocol_sent_nack_bytes_errors
+        expr: >
+          rate(dds_data_reader_protocol_sent_nack_bytes_total[1m]) <bool 0 or dds_data_reader_empty_metric
+          
+      # User Config Required
+      - record: dds_data_reader_protocol_sent_nack_fragments_errors
+        expr: >
+          rate(dds_data_reader_protocol_sent_nack_fragments_total[1m]) <bool 0 or dds_data_reader_empty_metric
+          
+      # User Config Required
+      - record: dds_data_reader_protocol_sent_nack_fragment_bytes_errors
+        expr: >
+          rate(dds_data_reader_protocol_sent_nack_fragment_bytes_total[1m]) <bool 0 or dds_data_reader_empty_metric
+          
+      #########################################################################
+      # User Data Writer Traffic
+      #########################################################################
+      
+      # User Config Required
+      - record: dds_data_writer_protocol_pulled_samples_errors
+        expr: >
+          rate(dds_data_writer_protocol_pulled_samples_total[1m]) <bool 0 or dds_data_writer_empty_metric
+          
+      # User Config Required
+      - record: dds_data_writer_protocol_pulled_sample_bytes_errors
+        expr: >
+          rate(dds_data_writer_protocol_pulled_sample_bytes_total[1m]) <bool 0 or dds_data_writer_empty_metric
+          
+      # User Config Required
+      - record: dds_data_writer_protocol_pulled_fragments_errors
+        expr: >
+          rate(dds_data_writer_protocol_pulled_fragments_total[1m]) <bool 0 or dds_data_writer_empty_metric
+
+      # User Config Required
+      - record: dds_data_writer_protocol_pulled_fragment_bytes_errors
+        expr: >
+          rate(dds_data_writer_protocol_pulled_fragment_bytes_total[1m]) <bool 0 or dds_data_writer_empty_metric
+
+      # User Config Required
+      - record: dds_data_writer_protocol_pushed_samples_errors
+        expr: >
+          rate(dds_data_writer_protocol_pushed_samples_total[1m]) <bool 0 or dds_data_writer_empty_metric
+
+      # User Config Required
+      - record: dds_data_writer_protocol_pushed_sample_bytes_errors
+        expr: >
+          rate(dds_data_writer_protocol_pushed_sample_bytes_total[1m]) <bool 0 or dds_data_writer_empty_metric
+
+      # User Config Required
+      - record: dds_data_writer_protocol_pushed_fragments_errors
+        expr: >
+          rate(dds_data_writer_protocol_pushed_fragments_total[1m]) <bool 0 or dds_data_writer_empty_metric
+
+      # User Config Required
+      - record: dds_data_writer_protocol_pushed_fragment_bytes_errors
+        expr: >
+          rate(dds_data_writer_protocol_pushed_fragment_bytes_total[1m]) <bool 0 or dds_data_writer_empty_metric
+
+      #########################################################################
+      # User Data Reader Traffic
+      #########################################################################
+      
+      # Custom Config to detect any reader side filtering
+      - record: dds_data_reader_cache_content_filter_dropped_samples_errors
+        expr: >
+          rate(dds_data_reader_cache_content_filter_dropped_samples_total[1m]) >bool 0 or dds_data_reader_empty_metric
+          
+      # User Config Required
+      - record: dds_data_reader_cache_compressed_samples_errors
+        expr: >
+          rate(dds_data_reader_cache_compressed_samples_total[1m]) <bool 0 or dds_data_reader_empty_metric
+ 
+      # User Config Required
+      - record: dds_data_reader_protocol_duplicate_samples_errors
+        expr: >
+          rate(dds_data_reader_protocol_duplicate_samples_total[1m]) <bool 0 or dds_data_reader_empty_metric
+ 
+      # User Config Required
+      - record: dds_data_reader_protocol_duplicate_sample_bytes_errors
+        expr: >
+          rate(dds_data_reader_protocol_duplicate_sample_bytes_total[1m]) <bool 0 or dds_data_reader_empty_metric
+ 
+      # User Config Required
+      - record: dds_data_reader_protocol_received_samples_errors
+        expr: >
+          rate(dds_data_reader_protocol_received_samples_total[1m]) <bool 0 or dds_data_reader_empty_metric
+ 
+      # User Config Required
+      - record: dds_data_reader_protocol_received_sample_bytes_errors
+        expr: >
+          rate(dds_data_reader_protocol_received_sample_bytes_total[1m]) <bool 0 or dds_data_reader_empty_metric
+ 
+      # User Config Required
+      - record: dds_data_reader_protocol_received_fragments_errors
+        expr: >
+          rate(dds_data_reader_protocol_received_fragments_total[1m]) <bool 0 or dds_data_reader_empty_metric
+ 
+      # User Config Required
+      - record: dds_data_reader_protocol_reassembled_samples_errors
+        expr: >
+          rate(dds_data_reader_protocol_reassembled_samples_total[1m]) <bool 0 or dds_data_reader_empty_metric
+ 
+      #
+      # The Excessive Bandwidth roll-up rule
+      #
+      - record: dds_excessive_bandwidth_errors
+        expr: >
+          clamp_max ((sum (dds_custom_excessive_bandwidth_errors) +
+                      sum (dds_data_writer_protocol_sent_heartbeats_errors) +
+                      sum (dds_data_writer_protocol_received_nacks_errors) +
+                      sum (dds_data_writer_protocol_received_nack_bytes_errors) +
+                      sum (dds_data_writer_protocol_received_nack_fragments_errors) +
+                      sum (dds_data_writer_protocol_received_nack_fragment_bytes_errors) +
+                      sum (dds_data_reader_protocol_received_heartbeats_errors) +
+                      sum (dds_data_reader_protocol_sent_nacks_errors) +
+                      sum (dds_data_reader_protocol_sent_nack_bytes_errors) +
+                      sum (dds_data_reader_protocol_sent_nack_fragments_errors) +
+                      sum (dds_data_reader_protocol_sent_nack_fragment_bytes_errors) +
+                      sum (dds_data_writer_protocol_pulled_samples_errors) +
+                      sum (dds_data_writer_protocol_pulled_sample_bytes_errors) +
+                      sum (dds_data_writer_protocol_pulled_fragments_errors) +
+                      sum (dds_data_writer_protocol_pulled_fragment_bytes_errors) +
+                      sum (dds_data_writer_protocol_pushed_samples_errors) +
+                      sum (dds_data_writer_protocol_pushed_sample_bytes_errors) +
+                      sum (dds_data_writer_protocol_pushed_fragments_errors) +
+                      sum (dds_data_writer_protocol_pushed_fragment_bytes_errors) +
+                      sum (dds_data_reader_cache_content_filter_dropped_samples_errors) +
+                      sum (dds_data_reader_cache_compressed_samples_errors) +
+                      sum (dds_data_reader_protocol_duplicate_samples_errors) +
+                      sum (dds_data_reader_protocol_duplicate_sample_bytes_errors) +
+                      sum (dds_data_reader_protocol_received_samples_errors) +
+                      sum (dds_data_reader_protocol_received_sample_bytes_errors) +
+                      sum (dds_data_reader_protocol_received_fragments_errors) +
+                      sum (dds_data_reader_protocol_reassembled_samples_errors)), 1)
+                      
+    ###########################################################################
+    #                      
+    # Saturation Rules
+    #
+    ###########################################################################
+    
+      # Any custom rule must generate an instance vector with the labels {TBD}
+      - record: dds_custom_saturation_errors
+        expr: >
+          rate(dds_data_reader_empty_metric[1m]) >bool 0
+       
+      #########################################################################
+      # CPU
+      #########################################################################
+      
+      # User Config Required
+      # - record: dds_domain_participant_process_user_cpu_time_errors
+      #   expr: >
+      #     rate(dds_domain_participant_process_user_cpu_time[1m]) <bool 0 or dds_domain_participant_empty_metric
+ 
+      # User Config Required
+      # - record: dds_domain_participant_process_kernel_cpu_time_errors
+      #   expr: >
+      #     rate(dds_domain_participant_process_kernel_cpu_time[1m]) <bool 0 or dds_domain_participant_empty_metric
+      
+      #########################################################################
+      # Memory
+      #########################################################################
+      
+      # User Config Required
+      - record: dds_application_process_memory_usage_resident_memory_bytes_errors
+        expr: >
+          rate(dds_application_process_memory_usage_resident_memory_bytes[1m]) <bool 0 or dds_application_empty_metric
+ 
+      # User Config Required
+      - record: dds_application_process_memory_usage_virtual_memory_bytes_errors
+        expr: >
+          rate(dds_application_process_memory_usage_virtual_memory_bytes[1m]) <bool 0 or dds_application_empty_metric
+          
+      #########################################################################
+      # Network
+      #########################################################################
+      
+      # User Config Required
+      - record: dds_domain_participant_udpv4_usage_in_net_pkts_errors
+        expr: >
+          rate(dds_domain_participant_udpv4_usage_in_net_pkts_mean[1m]) <bool 0 or dds_domain_participant_empty_metric
+ 
+      # User Config Required
+      - record: dds_domain_participant_udpv4_usage_in_net_bytes_errors
+        expr: >
+          rate(dds_domain_participant_udpv4_usage_in_net_bytes_mean[1m]) <bool 0 or dds_domain_participant_empty_metric
+          
+      # User Config Required
+      - record: dds_domain_participant_udpv4_usage_out_net_pkts_errors
+        expr: >
+          rate(dds_domain_participant_udpv4_usage_out_net_pkts_mean[1m]) <bool 0 or dds_domain_participant_empty_metric
+ 
+      # User Config Required
+      - record: dds_domain_participant_udpv4_usage_out_net_bytes_errors
+        expr: >
+          rate(dds_domain_participant_udpv4_usage_out_net_bytes_mean[1m]) <bool 0 or dds_domain_participant_empty_metric
+          
+      # User Config Required
+      - record: dds_domain_participant_udpv6_usage_in_net_pkts_errors
+        expr: >
+          rate(dds_domain_participant_udpv6_usage_in_net_pkts_mean[1m]) <bool 0 or dds_domain_participant_empty_metric
+ 
+      # User Config Required
+      - record: dds_domain_participant_udpv6_usage_in_net_bytes_errors
+        expr: >
+          rate(dds_domain_participant_udpv6_usage_in_net_bytes_mean[1m]) <bool 0 or dds_domain_participant_empty_metric
+          
+      # User Config Required
+      - record: dds_domain_participant_udpv6_usage_out_net_pkts_errors
+        expr: >
+          rate(dds_domain_participant_udpv6_usage_out_net_pkts_mean[1m]) <bool 0 or dds_domain_participant_empty_metric
+ 
+      # User Config Required
+      - record: dds_domain_participant_udpv6_usage_out_net_bytes_errors
+        expr: >
+          rate(dds_domain_participant_udpv6_usage_out_net_bytes_mean[1m]) <bool 0 or dds_domain_participant_empty_metric
+          
+      #########################################################################
+      # Send Window
+      #########################################################################
+      
+      # User Config Required
+      - record: dds_data_writer_reliable_cache_full_errors
+        expr: >
+          rate(dds_data_writer_reliable_cache_full_total[1m]) <bool 0 or dds_data_writer_empty_metric
+          
+      # User Config Required
+      - record: dds_data_writer_reliable_cache_high_watermark_errors
+        expr: >
+          rate(dds_data_writer_reliable_cache_high_watermark_total[1m]) <bool 0 or dds_data_writer_empty_metric
+          
+      # User Config Required
+      - record: dds_data_writer_reliable_cache_unack_samples_errors
+        expr: >
+          rate(dds_data_writer_reliable_cache_unack_samples[1m]) <bool 0 or dds_data_writer_empty_metric
+          
+      # User Config Required
+      - record: dds_data_writer_reliable_cache_unack_samples_peak_errors
+        expr: >
+          rate(dds_data_writer_reliable_cache_unack_samples_peak[1m]) <bool 0 or dds_data_writer_empty_metric
+          
+      # User Config Required
+      - record: dds_data_writer_protocol_send_window_size_errors
+        expr: >
+          rate(dds_data_writer_protocol_send_window_size[1m]) <bool 0 or dds_data_writer_empty_metric
+          
+      #########################################################################
+      # Writer Cache
+      #########################################################################
+      
+      # User Config Required
+      - record: dds_data_writer_cache_samples_errors
+        expr: >
+          rate(dds_data_writer_cache_samples[1m]) <bool 0 or dds_data_writer_empty_metric
+          
+      # User Config Required
+      - record: dds_data_writer_cache_samples_peak_errors
+        expr: >
+          rate(dds_data_writer_cache_samples_peak[1m]) <bool 0 or dds_data_writer_empty_metric
+          
+      # User Config Required
+      - record: dds_data_writer_cache_alive_instances_errors
+        expr: >
+          rate(dds_data_writer_cache_alive_instances[1m]) <bool 0 or dds_data_writer_empty_metric
+          
+      # User Config Required
+      - record: dds_data_writer_cache_alive_instances_peak_errors
+        expr: >
+          rate(dds_data_writer_cache_alive_instances_peak[1m]) <bool 0 or dds_data_writer_empty_metric
+          
+      #########################################################################
+      # Reader Cache
+      #########################################################################
+      
+      # User Config Required
+      - record: dds_data_reader_sample_rejected_errors
+        expr: >
+          rate(dds_data_reader_sample_rejected_total[1m]) <bool 0 or dds_data_reader_empty_metric
+          
+      # User Config Required
+      - record: dds_data_reader_cache_samples_errors
+        expr: >
+          rate(dds_data_reader_cache_samples[1m]) <bool 0 or dds_data_reader_empty_metric
+          
+      # User Config Required
+      - record: dds_data_reader_cache_samples_peak_errors
+        expr: >
+          rate(dds_data_reader_cache_samples_peak[1m]) <bool 0 or dds_data_reader_empty_metric
+          
+      # Auto Alert
+      - record: dds_data_reader_cache_replaced_dropped_samples_errors
+        expr: >
+          rate(dds_data_reader_cache_replaced_dropped_samples_total[1m]) >bool 0 or dds_data_reader_empty_metric
+          
+      # Auto Alert
+      - record: dds_data_reader_cache_samples_dropped_by_instance_replaced_errors
+        expr: >
+          rate(dds_data_reader_cache_samples_dropped_by_instance_replaced_total[1m]) >bool 0 or dds_data_reader_empty_metric
+          
+      # User Config Required
+      - record: dds_data_reader_cache_alive_instances_errors
+        expr: >
+          rate(dds_data_reader_cache_alive_instances[1m]) <bool 0 or dds_data_reader_empty_metric
+          
+      # User Config Required
+      - record: dds_data_reader_cache_alive_instances_peak_errors
+        expr: >
+          rate(dds_data_reader_cache_alive_instances_peak[1m]) <bool 0 or dds_data_reader_empty_metric
+          
+      # User Config Required
+      - record: dds_data_reader_cache_no_writers_instances_errors
+        expr: >
+          rate(dds_data_reader_cache_no_writers_instances[1m]) <bool 0 or dds_data_reader_empty_metric
+          
+      # User Config Required
+      - record: dds_data_reader_cache_no_writers_instances_peak_errors
+        expr: >
+          rate(dds_data_reader_cache_no_writers_instances_peak[1m]) <bool 0 or dds_data_reader_empty_metric
+          
+      # User Config Required
+      - record: dds_data_reader_cache_disposed_instances_errors
+        expr: >
+          rate(dds_data_reader_cache_disposed_instances[1m]) <bool 0 or dds_data_reader_empty_metric
+          
+      # User Config Required
+      - record: dds_data_reader_cache_disposed_instances_peak_errors
+        expr: >
+          rate(dds_data_reader_cache_disposed_instances_peak[1m]) <bool 0 or dds_data_reader_empty_metric
+          
+      #########################################################################
+      # Reader Protocol Resources
+      #########################################################################
+      
+      # Auto Alert
+      - record: dds_data_reader_protocol_rejected_samples_errors
+        expr: >
+          rate(dds_data_reader_protocol_rejected_samples_total[1m]) >bool 0 or dds_data_reader_empty_metric
+          
+      # Auto Alert
+      - record: dds_data_reader_protocol_out_of_range_rejected_samples_errors
+        expr: >
+          rate(dds_data_reader_protocol_out_of_range_rejected_samples_total[1m]) >bool 0 or dds_data_reader_empty_metric
+          
+      # Auto Alert
+      - record: dds_data_reader_protocol_dropped_fragments_errors
+        expr: >
+          rate(dds_data_reader_protocol_dropped_fragments_total[1m]) >bool 0 or dds_data_reader_empty_metric
+          
+      #
+      # The Saturation roll-up rule
+      #
+      - record: dds_saturation_errors
+        expr: >
+          clamp_max ((sum (dds_custom_saturation_errors) +
+                      sum (dds_application_process_memory_usage_resident_memory_bytes_errors) +
+                      sum (dds_application_process_memory_usage_virtual_memory_bytes_errors) +
+                      sum (dds_domain_participant_udpv4_usage_in_net_pkts_errors) +
+                      sum (dds_domain_participant_udpv4_usage_in_net_bytes_errors) +
+                      sum (dds_domain_participant_udpv4_usage_out_net_pkts_errors) +
+                      sum (dds_domain_participant_udpv4_usage_out_net_bytes_errors) +
+                      sum (dds_domain_participant_udpv6_usage_in_net_pkts_errors) +
+                      sum (dds_domain_participant_udpv6_usage_in_net_bytes_errors) +
+                      sum (dds_domain_participant_udpv6_usage_out_net_pkts_errors) +
+                      sum (dds_domain_participant_udpv6_usage_out_net_bytes_errors) +
+                      sum (dds_data_writer_reliable_cache_full_errors) +
+                      sum (dds_data_writer_reliable_cache_high_watermark_errors) +
+                      sum (dds_data_writer_reliable_cache_unack_samples_errors) +
+                      sum (dds_data_writer_reliable_cache_unack_samples_peak_errors) +
+                      sum (dds_data_writer_protocol_send_window_size_errors) +
+                      sum (dds_data_writer_cache_samples_errors) +
+                      sum (dds_data_writer_cache_samples_peak_errors) +
+                      sum (dds_data_writer_cache_alive_instances_errors) +
+                      sum (dds_data_writer_cache_alive_instances_peak_errors) +
+                      sum (dds_data_reader_sample_rejected_errors) +
+                      sum (dds_data_reader_cache_samples_errors) +
+                      sum (dds_data_reader_cache_samples_peak_errors) +
+                      sum (dds_data_reader_cache_replaced_dropped_samples_errors) +
+                      sum (dds_data_reader_cache_samples_dropped_by_instance_replaced_errors) +
+                      sum (dds_data_reader_cache_alive_instances_errors) +
+                      sum (dds_data_reader_cache_alive_instances_peak_errors) +
+                      sum (dds_data_reader_cache_no_writers_instances_errors) +
+                      sum (dds_data_reader_cache_no_writers_instances_peak_errors) +
+                      sum (dds_data_reader_cache_disposed_instances_errors) +
+                      sum (dds_data_reader_cache_disposed_instances_peak_errors) +
+                      sum (dds_data_reader_protocol_rejected_samples_errors) +
+                      sum (dds_data_reader_protocol_out_of_range_rejected_samples_errors) +
+                      sum (dds_data_reader_protocol_dropped_fragments_errors)), 1)
+
+    ###########################################################################
+    #
+    # System Errors Rules
+    #
+    ###########################################################################
+    
+      # Any custom rule must generate an instance vector with the labels {TBD}
+      - record: dds_custom_errors
+        expr: >
+          rate(dds_data_reader_empty_metric[1m]) >bool 0
+       
+      #########################################################################
+      # Configuration
+      #########################################################################
+       
+      # Auto Alert
+      - record: dds_topic_inconsistent_errors
+        expr: >
+          rate(dds_topic_inconsistent_total[1m]) >bool 0 or dds_topic_empty_metric
+          
+      # Auto Alert
+      - record: dds_data_writer_incompatible_qos_errors
+        expr: >
+          rate(dds_data_writer_incompatible_qos_total[1m]) >bool 0 or dds_data_writer_empty_metric
+          
+      # Auto Alert
+      - record: dds_data_reader_incompatible_qos_errors
+        expr: >
+          rate(dds_data_reader_incompatible_qos_total[1m]) >bool 0 or dds_data_reader_empty_metric
+          
+      #########################################################################
+      # Connection
+      #########################################################################
+       
+      # Auto Alert
+      - record: dds_data_writer_liveliness_lost_errors
+        expr: >
+          rate(dds_data_writer_liveliness_lost_total[1m]) >bool 0 or dds_data_writer_empty_metric
+          
+      # Auto Alert
+      - record: dds_data_writer_reliable_reader_activity_inactive_count_errors
+        expr: >
+          rate(dds_data_writer_reliable_reader_activity_inactive_count[1m]) >bool 0 or dds_data_writer_empty_metric
+          
+      # Auto Alert
+      - record: dds_data_reader_liveliness_not_alive_count_errors
+        expr: >
+          rate(dds_data_reader_liveliness_not_alive_count[1m]) >bool 0 or dds_data_reader_empty_metric
+          
+      #########################################################################
+      # Time
+      #########################################################################
+       
+      # User Config Required
+      - record: dds_data_reader_cache_old_source_ts_dropped_samples_errors
+        expr: >
+          rate(dds_data_reader_cache_old_source_ts_dropped_samples_total[1m]) <bool 0 or dds_data_reader_empty_metric
+          
+      # Auto Alert
+      - record: dds_data_reader_cache_tolerance_source_ts_dropped_samples_errors
+        expr: >
+          rate(dds_data_reader_cache_tolerance_source_ts_dropped_samples_total[1m]) >bool 0 or dds_data_reader_empty_metric
+          
+      #
+      # The Errors roll-up rule
+      #
+      - record: dds_errors
+        expr: >
+          clamp_max ((sum (dds_custom_errors) +
+                      sum (dds_topic_inconsistent_errors) +
+                      sum (dds_data_writer_incompatible_qos_errors) +
+                      sum (dds_data_reader_incompatible_qos_errors) +
+                      sum (dds_data_writer_liveliness_lost_errors) +
+                      sum (dds_data_writer_reliable_reader_activity_inactive_count_errors) +
+                      sum (dds_data_reader_liveliness_not_alive_count_errors) +
+                      sum (dds_data_reader_cache_old_source_ts_dropped_samples_errors) +
+                      sum (dds_data_reader_cache_tolerance_source_ts_dropped_samples_errors)), 1)
+
+    ###########################################################################
+    #
+    # Delays Rules
+    #
+    ###########################################################################
+    
+      # Any custom rule must generate an instance vector with the labels {TBD}
+      - record: dds_custom_delays_errors
+        expr: >
+          rate(dds_data_reader_empty_metric[1m]) >bool 0
+       
+      #########################################################################
+      # Missed Deadline
+      #########################################################################
+       
+      # Auto Alert
+      - record: dds_data_writer_deadline_missed_errors
+        expr: >
+          rate(dds_data_writer_deadline_missed_total[1m]) >bool 0 or dds_data_writer_empty_metric
+          
+      # Auto Alert
+      - record: dds_data_reader_deadline_missed_errors
+        expr: >
+          rate(dds_data_reader_deadline_missed_total[1m]) >bool 0 or dds_data_reader_empty_metric
+          
+      #
+      # The Delays roll-up rule
+      #
+      - record: dds_delays_errors
+        expr: >
+          clamp_max ((sum (dds_custom_delays_errors) +
+                      sum (dds_data_writer_deadline_missed_errors) +
+                      sum (dds_data_reader_deadline_missed_errors)), 1)
+
+    ###########################################################################
+    #
+    # Data Loss Rules
+    #
+    # NOTE: Moved to the end because there are dependencies here that have to
+    #       be run first.
+    #
+    ###########################################################################
+    
+      # Any custom rule must generate an instance vector with the labels {TBD}
+      - record: dds_custom_data_loss_errors
+        expr: >
+          rate(dds_data_reader_empty_metric[1m]) >bool 0
+       
+      #########################################################################
+      # Writer Data Loss
+      #########################################################################
+       
+      # Auto Alert
+      - record: dds_data_writer_reliable_cache_replaced_unack_samples_errors
+        expr: >
+          rate(dds_data_writer_reliable_cache_replaced_unack_samples_total[1m]) >bool 0 or dds_data_writer_empty_metric
+          
+      #########################################################################
+      # Reader Data Loss
+      #########################################################################
+       
+      # Auto Alert
+      - record: dds_data_reader_sample_lost_errors
+        expr: >
+          rate(dds_data_reader_sample_lost_total[1m]) >bool 0 or dds_data_reader_empty_metric
+          
+      # Auto Alert
+# Note this rule is already defined in the Saturation:Reader Cache section
+#      - record: dds_data_reader_cache_replaced_dropped_samples_errors
+#        expr: >
+#          rate(dds_data_reader_cache_replaced_dropped_samples_total[1m]) >bool 0 or dds_data_reader_empty_metric
+          
+      # Auto Alert
+# Note this rule is already defined in the Saturation:Reader Cache section
+#      - record: dds_data_reader_cache_samples_dropped_by_instance_replaced_errors
+#        expr: >
+#          rate(dds_data_reader_cache_samples_dropped_by_instance_replaced_total[1m]) >bool 0 or dds_data_reader_empty_metric
+          
+      # Auto Alert
+# Note this rule is already defined in the Errors:Time section
+#      - record: dds_data_reader_cache_tolerance_source_ts_dropped_samples_errors
+#        expr: >
+#          rate(dds_data_reader_cache_tolerance_source_ts_dropped_samples_total[1m]) >bool 0 or dds_data_reader_empty_metric
+          
+      #
+      # The Data Loss roll-up rule
+      #
+      - record: dds_data_loss_errors
+        expr: >
+          clamp_max ((sum (dds_custom_data_loss_errors) +
+                      sum (dds_data_writer_reliable_cache_replaced_unack_samples_errors) +
+                      sum (dds_data_reader_sample_lost_errors) +
+                      sum (dds_data_reader_cache_replaced_dropped_samples_errors) +
+                      sum (dds_data_reader_cache_samples_dropped_by_instance_replaced_errors) +
+                      sum (dds_data_reader_cache_tolerance_source_ts_dropped_samples_errors)), 1)
+

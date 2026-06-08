@@ -1,0 +1,889 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 10,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<div style=\"color: rgb(115, 191, 105)\" style=\"display:flex;justify-content:center\" class=\"container\"><h3 style=\"margin: 0\"><center>${application_name}</center></h3></div>",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.1.4",
+      "title": "Application Name",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "id": 11,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<p style=\"font-size:20px; color:#ccccdc; text-align: center\">\n  The RTI Collector Service at <span style=\"color: #ffffff; font-weight:bold\" >${control_url}</span> is <span style=\"color: #ffffff; font-weight:bold\" >${server_status}</span>. ${server_message}\n</p>",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.1.4",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 15,
+        "w": 9,
+        "x": 0,
+        "y": 5
+      },
+      "id": 2,
+      "options": {
+        "buttonGroup": {
+          "orientation": "center",
+          "size": "md"
+        },
+        "elements": [
+          {
+            "id": "dds_domain_participant_udpv4_usage_out_net_pkts_mean",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              },
+              {
+                "id": "NoChange",
+                "label": "Don't Change",
+                "type": "string",
+                "value": "NoChange"
+              }
+            ],
+            "section": "Bandwidth / Participant Traffic Out",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Transport UDPv4 Packets Out",
+            "tooltip": "dds_domain_participant_udpv4_usage_out_net_pkts_mean",
+            "type": "radio",
+            "uid": "5a9472ca-e376-4264-b361-6ebc789659a2",
+            "value": "Disable",
+            "width": 40
+          },
+          {
+            "id": "dds_domain_participant_udpv4_usage_out_net_bytes_mean",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              },
+              {
+                "id": "NoChange",
+                "label": "Don't Change",
+                "type": "string",
+                "value": "NoChange"
+              }
+            ],
+            "section": "Bandwidth / Participant Traffic Out",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Transport UDPv4 Bytes Out",
+            "tooltip": "dds_domain_participant_udpv4_usage_out_net_bytes_mean",
+            "type": "radio",
+            "uid": "51852351-1c03-42e4-b1a5-40c1ac7ebc9c",
+            "value": "Disable",
+            "width": 40
+          },
+          {
+            "id": "dds_domain_participant_udpv6_usage_out_net_pkts_mean",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              },
+              {
+                "id": "NoChange",
+                "label": "Don't Change",
+                "type": "string",
+                "value": "NoChange"
+              }
+            ],
+            "section": "Bandwidth / Participant Traffic Out",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Transport UDPv6 Packets Out",
+            "tooltip": "dds_domain_participant_udpv6_usage_out_net_pkts_mean",
+            "type": "radio",
+            "uid": "917317b1-4f6f-4189-a6c5-9540903f3786",
+            "value": "Disable",
+            "width": 40
+          },
+          {
+            "id": "dds_domain_participant_udpv6_usage_out_net_bytes_mean",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              },
+              {
+                "id": "NoChange",
+                "label": "Don't Change",
+                "type": "string",
+                "value": "NoChange"
+              }
+            ],
+            "section": "Bandwidth / Participant Traffic Out",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Transport UDPv6 Bytes Out",
+            "tooltip": "dds_domain_participant_udpv6_usage_out_net_bytes_mean",
+            "type": "radio",
+            "uid": "a5993ae1-e3d9-4349-9777-6b2299f15742",
+            "value": "Disable",
+            "width": 40
+          },
+          {
+            "id": "dds_domain_participant_udpv4_usage_in_net_pkts_mean",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              },
+              {
+                "id": "NoChange",
+                "label": "Don't Change",
+                "type": "string",
+                "value": "NoChange"
+              }
+            ],
+            "section": "Bandwidth / Participant Traffic In",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Transport UDPv4 Packets In",
+            "tooltip": "dds_domain_participant_udpv4_usage_in_net_pkts_mean",
+            "type": "radio",
+            "uid": "63316c60-982a-45c0-ad9e-5249a51a3f49",
+            "value": "Disable",
+            "width": 40
+          },
+          {
+            "id": "dds_domain_participant_udpv4_usage_in_net_bytes_mean",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              },
+              {
+                "id": "NoChange",
+                "label": "Don't Change",
+                "type": "string",
+                "value": "NoChange"
+              }
+            ],
+            "section": "Bandwidth / Participant Traffic In",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Transport UDPv4 Bytes In",
+            "tooltip": "dds_domain_participant_udpv4_usage_in_net_bytes_mean",
+            "type": "radio",
+            "uid": "0adc2c99-dd2e-49a5-ad80-1326cec8023d",
+            "value": "Disable",
+            "width": 40
+          },
+          {
+            "id": "dds_domain_participant_udpv6_usage_in_net_pkts_mean",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              },
+              {
+                "id": "NoChange",
+                "label": "Don't Change",
+                "type": "string",
+                "value": "NoChange"
+              }
+            ],
+            "section": "Bandwidth / Participant Traffic In",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Transport UDPv6 Packets In",
+            "tooltip": "dds_domain_participant_udpv6_usage_in_net_pkts_mean",
+            "type": "radio",
+            "uid": "5548c828-1776-455d-9cb5-e7ec4d37e353",
+            "value": "Disable",
+            "width": 40
+          },
+          {
+            "id": "dds_domain_participant_udpv6_usage_in_net_bytes_mean",
+            "labelWidth": 40,
+            "options": [
+              {
+                "id": "Enable",
+                "label": "Enable",
+                "type": "string",
+                "value": "Enable"
+              },
+              {
+                "id": "Disable",
+                "label": "Disable",
+                "type": "string",
+                "value": "Disable"
+              },
+              {
+                "id": "NoChange",
+                "label": "Don't Change",
+                "type": "string",
+                "value": "NoChange"
+              }
+            ],
+            "section": "Bandwidth / Participant Traffic In",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "Transport UDPv6 Bytes In",
+            "tooltip": "dds_domain_participant_udpv6_usage_in_net_bytes_mean",
+            "type": "radio",
+            "uid": "0688e3dc-3f7e-4473-9659-7ea1c1b89705",
+            "value": "Disable",
+            "width": 40
+          },
+          {
+            "id": "serverStatus",
+            "labelWidth": 12,
+            "options": [],
+            "section": "",
+            "showIf": "return false",
+            "title": "RTI Collector",
+            "tooltip": "",
+            "type": "disabled",
+            "uid": "374be844-46d3-4373-be57-2724ae393252",
+            "unit": "",
+            "value": ""
+          }
+        ],
+        "initial": {
+          "code": "console.log(\"** Running Multi Participant Metric Initial Custom Code **\");\n\n// Build URL from variables to test server access by requesting application subscription state\nconst url = `${control_url}/rti/collector_service/rest1/metrics:get_subscription_state?resource_selector=/applications/GUID(${application_guid})`;\n\n// list of metric names for the entity\nconst metricNames = new Set([\n  'dds_domain_participant_udpv4_usage_out_net_pkts_mean',\n  'dds_domain_participant_udpv4_usage_out_net_bytes_mean',\n  'dds_domain_participant_udpv6_usage_out_net_pkts_mean',\n  'dds_domain_participant_udpv6_usage_out_net_bytes_mean',\n  'dds_domain_participant_udpv4_usage_in_net_pkts_mean',\n  'dds_domain_participant_udpv4_usage_in_net_bytes_mean',\n  'dds_domain_participant_udpv6_usage_in_net_pkts_mean',\n  'dds_domain_participant_udpv6_usage_in_net_bytes_mean'\n]);\n\n/*\n * This function will create the request header\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction createHeaders(authentication) {\n\n  const authArray = authentication.split(\":\")\n  const headers = new Headers()\n\n  headers.append('Content-Type', 'application/json')\n  if (authArray.length === 2) {\n    console.log(\"Adding authorization header\")\n    headers.append(authArray[0], authArray[1])\n  }\n\n  return headers\n}\n\n/*\n * This function will process the fetch response\n *\n * Note: No actual processing of the jsonRsp is \n *       required as it was just a server access test.\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction processResponse(jsonRsp) {\n  // create empty initial value object\n  let init = {};\n\n  // set all values to Don't Change\n  metricNames.forEach(function (name) {\n    init[name] = 'NoChange';\n  });\n\n  return init;\n}\n\n/*\n * This function will set the server status message for the dashboard and hide the panel elements.\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction disablePlugin() {\n  // create empty initial value object\n  let init = {};\n  // Set the value for 'serverStatus panel element. This value will hide the other elements\n  init['serverStatus'] = 'NOT AVAILABLE';\n  // update the \"initial\" values so the plugin logic works\n  setInitial(init);\n\n  locationService.partial({ 'var-server_status': 'NOT AVAILABLE' }, true);\n  locationService.partial({ 'var-server_message': 'Configuration changes can NOT be made!' }, true);\n\n  // Update element values so they match the initial values\n  onChange(elements.map((element) => ({\n    ...element,\n    value: init[element.id],\n  })));\n\n  // notify of options update\n  onOptionsChange(options);\n}\n\n/*\n * This function will handle errors caught in the fetch request\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction handleError(error) {\n  if (error.name === 'TypeError') {\n    // could get here because ERR_CONNECTION_REFUSED \n    // could get here because ERR_NAME_NOT_RESOLVED \n    console.log('fetch() failed to access the server.');\n    notifyError(['Initialize', 'Server not found or request refused.']);\n  } else if (error.name === 'AbortError') {\n    console.log('The fetch()() operation timed out');\n    notifyError(['Initialize', 'Request timed out.']);\n  } else {\n    console.log('fetch() failed');\n    console.log(error);\n    notifyError(['Initialize', 'Unknown failure.']);\n  }\n  // the request failed, disable the plugin functionality\n  disablePlugin();\n}\n\n/*\n * This function will send an HTTP query to get the forwarding verbosity\n *\n * Note: Should not need to be modified for each dashboard\n */\nasync function getInitializationData() {\n  console.log(\"getInitializationData()\");\n\n  const timeout = 3000;\n  const controller = new AbortController();\n  const id = setTimeout(() => controller.abort(), timeout);\n  const reqHeaders = createHeaders(`${authentication_header}`);\n\n  fetch(url, {\n    method: 'GET',\n    headers: reqHeaders,\n    signal: controller.signal\n  })\n    .then(async response => {\n      const responseJson = await response.json();\n      if (response.ok) {\n        console.log(\"getInitializationData() - response.ok\");\n\n        // clear the abort controller\n        clearTimeout(id);\n\n        // process the fetch response into the init struct\n        let init = processResponse(responseJson);\n        // Set the value for 'serverStatus panel element. This value will enable the other elements\n        init['serverStatus'] = 'AVAILABLE';\n\n        // update the \"initial\" values so the plugin logic works\n        setInitial(init);\n\n        // update the server status dashboard variables\n        locationService.partial({ 'var-server_status': 'AVAILABLE' }, true);\n        locationService.partial({ 'var-server_message': 'Configuration changes can be made.' }, true);\n\n        // Update element values so they match the initial values\n        onChange(elements.map((element) => ({\n          ...element,\n          value: init[element.id],\n        })));\n\n        // notify of options update\n        onOptionsChange(options);\n\n        // notifySuccess(['Initialize', 'Data initialized successfully.']);\n      } else {\n        console.log(`getInitializationData() - fetch() operation returned ${response.status}.`);\n        if (response.status === 501) {\n          notifyWarning([responseJson['code'], responseJson['message']]);\n        } else {\n          notifyError([responseJson['code'], responseJson['message']]);\n        }\n        // the request failed, disable the plugin functionality\n        disablePlugin();\n      }\n    })\n    .catch(error => {\n      handleError(error);\n    });\n}\n\ngetInitializationData();",
+          "contentType": "application/json",
+          "getPayload": "return {\n  rawSql: '',\n  format: 'table',\n}",
+          "highlight": true,
+          "highlightColor": "light-green",
+          "method": "-"
+        },
+        "layout": {
+          "orientation": "vertical",
+          "padding": 0,
+          "sections": [
+            {
+              "name": "Bandwidth / Participant Traffic Out"
+            },
+            {
+              "name": "Bandwidth / Participant Traffic In"
+            }
+          ],
+          "variant": "split"
+        },
+        "reset": {
+          "backgroundColor": "purple",
+          "foregroundColor": "yellow",
+          "icon": "process",
+          "text": "Initialize",
+          "variant": "primary"
+        },
+        "resetAction": {
+          "code": "",
+          "mode": "initial"
+        },
+        "saveDefault": {
+          "icon": "save",
+          "text": "Save Default",
+          "variant": "hidden"
+        },
+        "submit": {
+          "backgroundColor": "purple",
+          "foregroundColor": "yellow",
+          "icon": "cog",
+          "text": "Configure Metrics",
+          "variant": "primary"
+        },
+        "update": {
+          "code": "console.log(\"** Running Multi Participant Update Custom Code **\");\n\n// Build URL from variables, update for each dashboard\nconst url = `${control_url}/rti/collector_service/rest1/metrics:update_subscription_state`;\n// Build resourceSelector from variables, update for each dashboard\nconst resourceSelector = `/applications/GUID(${application_guid})//domain_participants/*`;\n\n/*\n * This function will create the request header\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction createHeaders(authentication) {\n\n  const authArray = authentication.split(\":\")\n  const headers = new Headers()\n\n  headers.append('Content-Type', 'application/json')\n  if (authArray.length === 2) {\n    console.log(\"Adding authorization header\")\n    headers.append(authArray[0], authArray[1])\n  }\n\n  return headers\n}\n\n/*\n * This function will build the body for the HTTP request\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction buildRequestBody() {\n  // the json body for the POST request\n  let body = [];\n  // local variable to collect the subscribed metric settings\n  let subscribeMetrics = [];\n  // local variable to collect the unsubscribed metric settings\n  let unsubscribeMetrics = [];\n  // local init object to update the \"initial\" values with\n  // the current values if the POST is successful\n  let init = {};\n\n  // gather up the modified metric settings\n  elements.forEach((element) => {\n\n    // update the local init structure with all of the current values\n    init[element.id] = element.value;\n\n    // capture all elements that are enabled\n    if (element.value === `Enable`) {\n      subscribeMetrics.push(element.id)\n      subscribeMetrics.push(element.id.replace('mean', 'min'))\n      subscribeMetrics.push(element.id.replace('mean', 'max'))\n    }\n\n    // capture all elements that are disabled\n    if (element.value === `Disable`) {\n      unsubscribeMetrics.push(element.id)\n      unsubscribeMetrics.push(element.id.replace('mean', 'min'))\n      unsubscribeMetrics.push(element.id.replace('mean', 'max'))\n    }\n  });\n\n  // create the metricSettingEntry object\n  let metricSettingEntry = {};\n  metricSettingEntry['resource_selector'] = resourceSelector;\n  metricSettingEntry['subscribe_metrics_selectors'] = subscribeMetrics;\n  metricSettingEntry['unsubscribe_metrics_selectors'] = unsubscribeMetrics;\n  // add the metricSettingEntry object to the body\n  body.push(metricSettingEntry);\n\n  return body\n}\n\n/*\n * This function will handle errors caught in the fetch request\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction handleError(error) {\n  if (error.name === 'TypeError') {\n    // could get here because ERR_CONNECTION_REFUSED \n    // could get here because ERR_NAME_NOT_RESOLVED \n    console.log('fetch() failed to access the server.');\n    notifyError(['Initialize', 'Server not found or request refused.']);\n  } else if (error.name === 'AbortError') {\n    console.log('The fetch()() operation timed out');\n    notifyError(['Initialize', 'Request timed out.']);\n  } else {\n    console.log('fetch() failed');\n    console.log(error);\n    notifyError(['Initialize', 'Unknown failure.']);\n  }\n}\n\n/*\n * This function will send an HTTP query to update the data\n *\n * Note: Should not need to be modified for each dashboard\n */\nasync function updateData() {\n\n  const timeout = 3000;\n  const controller = new AbortController();\n  const id = setTimeout(() => controller.abort(), timeout);\n  const reqHeaders = createHeaders(`${authentication_header}`);\n\n  // local object to update the \"initial\" values with\n  // the current values if the POST is successful\n  let currentValues = {};\n  elements.forEach((element) => {\n    // update the local currentValues structure with all of the current values\n    currentValues[element.id] = element.value;\n  });\n\n  // create the request body\n  let body = buildRequestBody();\n\n  fetch(url, {\n    method: 'POST',\n    headers: reqHeaders,\n    signal: controller.signal,\n    body: JSON.stringify(body),\n  })\n    .then(async response => {\n      if (response.ok) {\n        console.log(\"Successful Update!!\");\n        // update the \"initial\" values with the successful updates\n        setInitial(currentValues);\n        notifySuccess(['Update', 'Values updated successfully. Dashboard will refresh automatically.']);\n        // reload dashboard to update everything\n        setTimeout(() => {\n          //delay the reload a bit to give the service time to catch up\n          locationService.reload();\n        }, 3000);\n      } else {\n        console.log(\"Unsuccessful Update!!\");\n        responseJson = await response.json();\n        notifyError([responseJson['code'], responseJson['message']]);\n        // the request failed call the initialRequest() code to get current values\n        initialRequest();\n      }\n    })\n    .catch(error => {\n      handleError(error);\n      // the request failed call the initialRequest() code to get current values\n      initialRequest();\n    });\n}\n\nupdateData();",
+          "confirm": true,
+          "contentType": "application/json",
+          "getPayload": "const payload = {};\n\nelements.forEach((element) => {\n  if (!element.value) {\n    return;\n  }\n\n  payload[element.id] = element.value;\n})\n\nreturn payload;\n\n/**\n * Data Source payload\n */ \nreturn {\n  rawSql: '',\n  format: 'table',\n};",
+          "method": "-",
+          "payloadMode": "all",
+          "updatedOnly": false
+        }
+      },
+      "title": "Configure Metrics for all Participants of Application \"$application_name\"",
+      "type": "volkovlabs-form-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 15,
+        "w": 3,
+        "x": 9,
+        "y": 5
+      },
+      "id": 13,
+      "options": {
+        "buttonGroup": {
+          "orientation": "center",
+          "size": "sm"
+        },
+        "elements": [
+          {
+            "id": "dds_domain_participant_udpv4_usage_out_net_pkts_mean",
+            "options": [],
+            "section": "Bandwidth / Participant Traffic Out",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "",
+            "tooltip": "",
+            "type": "disabled",
+            "uid": "85440fb9-3563-4730-aee9-75580b5acc04",
+            "value": "Disable",
+            "width": 13
+          },
+          {
+            "id": "dds_domain_participant_udpv4_usage_out_net_bytes_mean",
+            "options": [],
+            "section": "Bandwidth / Participant Traffic Out",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "",
+            "tooltip": "",
+            "type": "disabled",
+            "uid": "321a2529-6070-4d9f-be65-98d9eb70a10c",
+            "value": "Disable",
+            "width": 13
+          },
+          {
+            "id": "dds_domain_participant_udpv6_usage_out_net_pkts_mean",
+            "options": [],
+            "section": "Bandwidth / Participant Traffic Out",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "",
+            "tooltip": "",
+            "type": "disabled",
+            "uid": "3db2926a-1024-4f99-a5bb-b3930387c7a2",
+            "value": "Disable",
+            "width": 13
+          },
+          {
+            "id": "dds_domain_participant_udpv6_usage_out_net_bytes_mean",
+            "options": [],
+            "section": "Bandwidth / Participant Traffic Out",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "",
+            "tooltip": "",
+            "type": "disabled",
+            "uid": "f1e926ab-02cb-43db-8a56-c20a5deeed8d",
+            "value": "Disable",
+            "width": 13
+          },
+          {
+            "id": "dds_domain_participant_udpv4_usage_in_net_pkts_mean",
+            "labelWidth": 1,
+            "options": [],
+            "section": "Bandwidth / Participant Traffic In",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "",
+            "tooltip": "",
+            "type": "disabled",
+            "uid": "a91ada4a-90a2-470f-b647-b6e8b1573769",
+            "value": "Disable",
+            "width": 13
+          },
+          {
+            "id": "dds_domain_participant_udpv4_usage_in_net_bytes_mean",
+            "options": [],
+            "section": "Bandwidth / Participant Traffic In",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "",
+            "tooltip": "",
+            "type": "disabled",
+            "uid": "49ea7f32-1e58-40a0-820b-1d1cd2c20d33",
+            "value": "Disable",
+            "width": 13
+          },
+          {
+            "id": "dds_domain_participant_udpv6_usage_in_net_pkts_mean",
+            "options": [],
+            "section": "Bandwidth / Participant Traffic In",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "",
+            "tooltip": "",
+            "type": "disabled",
+            "uid": "6734e70d-160c-4538-a261-765c945cb1e5",
+            "value": "Disable",
+            "width": 13
+          },
+          {
+            "id": "dds_domain_participant_udpv6_usage_in_net_bytes_mean",
+            "options": [],
+            "section": "Bandwidth / Participant Traffic In",
+            "showIf": "const select = elements.find((element) => element.id === \"serverStatus\");\n\nif (select) {\n  return select.value === \"AVAILABLE\";\n}",
+            "title": "",
+            "tooltip": "",
+            "type": "disabled",
+            "uid": "6c5b9073-4c2a-43e6-8f89-a7f698c2eb37",
+            "value": "Disable",
+            "width": 13
+          },
+          {
+            "id": "serverStatus",
+            "labelWidth": 12,
+            "options": [],
+            "section": "",
+            "showIf": "return false",
+            "title": "RTI Collector",
+            "tooltip": "",
+            "type": "disabled",
+            "uid": "374be844-46d3-4373-be57-2724ae393252",
+            "unit": "",
+            "value": ""
+          }
+        ],
+        "initial": {
+          "code": "console.log(\"** Running Multi Participant Current State Initial Custom Code **\");\n\n// Build URL from variables to test server access by requesting application subscription state\nconst url = `${control_url}/rti/collector_service/rest1/metrics:get_subscription_state?resource_selector=/applications/GUID(${application_guid})//domain_participants/*`;\n\n// list of metric names for the entity\nconst metricNames = new Set([\n  'dds_domain_participant_udpv4_usage_out_net_pkts_mean',\n  'dds_domain_participant_udpv4_usage_out_net_bytes_mean',\n  'dds_domain_participant_udpv6_usage_out_net_pkts_mean',\n  'dds_domain_participant_udpv6_usage_out_net_bytes_mean',\n  'dds_domain_participant_udpv4_usage_in_net_pkts_mean',\n  'dds_domain_participant_udpv4_usage_in_net_bytes_mean',\n  'dds_domain_participant_udpv6_usage_in_net_pkts_mean',\n  'dds_domain_participant_udpv6_usage_in_net_bytes_mean'\n]);\n\n/*\n * This function will create the request header\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction createHeaders(authentication) {\n\n  const authArray = authentication.split(\":\")\n  const headers = new Headers()\n\n  headers.append('Content-Type', 'application/json')\n  if (authArray.length === 2) {\n    console.log(\"Adding authorization header\")\n    headers.append(authArray[0], authArray[1])\n  }\n\n  return headers\n}\n\n/*\n * This function will process the fetch response\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction processResponse(jsonRsp) {\n  // create empty initial value object\n  let init = {};\n  let subscriptionCount = {};\n  let metricConfigurations = 0;\n\n  // initialize containers\n  metricNames.forEach(function (name) {\n    init[name] = 'Unknown';\n    subscriptionCount[name] = 0;\n  });\n\n  //\n  // parse response \n  //\n\n  // iterate over each metric configuration\n  jsonRsp.forEach((metricCfg) => {\n    // iterate over each metric\n    metricConfigurations++;\n    metricCfg['metrics'].forEach((setting) => {\n      if (setting in subscriptionCount) {\n        subscriptionCount[setting] += 1;\n      }\n    });\n  });\n\n  // update current init state\n  metricNames.forEach(function (name) {\n    if (subscriptionCount[name] === 0) {\n      // no one is enabled\n      init[name] = 'Disabled';\n    } else if (subscriptionCount[name] === metricConfigurations) {\n      // everyone is enabled\n      init[name] = 'Enabled';\n    } else {\n      // some are enabled\n      init[name] = 'Partial';\n    }\n  });\n\n  return init;\n}\n\n/*\n * This function will set the server status message for the dashboard and hide the panel elements.\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction disablePlugin() {\n  // create empty initial value object\n  let init = {};\n  // Set the value for 'serverStatus panel element. This value will hide the other elements\n  init['serverStatus'] = 'NOT AVAILABLE';\n  // update the \"initial\" values so the plugin logic works\n  setInitial(init);\n\n  // Update element values so they match the initial values\n  onChange(elements.map((element) => ({\n    ...element,\n    value: init[element.id],\n  })));\n\n  // notify of options update\n  onOptionsChange(options);\n}\n\n/*\n * This function will set the server status message for the dashboard and set \n * all metric status to \"Not Available\".\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction setNotAvailableState() {\n  // create empty initial value object\n  let init = {};\n  // Set the value for 'serverStatus panel element. This value will enable the other elements\n  init['serverStatus'] = 'AVAILABLE';\n  // initialize containers\n  metricNames.forEach(function (name) {\n    init[name] = 'Not Available';\n  });\n  // update the \"initial\" values so the plugin logic works\n  setInitial(init);\n\n  // Update element values so they match the initial values\n  onChange(elements.map((element) => ({\n    ...element,\n    value: init[element.id],\n  })));\n\n  // notify of options update\n  onOptionsChange(options);\n}\n\n/*\n * This function will handle errors caught in the fetch request\n *\n * Note: Should not need to be modified for each dashboard\n */\nfunction handleError(error) {\n  if (error.name === 'TypeError') {\n    // could get here because ERR_CONNECTION_REFUSED \n    // could get here because ERR_NAME_NOT_RESOLVED \n    console.log('fetch() failed to access the server.');\n    notifyError(['Initialize', 'Server not found or request refused.']);\n  } else if (error.name === 'AbortError') {\n    console.log('The fetch()() operation timed out');\n    notifyError(['Initialize', 'Request timed out.']);\n  } else {\n    console.log('fetch() failed');\n    console.log(error);\n    notifyError(['Initialize', 'Unknown failure.']);\n  }\n  // the request failed, disable the plugin functionality\n  disablePlugin();\n}\n\n/*\n * This function will send an HTTP query to get the forwarding verbosity\n *\n * Note: Should not need to be modified for each dashboard\n */\nasync function getCurrentState() {\n  console.log(\"getCurrentState()\");\n\n  const timeout = 3000;\n  const controller = new AbortController();\n  const id = setTimeout(() => controller.abort(), timeout);\n  const reqHeaders = createHeaders(`${authentication_header}`);\n\n  fetch(url, {\n    method: 'GET',\n    headers: reqHeaders,\n    signal: controller.signal\n  })\n    .then(async response => {\n      const responseJson = await response.json();\n      if (response.ok) {\n        console.log(\"getCurrentState() - response.ok\");\n\n        // clear the abort controller\n        clearTimeout(id);\n\n        // process the fetch response into the init struct\n        let init = processResponse(responseJson);\n        // Set the value for 'serverStatus panel element. This value will enable the other elements\n        init['serverStatus'] = 'AVAILABLE';\n        // update the \"initial\" values so the plugin logic works\n        setInitial(init);\n\n        // update the server status dashboard variables\n        locationService.partial({ 'var-server_status': 'AVAILABLE' }, true);\n        locationService.partial({ 'var-server_message': 'Configuration changes can be made.' }, true);\n\n        // Update element values so they match the initial values\n        onChange(elements.map((element) => ({\n          ...element,\n          value: init[element.id],\n        })));\n\n        // notify of options update\n        onOptionsChange(options);\n\n        // notifySuccess(['Initialize', 'Data initialized successfully.']);\n      } else {\n        console.log(`getCurrentState() - fetch() operation returned ${response.status}.`);\n        if (response.status === 501) {\n          notifyWarning([responseJson['code'], responseJson['message']]);\n          // the request failed, disable the plugin functionality\n          disablePlugin();\n        } else if (response.status === 404) {\n          // do not notify as we got a response, but there were no entities found\n          // set metric states to \"Not Available\"\n          setNotAvailableState()\n        } else {\n          notifyError([responseJson['code'], responseJson['message']]);\n          // the request failed, disable the plugin functionality\n          disablePlugin();\n        }\n      }\n    })\n    .catch(error => {\n      handleError(error);\n    });\n}\n\ngetCurrentState();",
+          "contentType": "application/json",
+          "getPayload": "return {\n  rawSql: '',\n  format: 'table',\n}",
+          "highlight": false,
+          "highlightColor": "light-green",
+          "method": "-"
+        },
+        "layout": {
+          "orientation": "vertical",
+          "padding": 0,
+          "sections": [
+            {
+              "id": "Bandwidth / Participant Traffic Out",
+              "name": "---"
+            },
+            {
+              "id": "Bandwidth / Participant Traffic In",
+              "name": "---"
+            }
+          ],
+          "variant": "split"
+        },
+        "reset": {
+          "backgroundColor": "purple",
+          "foregroundColor": "yellow",
+          "icon": "process",
+          "text": "Refresh",
+          "variant": "hidden"
+        },
+        "resetAction": {
+          "code": "console.log(data, response, initial, elements);",
+          "mode": "initial"
+        },
+        "saveDefault": {
+          "icon": "save",
+          "text": "Save Default",
+          "variant": "hidden"
+        },
+        "submit": {
+          "backgroundColor": "purple",
+          "foregroundColor": "yellow",
+          "icon": "heart-rate",
+          "text": "",
+          "variant": "primary"
+        },
+        "update": {
+          "code": "",
+          "confirm": false,
+          "contentType": "application/json",
+          "getPayload": "const payload = {};\n\nelements.forEach((element) => {\n  if (!element.value) {\n    return;\n  }\n\n  payload[element.id] = element.value;\n})\n\nreturn payload;\n\n/**\n * Data Source payload\n */ \nreturn {\n  rawSql: '',\n  format: 'table',\n};",
+          "method": "-",
+          "payloadMode": "all",
+          "updatedOnly": false
+        }
+      },
+      "title": "Current State",
+      "type": "volkovlabs-form-panel"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "links": [],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "GUID"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Participant Name"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "Alert DataWriter Status",
+                    "url": "/d/oQ8g7gE4z/participant-metrics?orgid=1&var-participant_guid=${__data.fields.GUID}&${__url_time_range}"
+                  }
+                ]
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "pattern": "\\/applications\\/(.*?)\\/domain_participants\\/(.*?)\\/[^.*]+\\/(.*?)$",
+                      "result": {
+                        "index": 0,
+                        "text": "$1/$2/$3"
+                      }
+                    },
+                    "type": "regex"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 12,
+        "x": 12,
+        "y": 5
+      },
+      "id": 12,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 1,
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum_over_time(dds_domain_participant_presence{owner_guid=~\"${application_guid}\"}[1m])",
+          "format": "table",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Participants on Application \"$application_name\"",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Value": true,
+              "application_guid": true,
+              "dds_guid": true,
+              "domain_id": true,
+              "guid": false,
+              "hostname": true,
+              "instance": true,
+              "job": true,
+              "owner_guid": true,
+              "participant_guid": true,
+              "platform": true,
+              "process_id": true,
+              "product_version": true,
+              "registered_type_name": true
+            },
+            "indexByName": {
+              "Time": 3,
+              "Value": 13,
+              "application_guid": 4,
+              "dds_guid": 5,
+              "domain_id": 6,
+              "guid": 2,
+              "hostname": 7,
+              "instance": 8,
+              "job": 9,
+              "name": 0,
+              "owner_guid": 10,
+              "participant_guid": 11,
+              "registered_type_name": 12,
+              "topic_name": 1
+            },
+            "renameByName": {
+              "guid": "GUID",
+              "name": "Participant Name",
+              "topic_name": "Topic Name"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_application_presence{guid=~\"$application_guid\"},controllability_url)",
+        "description": "Control URL",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Control URL",
+        "multi": false,
+        "name": "control_url",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_application_presence{guid=~\"$application_guid\"},controllability_url)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "description": "Authentication Header",
+        "hide": 2,
+        "label": "Authentication Header",
+        "name": "authentication_header",
+        "query": "",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "description": "Application Resource GUID",
+        "hide": 2,
+        "label": "Application GUID",
+        "name": "application_guid",
+        "query": "${VAR_APPLICATION_GUID}",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_application_presence{guid=~\"$application_guid\"}, name)",
+        "description": "Application Name",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Application Name",
+        "multi": false,
+        "name": "application_name",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_application_presence{guid=~\"$application_guid\"}, name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "\\/applications\\/(.*?)$",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "description": "This is the Server status",
+        "hide": 2,
+        "label": "Server Status",
+        "name": "server_status",
+        "query": "${VAR_SERVER_STATUS}",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "description": "This is the Server message",
+        "hide": 2,
+        "label": "Server Message",
+        "name": "server_message",
+        "query": "${VAR_SERVER_MESSAGE}",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "hide": 2,
+        "label": "Set Reset Initialize",
+        "name": "command",
+        "query": "'set'",
+        "skipUrlSync": false,
+        "type": "constant"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Participant Metrics Multi",
+  "uid": "m0Rf-Js4z",
+  "version": 1,
+  "weekStart": ""
+}

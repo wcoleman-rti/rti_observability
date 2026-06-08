@@ -25,7 +25,7 @@
                             <!-- Domain ID for the Observability Participant. Must match the domain ID configured in the RTI Collector Service (env: OBSERVABILITY_DOMAIN).
                                     https://community.rti.com/static/documentation/connext-dds/7.3.1/doc/manuals/addon_products/observability/library.html#changing-the-default-observability-domain-id
                             -->
-                            <domain_id>120</domain_id>
+                            <domain_id>101</domain_id>
 
                             <!-- Initial peers for the Observability Participant.
                                     If RTI Collector Service is running on another machine, set this to the IP address of that machine. 

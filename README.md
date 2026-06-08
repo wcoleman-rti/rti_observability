@@ -8,91 +8,100 @@
   - [rticom/collector-service](https://hub.docker.com/r/rticom/collector-service)
   - [prom/prometheus](https://hub.docker.com/r/prom/prometheus)
   - [grafana/grafana-enterprise](https://hub.docker.com/r/grafana/grafana-enterprise)
-  - [grafana/loki](https://hub.docker.com/r/grafana/loki)
 
-## 2. Start App(s) with Monitoring (2.0)
+## 2. Start App(s) with Monitoring 2.0
 
 ```bash
-NDDS_QOS_PROFILES=config/FactoryQos.xml <app>
+NDDS_QOS_PROFILES=qos/FactoryQos.xml <app>
 ```
 
 For example, you can run RTI DDS Ping as a test:
 
 ```bash
-NDDS_QOS_PROFILES=config/FactoryQos.xml $NDDSHOME/bin/rtiddsping -pub
+NDDS_QOS_PROFILES=qos/FactoryQos.xml $NDDSHOME/bin/rtiddsping -pub
 ```
 
 ## 3. Launch
 
-There are 4 Docker containers/services that need to be running:
+There are 3 Docker containers/services that need to be running:
 
-1. RTI Collector Service Docker container (for collecting RTI metrics and pushing to telemetry [Prometheus/Loki] backends)
-2. Loki Docker container (for storing logs)
-3. Prometheus Docker container (for storing metrics)
-4. Grafana Docker container (for visualizing logs & metrics)
+1. RTI Collector Service Docker container (for collecting RTI metrics and pushing to telemetry [Prometheus] backends)
+2. Prometheus Docker container (for storing metrics)
+3. Grafana Docker container (for visualizing logs & metrics)
 
-You can launch them 1 of 3 ways:
+In this guide, you can launch them 1 of 2 ways:
 
-1. With rtiobservability tool (best if you want to launch new Grafana/Prometheus/Loki services locally)
-2. With docker compose (best if you want to see what the rtiobservability tool does at the docker compose level)
-3. With docker (best if you want to use docker directly alongside existing Grafana/Prometheus/Loki services, i.e. just launch RTI Collector Service)
+1. With `docker run`
+2. With `docker compose`
 
-### 1. Run with rtiobservability
+### 1. Run with `docker run`
 
-Use rtiobservability tool to set up the infrastructure based on your configuration:
-
-```bash
-$NDDSHOME/bin/rtiobservability -c config/rti_observability.json
-```
-
-The following command starts all 4 docker containers and creates the Docker data volumes for data storage for:
-
-1. Prometheus
-2. Grafana
-
-```bash
-$NDDSHOME/bin/rtiobservability -i
-```
-
-To just start the containers (and avoid re-creating the data volumes if already ran previously with -i):
-
-```bash
-$NDDSHOME/bin/rtiobservability -s
-```
-
-### 2. Run with Docker Compose
-
-You still need to scaffold the docker-compose.yml, so we will use rtiobservability tool to set up the infrastructure:
-
-```bash
-$NDDSHOME/bin/rtiobservability -c config/rti_observability.json
-```
-
-Start the containers:
-
-```bash
-docker compose -f ~/rti_workspace/7.3.0/user_config/observability/docker-compose.yml up -d
-```
-
-### 3. Run with Docker
+Run RTI Collector Service:
 
 ```bash
 # Start RTI Collector Service
 #   - OBSERVABILITY_DOMAIN: The domain ID in which Collector Service receives the telemetry data from Connext applications.
 #   - OBSERVABILITY_PROMETHEUS_EXPORTER_PORT: The TCP port of the Prometheus endpoint for exporting telemetry data to Prometheus.
-#   - OBSERVABILITY_LOKI_HOSTNAME: The hostname where the Loki server runs.
-#   - OBSERVABILITY_LOKI_EXPORTER_PORT: The TCP port of the Grafana Loki server in which it will receive logs from Collector Service.
-# See: https://github.com/rticommunity/rticonnextdds-containers/blob/release/7.3.0/doc/collector-service/README.md#built-in-configuration
+#   - CFG_NAME: see https://github.com/rticommunity/rticonnextdds-containers/blob/release/7.3.1/doc/collector-service/README.md#built-in-configuration
 docker run -dt \
         --network host \
-        -v $RTI_LICENSE_FILE:/opt/rti.com/rti_connext_dds-7.3.0/rti_license.dat \
-        --name=collector_service \
+        --ipc host \
+        -v $RTI_LICENSE_FILE:/opt/rti.com/rti_connext_dds-7.3.1/rti_license.dat \
+        --name collector_service \
         -e CFG_NAME="NonSecureLAN" \
-        -e OBSERVABILITY_DOMAIN=120 \
+        -e OBSERVABILITY_DOMAIN=101 \
         -e OBSERVABILITY_PROMETHEUS_EXPORTER_PORT=19090 \
-        -e OBSERVABILITY_LOKI_HOSTNAME=localhost \
-        -e OBSERVABILITY_LOKI_EXPORTER_PORT=3100 \
-        rticom/collector-service:7.3.0
+        rticom/collector-service:7.3.1.3
+```
+
+Run Prometheus:
+
+```bash
+# Start Prometheus
+docker run -dt \
+        --network host \
+        -v ./prometheus:/etc/prometheus \
+        -v prometheus_data:/prometheus \
+        --name=prometheus_observability \
+        prom/prometheus:v2.45.1 \
+        --config.file=/etc/prometheus/prometheus.yml \
+        --storage.tsdb.path=/prometheus \
+        --web.console.libraries=/etc/prometheus/console_libraries \
+        --web.console.templates=/etc/prometheus/consoles \
+        --storage.tsdb.retention.time=200h \
+        --query.lookback-delta=30s \
+        --web.enable-lifecycle \
+        --web.enable-admin-api \
+        --web.listen-address=0.0.0.0:9090
+```
+
+Run Grafana:
+
+```bash
+# Start Grafana
+docker run -dt \
+        --network host \
+        -v grafana_data:/var/lib/grafana \
+        -v ./grafana/dashboards:/etc/grafana/provisioning/dashboards \
+        -v ./grafana/datasources:/etc/grafana/provisioning/datasources \
+        -v ./img/RTI_Logo_RGB-Color.png:/usr/share/grafana/public/img/RTI_Logo_RGB-Color.png \
+        --name=grafana_observability \
+        -e GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin} \
+        -e GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin} \
+        -e GF_USERS_ALLOW_SIGN_UP=false \
+        -e GF_SERVER_HTTP_PORT=3000 \
+        -e GF_SERVER_DOMAIN=localhost \
+        -e GF_USERS_HOME_PAGE="/d/Hj4nnyOnk/alert-home?orgId=1&refresh=10s" \
+        -e GF_INSTALL_PLUGINS="https://github.com/VolkovLabs/volkovlabs-form-panel/releases/download/v3.2.1/volkovlabs-form-panel-3.2.1.zip;volkovlabs-form-panel" \
+        grafana/grafana-enterprise:10.1.4
+```
+
+### 2. Run with `docker compose`
+
+Start the containers:
+
+```bash
+docker compose up -d
 ```
 
 ## 4. Verify Container Statuses
@@ -103,7 +112,7 @@ Check the status of the launched containers for startup failures:
 docker ps -a
 ```
 
-*Refer to [Docker Container[s] Failed to Start](https://community.rti.com/static/documentation/connext-dds/7.3.0/doc/manuals/addon_products/observability/troubleshooting.html#docker-container-s-failed-to-start) if any fail to start.*
+*Refer to [Docker Container[s] Failed to Start](https://community.rti.com/static/documentation/connext-dds/7.3.1/doc/manuals/addon_products/observability/troubleshooting.html#docker-container-s-failed-to-start) if any fail to start.*
 
 ## 5. Visualize Data in Grafana
 
@@ -112,42 +121,30 @@ Open: [http://localhost:3000](http://localhost:3000)
 - Username: admin
 - Password: admin
 
-*Refer to [Configure Grafana](https://community.rti.com/static/documentation/connext-dds/7.3.0/doc/manuals/addon_products/observability/install.html#configure-grafana).*
+*Refer to [Configure Grafana](https://community.rti.com/static/documentation/connext-dds/7.3.1/doc/manuals/addon_products/observability/install.html#configure-grafana).*
 
 ## 6. Stop
 
 Depending on how you launched them, you should use the same method to stop/remove running containers.
 
-### 1. Stop with rtiobservability
+### 1. Stop with `docker stop`
 
-Just stop:
+To stop:
 
 ```bash
-$NDDSHOME/bin/rtiobservability -t
+# To stop:
+docker stop collector_service prometheus_observability grafana_observability
+
+# To remove:
+docker rm collector_service prometheus_observability grafana_observability
 ```
 
-Stop and Remove:
+### 2. Stop with `docker compose`
 
 ```bash
-$NDDSHOME/bin/rtiobservability -d
-```
+# To stop:
+docker compose stop
 
-### 2. Stop with Docker Compose
-
-```bash
-docker compose -f ~/rti_workspace/7.3.0/user_config/observability/docker-compose.yml stop
-```
-
-```bash
-docker compose -f ~/rti_workspace/7.3.0/user_config/observability/docker-compose.yml down
-```
-
-### 3. Stop with Docker
-
-```bash
-docker stop collector_service
-```
-
-```bash
-docker rm collector_service
+# To remove:
+docker compose down
 ```

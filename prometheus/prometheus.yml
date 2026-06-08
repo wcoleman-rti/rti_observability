@@ -1,0 +1,73 @@
+# Global configuration
+global:
+  scrape_interval:     10s # Set the scrape interval to every 10 seconds. Default is every 1 minute.
+  evaluation_interval: 10s # Evaluate rules every 10 seconds. The default is every 1 minute.
+  scrape_timeout:       7s # this was commented out and the global default (10s).
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  - "monitoring_recording_rules.yml"
+
+#
+# Scrape configurations 
+#
+scrape_configs:
+  #
+  # Configuration for Prometheus exporter in a system
+  #      
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  #
+  - job_name: 'prometheus'
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+
+    static_configs:
+    - targets: 
+      - localhost:9090 # Prometheus metrics
+    
+  #
+  # Configuration for Grafana exporter in a system
+  #      
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  #
+  - job_name: 'grafana'
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+
+    static_configs:
+    - targets: 
+      - localhost:3000 # Grafana metrics
+    
+  # #
+  # # Configuration for Loki exporter in a system
+  # #      
+  # # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  # #
+  # - job_name: 'loki'
+
+  #   # metrics_path defaults to '/metrics'
+  #   # scheme defaults to 'http'.
+
+
+  #   static_configs:
+  #   - targets: 
+  #     - localhost:3100 # dds metrics
+
+  #
+  # Configuration for DDS exporter in a system
+  #      
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  #
+  - job_name: 'dds'
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+
+    static_configs:
+    - targets: 
+      - localhost:19090 # dds metrics
