@@ -1,75 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  RTI Connext Professional 7.3.1 — Monitoring Library 2.0 Configuration
+  ==========================================================================
+  File:    qos/FactoryQos.xml
+  Purpose: Main configuration file for Connext applications to configure
+           the participant factory QoS. This file is intended to be loaded alongside
+           your application QoS XML files.
 
-<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://community.rti.com/schema/7.3.1/rti_dds_profiles.xsd">
-    <qos_library name="FactoryQosLibrary">
+  QoS Profiles
+  ========
 
-        <!--  -->
-        <qos_profile name="FactoryProfile" is_default_participant_factory_profile="true">
+  Factory::Main
+      This profile is intended to be used as the default participant factory
+      profile for the application. All participant factory QoS intended to be
+      applied to for the process should be derived from this profile.
+
+  Usage
+  =====
+  Load this file alongside files that configure independent behavior 
+  (e.g. monitoring, logging, entity enabling, etc.) to ensure a single entry
+  point for all participant factory QoS configuration.
+
+    > NDDS_QOS_PROFILES="qos/Monitoring.xml;qos/Logging.xml;qos/FactoryQos.xml"
+
+-->
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://community.rti.com/schema/7.3.1/rti_dds_profiles.xsd">    
+    
+    <qos_library name="Factory">
+
+        <!-- ==================================================================
+             Main
+             ──────────────────────────────────────────────────────────────────
+             This profile is intended to be used as the default participant factory
+             profile for the application. All participant factory QoS intended to be
+             applied to for the process should be derived from this profile.
+
+             It is best to inherit from base profiles configuring independent
+             behavior (e.g. monitoring, logging, entity enabling, etc.) to ensure a
+             single entry point for all participant factory QoS configuration.
+        ================================================================== -->
+        <qos_profile name="Main" is_default_participant_factory_profile="true">
             <participant_factory_qos>
-
-                <!-- Configure Observability here -->
-                <monitoring>
-                    <enable>true</enable>
-
-                    <!-- Application name
-                    Resource: /applications/<AppName>
-                    https://community.rti.com/static/documentation/connext-dds/7.3.1/doc/manuals/connext_dds_professional/observability/library.html#setting-the-application-name
-                    https://community.rti.com/static/documentation/connext-dds/7.3.1/doc/manuals/connext_dds_professional/observability/telemetry_data/resources.html#resources
-            -->
-                    <application_name></application_name>
-
-
-                    <distribution_settings>
-                        <!-- Configure how the monitoring data is propagated to RTI Collector Service -->
-                        <dedicated_participant>
-                            <!-- Domain ID for the Observability Participant. Must match the domain ID configured in the RTI Collector Service (env: OBSERVABILITY_DOMAIN).
-                                    https://community.rti.com/static/documentation/connext-dds/7.3.1/doc/manuals/connext_dds_professional/observability/library.html#changing-the-default-observability-domain-id
-                            -->
-                            <domain_id>101</domain_id>
-
-                            <!-- Initial peers for the Observability Participant.
-                                    If RTI Collector Service is running on another machine, set this to the IP address of that machine. 
-                                    If left blank, it will use the system default initial peers configuration. 
-                                    https://community.rti.com/static/documentation/connext-dds/7.3.1/doc/manuals/connext_dds_professional/observability/library.html#setting-collector-service-initial-peers
-                            -->
-                            <collector_initial_peers>
-                                <!-- <element>192.168.1.2</element> -->
-                            </collector_initial_peers>
-                        </dedicated_participant>
-                    </distribution_settings>
-                    <telemetry_data>
-
-                        <metrics>
-                            <!-- Configure metrics to enable/disable per resource group to propagate to RTI Collector Service
-                                    https://community.rti.com/static/documentation/connext-dds/7.3.1/doc/manuals/connext_dds_professional/observability/library.html#setting-the-initial-metrics-and-log-configuration 
-                            -->
-                            <element>
-                                <!-- Enable all metrics for all resources -->
-                                <resource_selection>//*</resource_selection>
-                                <enabled_metrics_selection>
-                                    <element>*</element>
-                                </enabled_metrics_selection>
-                            </element>
-                        </metrics>
-                        <logs>
-                            <!-- Set log level per category to propagate to RTI Collector Service
-                                    https://community.rti.com/static/documentation/connext-dds/7.3.1/doc/manuals/connext_dds_professional/observability/library.html#setting-the-initial-metrics-and-log-configuration 
-                            -->
-                            <middleware_forwarding_level>SILENT</middleware_forwarding_level>
-                            <security_event_forwarding_level>SILENT</security_event_forwarding_level>
-                            <service_forwarding_level>SILENT</service_forwarding_level>
-                            <user_forwarding_level>SILENT</user_forwarding_level>
-                        </logs>
-                    </telemetry_data>
-                </monitoring>
-
-                <logging>
-                    <!-- Configure DDS Logging here, if needed -->
-                    <!-- <category>ALL</category> -->
-                    <!-- <print_format>TIMESTAMPED</print_format> -->
-                    <!-- <verbosity>LOCAL</verbosity> -->
-                    <!-- <output_file>logs/ddslog.log</output_file> -->
-                </logging>
+                <base_name>
+                    <element>Monitoring::Main</element>
+                    <element>Logging::Main</element>
+                </base_name>
             </participant_factory_qos>
         </qos_profile>
 

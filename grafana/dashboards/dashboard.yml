@@ -1,7 +1,7 @@
 apiVersion: 1
 
 providers:
-  - name: 'RTI'
+  - name: 'RTI - Stock'
     orgId: 1
     folder: ''
     type: file
@@ -9,4 +9,34 @@ providers:
     editable: true
     allowUiUpdates: true
     options:
-      path: /etc/grafana/provisioning/dashboards
+      path: /etc/grafana/provisioning/dashboards/General
+
+  - name: 'RTI - Production'
+    orgId: 1
+    folder: 'Production'
+    type: file
+    disableDeletion: true
+    editable: true
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards/Production
+
+  - name: 'RTI - Development'
+    orgId: 1
+    folder: 'Development'
+    type: file
+    disableDeletion: true
+    editable: true
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards/Development
+
+  - name: 'RTI - Discovery'
+    orgId: 1
+    folder: 'Discovery'
+    type: file
+    disableDeletion: true
+    editable: true
+    allowUiUpdates: true
+    options:
+      path: /etc/grafana/provisioning/dashboards/Discovery

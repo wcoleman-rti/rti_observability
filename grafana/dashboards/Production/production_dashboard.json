@@ -1,0 +1,1379 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "System health dashboard for field maintainers and operators. Shows whether the system is healthy, data is flowing, and components are online \u2014 without requiring knowledge of the underlying middleware or communication framework. Uses RTI Connext Monitoring Library 2.0 / DDS_MONITOR_PROFILE=Production.",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 100,
+      "title": "At a Glance \u2014 System Health",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "Rolled-up indicator: 1 means one or more communication faults are active (liveliness loss, QoS mismatch, timestamp errors). 0 means all clear.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short",
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "OK"
+                },
+                "1": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "FAULT"
+                }
+              },
+              "type": "value"
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 0,
+        "y": 1
+      },
+      "id": 1,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "dds_errors",
+          "instant": true,
+          "legendFormat": "Faults",
+          "refId": "A"
+        }
+      ],
+      "title": "Communication Faults",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "Rolled-up indicator: 1 means messages were dropped or lost. Sources: reader sample loss, queue overwrites, sender unacknowledged drops.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short",
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "OK"
+                },
+                "1": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "FAULT"
+                }
+              },
+              "type": "value"
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 5,
+        "y": 1
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "dds_data_loss_errors",
+          "instant": true,
+          "legendFormat": "Data Loss",
+          "refId": "A"
+        }
+      ],
+      "title": "Data Loss",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "Rolled-up indicator: 1 means one or more components missed their expected update schedule \u2014 data is arriving late or not at all.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short",
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "OK"
+                },
+                "1": {
+                  "color": "yellow",
+                  "index": 1,
+                  "text": "LATE"
+                }
+              },
+              "type": "value"
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 10,
+        "y": 1
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "dds_delays_errors",
+          "instant": true,
+          "legendFormat": "Timing",
+          "refId": "A"
+        }
+      ],
+      "title": "Late Updates",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "Rolled-up indicator: 1 means delivery queues, memory, or network are under abnormal pressure. May precede data loss if unresolved.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short",
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "OK"
+                },
+                "1": {
+                  "color": "orange",
+                  "index": 1,
+                  "text": "CONGESTED"
+                }
+              },
+              "type": "value"
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 15,
+        "y": 1
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "dds_saturation_errors",
+          "instant": true,
+          "legendFormat": "Congestion",
+          "refId": "A"
+        }
+      ],
+      "title": "Congestion",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "Total messages being received across all components per second. A value near zero when activity is expected may indicate a connectivity problem.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.01
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 20,
+        "y": 1
+      },
+      "id": 5,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum(rate(dds_data_reader_protocol_received_samples_total[$__rate_interval]))",
+          "instant": true,
+          "legendFormat": "msgs/s",
+          "refId": "A"
+        }
+      ],
+      "title": "Message Rate",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 101,
+      "title": "Components Online",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "Number of monitored application processes currently visible to the observability stack.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 7
+      },
+      "id": 10,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum(dds_application_presence)",
+          "instant": true,
+          "legendFormat": "Online",
+          "refId": "A"
+        }
+      ],
+      "title": "Applications",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "Number of active communication participants (one per application domain connection).",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 7
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum(dds_domain_participant_presence)",
+          "instant": true,
+          "legendFormat": "Online",
+          "refId": "A"
+        }
+      ],
+      "title": "Communication Nodes",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "Number of active data publishers. A drop here means a component has stopped sending.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 7
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum(dds_data_writer_presence)",
+          "instant": true,
+          "legendFormat": "Online",
+          "refId": "A"
+        }
+      ],
+      "title": "Data Sources",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "Number of active data subscribers. A drop here means a component has stopped receiving.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 7
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum(dds_data_reader_presence)",
+          "instant": true,
+          "legendFormat": "Online",
+          "refId": "A"
+        }
+      ],
+      "title": "Data Consumers",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 102,
+      "title": "Data Flow",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "Rate at which messages are being received, broken down by topic. Flat lines or zero values indicate data has stopped flowing.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 13
+      },
+      "id": 20,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_protocol_received_samples_total[$__rate_interval]))",
+          "legendFormat": "{{topic_name}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Messages Received per Second",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "Bandwidth consumed by incoming data, by topic. Unexpected spikes or drops may indicate abnormal system behaviour.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "Bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 13
+      },
+      "id": 21,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_protocol_received_sample_bytes_total[$__rate_interval]))",
+          "legendFormat": "{{topic_name}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Data Volume Received (bytes/s)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 21
+      },
+      "id": 103,
+      "title": "Connectivity Status",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "Connectivity events: a data source going offline, a receiver detecting a source has disappeared, or a subscriber that has stopped responding. Any non-zero value warrants investigation.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 22
+      },
+      "id": 30,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum",
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_writer_liveliness_lost_total[$__rate_interval]))",
+          "legendFormat": "Source went offline \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (dds_data_reader_liveliness_not_alive_count)",
+          "legendFormat": "Sources seen as offline \u2014 {{topic_name}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (dds_data_writer_reliable_reader_activity_inactive_count)",
+          "legendFormat": "Inactive subscribers \u2014 {{topic_name}}",
+          "refId": "C"
+        }
+      ],
+      "title": "Offline Data Sources and Inactive Subscribers",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "How often components fail to meet their expected update interval. Source misses mean a publisher is running behind; receiver misses mean data is not arriving on schedule.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 22
+      },
+      "id": 31,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_writer_deadline_missed_total[$__rate_interval]))",
+          "legendFormat": "Source missed schedule \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_deadline_missed_total[$__rate_interval]))",
+          "legendFormat": "Updates not arriving on time \u2014 {{topic_name}}",
+          "refId": "B"
+        }
+      ],
+      "title": "Late or Missing Updates (events/s)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 30
+      },
+      "id": 104,
+      "title": "Message Loss and Delivery Backlog",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "Messages that were dropped before being read by the receiving component. 'Lost' = discarded at protocol level. 'Overwrites' = queue full, oldest data replaced. 'Sender dropped' = unacknowledged data discarded by source.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 31
+      },
+      "id": 40,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_sample_lost_total[$__rate_interval]))",
+          "legendFormat": "Messages lost \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_cache_replaced_dropped_samples_total[$__rate_interval]))",
+          "legendFormat": "Receiver queue overwrites \u2014 {{topic_name}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_writer_reliable_cache_replaced_unack_samples_total[$__rate_interval]))",
+          "legendFormat": "Sender dropped unconfirmed \u2014 {{topic_name}}",
+          "refId": "C"
+        }
+      ],
+      "title": "Lost and Dropped Messages (events/s)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "Messages waiting in the sender's queue for delivery confirmation. A growing backlog means receivers are slow or offline. Queue-full events mean data is being dropped at the source.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 31
+      },
+      "id": 41,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (dds_data_writer_reliable_cache_unack_samples)",
+          "legendFormat": "Pending \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (dds_data_writer_reliable_cache_unack_samples_peak)",
+          "legendFormat": "Peak pending \u2014 {{topic_name}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_writer_reliable_cache_full_total[$__rate_interval]))",
+          "legendFormat": "Queue full events/s \u2014 {{topic_name}}",
+          "refId": "C"
+        }
+      ],
+      "title": "Delivery Backlog \u2014 Pending Messages in Sender Queue",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 39
+      },
+      "id": 105,
+      "title": "Configuration Faults",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "Components discovered each other but cannot exchange data. 'Settings conflicts' mean incompatible reliability or durability configuration. 'Definition conflicts' mean the data structure differs between sender and receiver. These faults persist until configuration is corrected \u2014 a restart alone will not fix them.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 40
+      },
+      "id": 50,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_writer_incompatible_qos_total[$__rate_interval]))",
+          "legendFormat": "Sender settings conflict \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_incompatible_qos_total[$__rate_interval]))",
+          "legendFormat": "Receiver settings conflict \u2014 {{topic_name}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_topic_inconsistent_total[$__rate_interval]))",
+          "legendFormat": "Data definition conflict \u2014 {{topic_name}}",
+          "refId": "C"
+        }
+      ],
+      "title": "Settings Conflicts and Definition Faults (events/s)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 48
+      },
+      "id": 106,
+      "title": "Resource Usage",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "Physical (RSS) and virtual memory consumed by each monitored application process. Steady growth over time may indicate a memory leak.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 49
+      },
+      "id": 60,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "dds_application_process_memory_usage_resident_memory_bytes",
+          "legendFormat": "RSS \u2014 {{name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "dds_application_process_memory_usage_virtual_memory_bytes",
+          "legendFormat": "Virtual \u2014 {{name}}",
+          "refId": "B"
+        }
+      ],
+      "title": "Memory in Use per Application",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "Network bandwidth used for sending and receiving data, per host. Unexpectedly high outbound traffic can indicate retransmit pressure.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "Bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 49
+      },
+      "id": 61,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "rate(dds_domain_participant_udpv4_usage_out_net_bytes_mean[$__rate_interval])",
+          "legendFormat": "Outbound \u2014 {{hostname}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "rate(dds_domain_participant_udpv4_usage_in_net_bytes_mean[$__rate_interval])",
+          "legendFormat": "Inbound \u2014 {{hostname}}",
+          "refId": "B"
+        }
+      ],
+      "title": "Network Send Rate per Host",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "30s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [
+    "rti",
+    "connext",
+    "monitoring2",
+    "production",
+    "operations"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "System Health \u2014 Production",
+  "uid": "rti-prod-v1",
+  "version": 1,
+  "weekStart": ""
+}

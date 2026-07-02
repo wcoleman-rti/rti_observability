@@ -62,17 +62,19 @@ services:
   #     org.label-schema.group: "observability"
 
   collector-service:
-    image: rticom/collector-service:7.3.1.3
+    image: rticom/collector-service:7.7.0
     container_name: collector_service_observability
     stop_signal: SIGINT
     stop_grace_period: 50s
     volumes:
-      - $RTI_LICENSE_FILE:/opt/rti.com/rti_connext_dds-7.3.0/rti_license.dat
+      - $RTI_LICENSE_FILE:/opt/rti.com/rti_license.dat
     command:
       - "-verbosity"
       - "WARN"
     environment:
+      - RTI_LICENSE_FILE=/opt/rti.com/rti_license.dat
       - CFG_NAME="NonSecureLAN"
+      - OBSERVABILITY_HOSTNAME=localhost
       - OBSERVABILITY_DOMAIN=101
       - OBSERVABILITY_PROMETHEUS_EXPORTER_PORT=19090
     restart: unless-stopped
@@ -82,3 +84,80 @@ services:
       org.label-schema.group: "observability"
     tty: true
     stdin_open: true
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # DDS Ping publisher/subscriber pair — quick scenario for testing dashboards
+  #
+  # Start alongside the observability stack:
+  #   docker compose --profile dds-ping up
+  #
+  # Or start just these two services against an already-running stack:
+  #   docker compose --profile dds-ping up dds-ping-pub dds-ping-sub
+  #
+  # Override monitoring tier at runtime (default: Production):
+  #   DDS_MONITOR_PROFILE=Development docker compose --profile dds-ping up
+  #
+  # The QoS files are mounted read-only from ./qos into the container.
+  # Both services run on DDS domain 0; the Monitoring Library 2.0 dedicated
+  # participant forwards telemetry to Collector Service on domain 101.
+  # ──────────────────────────────────────────────────────────────────────────
+
+  dds-ping-pub:
+    image: rticom/dds-ping:7.3.1.2
+    container_name: dds_ping_pub
+    profiles:
+      - dds-ping
+    stop_signal: SIGINT
+    stop_grace_period: 10s
+    volumes:
+      - $RTI_LICENSE_FILE:/opt/rti.com/rti_license.dat
+      - ./qos:/qos:ro
+    command:
+      - "-domainId"
+      - "0"
+      - "-qosFile"
+      - "/qos/Ping.xml"
+      - "-qosProfile"
+      - "Ping::Reliable"
+      - "-pub"
+    environment:
+      - RTI_LICENSE_FILE=/opt/rti.com/rti_license.dat
+      - NDDS_QOS_PROFILES=/qos/Monitoring.xml;/qos/Logging.xml;/qos/FactoryQos.xml
+      - DDS_MONITOR_PROFILE=${DDS_MONITOR_PROFILE:-Production}
+    restart: unless-stopped
+    network_mode: "host"
+    ipc: host
+    depends_on:
+      - collector-service
+    labels:
+      org.label-schema.group: "observability"
+
+  dds-ping-sub:
+    image: rticom/dds-ping:7.3.1.2
+    container_name: dds_ping_sub
+    profiles:
+      - dds-ping
+    stop_signal: SIGINT
+    stop_grace_period: 10s
+    volumes:
+      - $RTI_LICENSE_FILE:/opt/rti.com/rti_license.dat
+      - ./qos:/qos:ro
+    command:
+      - "-domainId"
+      - "0"
+      - "-qosFile"
+      - "/qos/Ping.xml"
+      - "-qosProfile"
+      - "Ping::Reliable"
+      - "-sub"
+    environment:
+      - RTI_LICENSE_FILE=/opt/rti.com/rti_license.dat
+      - NDDS_QOS_PROFILES=/qos/Monitoring.xml;/qos/Logging.xml;/qos/FactoryQos.xml
+      - DDS_MONITOR_PROFILE=${DDS_MONITOR_PROFILE:-Production}
+    restart: unless-stopped
+    network_mode: "host"
+    ipc: host
+    depends_on:
+      - collector-service
+    labels:
+      org.label-schema.group: "observability"

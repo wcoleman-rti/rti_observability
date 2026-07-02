@@ -1,0 +1,1903 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "RTI Connext Monitoring Library 2.0 \u2014 Development Tier (DDS_MONITOR_PROFILE=Development). Polling 5 s / Event immediate. Metrics: all Production metrics plus DataReader sample rejection. Logs: INFORMATIONAL all channels.",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 100,
+      "title": "System Health Rollup",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short",
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "OK"
+                },
+                "1": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "ERROR"
+                }
+              },
+              "type": "value"
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 1
+      },
+      "id": 1,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "dds_errors",
+          "instant": true,
+          "legendFormat": "Errors",
+          "refId": "A"
+        }
+      ],
+      "title": "System Errors",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short",
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "OK"
+                },
+                "1": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "LOSS"
+                }
+              },
+              "type": "value"
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 1
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "dds_data_loss_errors",
+          "instant": true,
+          "legendFormat": "Loss",
+          "refId": "A"
+        }
+      ],
+      "title": "Data Loss",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short",
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "OK"
+                },
+                "1": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "DELAY"
+                }
+              },
+              "type": "value"
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 8,
+        "y": 1
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "dds_delays_errors",
+          "instant": true,
+          "legendFormat": "Delays",
+          "refId": "A"
+        }
+      ],
+      "title": "Deadline Delays",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short",
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "OK"
+                },
+                "1": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "SAT"
+                }
+              },
+              "type": "value"
+            }
+          ]
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 12,
+        "y": 1
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "dds_saturation_errors",
+          "instant": true,
+          "legendFormat": "Saturation",
+          "refId": "A"
+        }
+      ],
+      "title": "Saturation",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 16,
+        "y": 1
+      },
+      "id": 5,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum(dds_application_presence)",
+          "instant": true,
+          "legendFormat": "Apps",
+          "refId": "A"
+        }
+      ],
+      "title": "Active Applications",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 101,
+      "title": "Data Loss and Sample Rejection",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 6
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_sample_lost_total[$__rate_interval]))",
+          "legendFormat": "Lost \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_cache_replaced_dropped_samples_total[$__rate_interval]))",
+          "legendFormat": "Cache replaced \u2014 {{topic_name}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_writer_reliable_cache_replaced_unack_samples_total[$__rate_interval]))",
+          "legendFormat": "Writer replaced unack \u2014 {{topic_name}}",
+          "refId": "C"
+        }
+      ],
+      "title": "Sample Lost and Cache Replaced (samples/s)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 6
+      },
+      "id": 11,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_sample_rejected_total[$__rate_interval]))",
+          "legendFormat": "Sample rejected \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_cache_tolerance_source_ts_dropped_samples_total[$__rate_interval]))",
+          "legendFormat": "TS tol drop \u2014 {{topic_name}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_protocol_rejected_samples_total[$__rate_interval]))",
+          "legendFormat": "Protocol rejected \u2014 {{topic_name}}",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_protocol_out_of_range_rejected_samples_total[$__rate_interval]))",
+          "legendFormat": "Out-of-range \u2014 {{topic_name}}",
+          "refId": "D"
+        }
+      ],
+      "title": "Sample Drop and Rejection Rate (samples/s)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 102,
+      "title": "Deadline Delays",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "id": 20,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_writer_deadline_missed_total[$__rate_interval]))",
+          "legendFormat": "Writer \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_deadline_missed_total[$__rate_interval]))",
+          "legendFormat": "Reader \u2014 {{topic_name}}",
+          "refId": "B"
+        }
+      ],
+      "title": "Deadline Missed (events/s by topic)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 23
+      },
+      "id": 103,
+      "title": "Writer Cache Saturation",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 24
+      },
+      "id": 30,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (dds_data_writer_reliable_cache_unack_samples)",
+          "legendFormat": "Unack \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (dds_data_writer_reliable_cache_unack_samples_peak)",
+          "legendFormat": "Unack peak \u2014 {{topic_name}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (dds_data_writer_protocol_send_window_size)",
+          "legendFormat": "Send window \u2014 {{topic_name}}",
+          "refId": "C"
+        }
+      ],
+      "title": "Writer Unacknowledged Samples and Send Window",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 24
+      },
+      "id": 31,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_writer_reliable_cache_full_total[$__rate_interval]))",
+          "legendFormat": "Full \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_writer_reliable_cache_high_watermark_total[$__rate_interval]))",
+          "legendFormat": "High watermark \u2014 {{topic_name}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_writer_reliable_cache_replaced_unack_samples_total[$__rate_interval]))",
+          "legendFormat": "Replaced unack \u2014 {{topic_name}}",
+          "refId": "C"
+        }
+      ],
+      "title": "Writer Cache Full / High Watermark / Replaced-Unack (events/s)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 32
+      },
+      "id": 112,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (dds_data_writer_cache_samples)",
+          "legendFormat": "Samples \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (dds_data_writer_cache_samples_peak)",
+          "legendFormat": "Samples peak \u2014 {{topic_name}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (dds_data_writer_cache_alive_instances)",
+          "legendFormat": "Alive instances \u2014 {{topic_name}}",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (dds_data_writer_cache_alive_instances_peak)",
+          "legendFormat": "Alive instances peak \u2014 {{topic_name}}",
+          "refId": "D"
+        }
+      ],
+      "title": "Writer Cache \u2014 Sample Count and Alive Instances",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 40
+      },
+      "id": 108,
+      "title": "DataWriter Protocol Throughput",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 41
+      },
+      "id": 109,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_writer_protocol_pushed_samples_total[$__rate_interval]))",
+          "legendFormat": "Pushed \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_writer_protocol_pulled_samples_total[$__rate_interval]))",
+          "legendFormat": "Pulled \u2014 {{topic_name}}",
+          "refId": "B"
+        }
+      ],
+      "title": "Writer Pushed vs Pulled Sample Rate (samples/s)\n\u2014 Pushed: on-write delivery  |  Pulled: repair, late-joiner, push_on_write=false",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "Bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 41
+      },
+      "id": 110,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_writer_protocol_pushed_sample_bytes_total[$__rate_interval]))",
+          "legendFormat": "Pushed bytes \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_writer_protocol_pulled_sample_bytes_total[$__rate_interval]))",
+          "legendFormat": "Pulled bytes \u2014 {{topic_name}}",
+          "refId": "B"
+        }
+      ],
+      "title": "Writer Pushed and Pulled Byte Rate (bytes/s)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 41
+      },
+      "id": 111,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_writer_protocol_received_nacks_total[$__rate_interval]))",
+          "legendFormat": "NACKs recv \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_writer_protocol_sent_heartbeats_total[$__rate_interval]))",
+          "legendFormat": "Heartbeats sent \u2014 {{topic_name}}",
+          "refId": "B"
+        }
+      ],
+      "title": "Writer NACK Rate / Heartbeats Sent (events/s)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 58
+      },
+      "id": 104,
+      "title": "Match / Liveliness / QoS Compatibility",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 59
+      },
+      "id": 40,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum",
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_writer_liveliness_lost_total[$__rate_interval]))",
+          "legendFormat": "Writer liveliness lost \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (dds_data_reader_liveliness_not_alive_count)",
+          "legendFormat": "Reader not-alive \u2014 {{topic_name}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (dds_data_writer_reliable_reader_activity_inactive_count)",
+          "legendFormat": "Reliable reader inactive \u2014 {{topic_name}}",
+          "refId": "C"
+        }
+      ],
+      "title": "Liveliness and Reliable Reader Activity",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 59
+      },
+      "id": 41,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_writer_incompatible_qos_total[$__rate_interval]))",
+          "legendFormat": "Writer QoS incompat \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_incompatible_qos_total[$__rate_interval]))",
+          "legendFormat": "Reader QoS incompat \u2014 {{topic_name}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_topic_inconsistent_total[$__rate_interval]))",
+          "legendFormat": "Topic inconsistent \u2014 {{topic_name}}",
+          "refId": "C"
+        }
+      ],
+      "title": "QoS Incompatibility and Topic Inconsistency (events/s)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 67
+      },
+      "id": 42,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "dds_data_writer_publication_matched_current_count",
+          "legendFormat": "{{name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "dds_data_writer_publication_matched_current_count_change",
+          "legendFormat": "Change \u2014 {{name}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "dds_data_writer_publication_matched_current_count_peak",
+          "legendFormat": "Peak \u2014 {{name}}",
+          "refId": "C"
+        }
+      ],
+      "title": "Publication Matched \u2014 Current Count and Change\n(TODO: verify exact names for dds_data_writer_publication_matched_*)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 67
+      },
+      "id": 43,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "dds_data_reader_subscription_matched_current_count",
+          "legendFormat": "{{name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "dds_data_reader_subscription_matched_current_count_change",
+          "legendFormat": "Change \u2014 {{name}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "dds_data_reader_subscription_matched_current_count_peak",
+          "legendFormat": "Peak \u2014 {{name}}",
+          "refId": "C"
+        }
+      ],
+      "title": "Subscription Matched \u2014 Current Count and Change\n(TODO: verify exact names for dds_data_reader_subscription_matched_*)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 75
+      },
+      "id": 105,
+      "title": "DataReader Traffic",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 76
+      },
+      "id": 50,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_protocol_received_samples_total[$__rate_interval]))",
+          "legendFormat": "Received \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_protocol_received_heartbeats_total[$__rate_interval]))",
+          "legendFormat": "Heartbeats recv \u2014 {{topic_name}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_protocol_sent_nacks_total[$__rate_interval]))",
+          "legendFormat": "NACKs sent \u2014 {{topic_name}}",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_protocol_duplicate_samples_total[$__rate_interval]))",
+          "legendFormat": "Duplicates \u2014 {{topic_name}}",
+          "refId": "D"
+        }
+      ],
+      "title": "DataReader Received Samples and Heartbeats (samples/s)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "Bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 76
+      },
+      "id": 51,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_protocol_received_sample_bytes_total[$__rate_interval]))",
+          "legendFormat": "Bytes \u2014 {{topic_name}}",
+          "refId": "A"
+        }
+      ],
+      "title": "DataReader Received Bytes (bytes/s)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 84
+      },
+      "id": 106,
+      "title": "Reader Cache Detail",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 85
+      },
+      "id": 60,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (dds_data_reader_cache_alive_instances)",
+          "legendFormat": "Alive \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (dds_data_reader_cache_no_writers_instances)",
+          "legendFormat": "No-writers \u2014 {{topic_name}}",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (dds_data_reader_cache_disposed_instances)",
+          "legendFormat": "Disposed \u2014 {{topic_name}}",
+          "refId": "C"
+        }
+      ],
+      "title": "Reader Cache \u2014 Instance State",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 85
+      },
+      "id": 61,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (dds_data_reader_cache_samples)",
+          "legendFormat": "Samples \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (dds_data_reader_cache_samples_peak)",
+          "legendFormat": "Samples peak \u2014 {{topic_name}}",
+          "refId": "B"
+        }
+      ],
+      "title": "Reader Cache \u2014 Sample Counts",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 85
+      },
+      "id": 62,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_cache_content_filter_dropped_samples_total[$__rate_interval]))",
+          "legendFormat": "CF dropped \u2014 {{topic_name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "sum by (topic_name) (rate(dds_data_reader_cache_compressed_samples_total[$__rate_interval]))",
+          "legendFormat": "Compressed \u2014 {{topic_name}}",
+          "refId": "B"
+        }
+      ],
+      "title": "Reader Cache \u2014 Content Filter and Compression Drops (samples/s)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 93
+      },
+      "id": 107,
+      "title": "Resources",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 94
+      },
+      "id": 70,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "dds_application_process_memory_usage_resident_memory_bytes",
+          "legendFormat": "RSS \u2014 {{name}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "dds_application_process_memory_usage_virtual_memory_bytes",
+          "legendFormat": "VSZ \u2014 {{name}}",
+          "refId": "B"
+        }
+      ],
+      "title": "Application Memory (RSS and VSZ)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "Bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 94
+      },
+      "id": 71,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "rate(dds_domain_participant_udpv4_usage_out_net_bytes_mean[$__rate_interval])",
+          "legendFormat": "UDP4 out \u2014 {{hostname}}",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "rate(dds_domain_participant_udpv4_usage_in_net_bytes_mean[$__rate_interval])",
+          "legendFormat": "UDP4 in \u2014 {{hostname}}",
+          "refId": "B"
+        }
+      ],
+      "title": "Network \u2014 UDP4 (bytes/s by host)",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [
+    "rti",
+    "connext",
+    "monitoring2",
+    "development"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-30m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "RTI Connext \u2014 Development Tier",
+  "uid": "rti-dev-v1",
+  "version": 1,
+  "weekStart": ""
+}

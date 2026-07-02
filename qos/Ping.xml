@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  RTI Connext Professional 7.3.1 — DDS Ping Scenarios
+  ==========================================================================
+  File:    qos/Ping.xml
+  Purpose: Entity QoS profiles for rticom/dds-ping demonstration scenarios.
+           Simulates realistic production conditions (packet loss, deadlines)
+           to exercise observability dashboards without requiring real systems.
+
+  QoS Profiles
+  ========
+
+  Ping::Base
+      Common base: BuiltinQosLib::Generic.Common
+      Simulates 35% random sample loss at the DataReader level via
+      dds.data_reader.loss_percentage property. All scenario profiles
+      inherit this loss simulation so Collector Service receives realistic
+      fault events (sample_lost, NACKs, retransmits, deadline misses).
+
+  Ping::Reliable     (inherits Base)
+      Reliable delivery + KeepAll history.
+      35% reader-side loss causes NACK/retransmit traffic — exercises
+      reliable_cache, sent_heartbeats, received_nacks metrics.
+
+  Ping::BestEffort   (inherits Base)
+      Best-effort delivery + KeepLast(1) + 1 s writer / 2 s reader deadline.
+      35% loss is unrecoverable → generates sample_lost and deadline_missed
+      events — best for demonstrating data-loss and timing-fault dashboards.
+
+  Ping::Durable      (inherits Base)
+      Reliable + TransientLocal durability + KeepLast(1).
+      Late-joining subscribers receive the last published sample.
+
+  Usage
+  =====
+  Referenced by docker-compose dds-ping services via:
+    -qosFile /qos/Ping.xml -qosProfile Ping::Reliable
+
+  Switch profiles to exercise different dashboard scenarios:
+    Ping::Reliable    — connectivity + retransmit load
+    Ping::BestEffort  — data loss + deadline faults
+    Ping::Durable     — late-joiner / durability behaviour
+-->
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://community.rti.com/schema/7.3.1/rti_dds_profiles.xsd">
+
+    <qos_library name="Ping">
+        <qos_profile name="Base" base_name="BuiltinQosLib::Generic.Common">
+            <datareader_qos>
+                <property>
+                    <value>
+                        <element>
+                            <name>dds.data_reader.loss_percentage</name>
+                            <value>R,35,-1,-1</value>
+                        </element>
+                    </value>
+                </property>
+            </datareader_qos>
+        </qos_profile>
+        <qos_profile name="Reliable" base_name="Base">
+            <base_name>
+                <element>BuiltinQosSnippetLib::QosPolicy.Reliability.Reliable</element>
+                <element>BuiltinQosSnippetLib::QosPolicy.History.KeepAll</element>
+                <element>BuiltinQosSnippetLib::Optimization.ReliabilityProtocol.KeepAll</element>
+            </base_name>
+        </qos_profile>
+        <qos_profile name="Durable" base_name="Base">
+            <base_name>
+                <element>BuiltinQosSnippetLib::QosPolicy.Reliability.Reliable</element>
+                <element>BuiltinQosSnippetLib::QosPolicy.Durability.TransientLocal</element>
+                <element>BuiltinQosSnippetLib::QosPolicy.History.KeepLast_1</element>
+                <element>BuiltinQosSnippetLib::Optimization.ReliabilityProtocol.KeepLast</element>
+            </base_name>
+        </qos_profile>
+        <qos_profile name="BestEffort" base_name="Base">
+            <base_name>
+                <element>BuiltinQosSnippetLib::QosPolicy.Reliability.BestEffort</element>
+                <element>BuiltinQosSnippetLib::QosPolicy.History.KeepLast_1</element>
+            </base_name>
+            <datawriter_qos>
+                <deadline>
+                    <period>
+                        <sec>1</sec>
+                        <nanosec>0</nanosec>
+                    </period>
+                </deadline>
+            </datawriter_qos>
+            <datareader_qos>
+                <deadline>
+                    <period>
+                        <sec>2</sec>
+                        <nanosec>0</nanosec>
+                    </period>
+                </deadline>
+            </datareader_qos>
+        </qos_profile>
+    </qos_library>
+
+</dds>

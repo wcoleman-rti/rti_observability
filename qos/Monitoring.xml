@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  RTI Connext Professional 7.3.1 — Monitoring Library 2.0 Profiles
+  ==========================================================================
+  File:    qos/Monitoring.xml
+  Purpose: RTI Observability application monitoring configuration.
+           This file is intended to be loaded alongside FactoryQos.xml.
+
+  QoS Profiles
+  ========
+
+  Monitoring::Main
+      Monitoring domain ID 101
+      Discovery: multicast (239.255.0.1) using RTI's built-in fast-discovery
+        QoS snippets, plus a domain_tag required for RTI Collector Service
+        >= 7.7.0 (see qos_profile "MonitoringParticipant" below).
+      Polling/Metrics/Logs: configured by environment variable-derived snippet
+        (`DDS_MONITOR_PROFILE` = Production, Development, or Discovery).
+  
+  Snippet Profiles
+  ========
+
+  Monitoring::Production
+      Polling 15 s / Event 1 s. Health, freshness, delay, loss, saturation.
+      Logs: WARNING and above.
+
+  Monitoring::Development
+      Polling 5 s / Event 0 s (immediate). Reliability, cache detail, QoS/status,
+      sample rejection.
+      Logs: INFORMATIONAL and above.
+
+  Monitoring::Discovery
+      Polling 1 s / Event 0 s (immediate). QoS compatibility, match/unmatch churn,
+      startup timing.
+      Logs: INFORMATIONAL (middleware) / WARNING (security) / ERROR (service, user).
+
+  Monitoring::MonitoringParticipant
+      QoS for the dedicated Monitoring Library 2.0 participant (domain 101)
+      itself: fast multicast discovery plus the domain_tag required for
+      RTI Collector Service >= 7.7.0.
+
+  Requirements
+  ============
+  RTI Collector Service >= 7.7.0. Monitored applications may run RTI Connext
+  7.3.1 (or later); Monitoring Library 2.0 wire compatibility with Collector
+  Service is maintained across these versions.
+
+  Usage
+  =====
+  Load this file alongside FactoryQos.xml.
+  To activate a tier:
+    - Set the DDS_MONITOR_PROFILE environment variable to one of the three profile names:
+        - Production (default)
+        - Development
+        - Discovery
+
+    > DDS_MONITOR_PROFILE=Production NDDS_QOS_PROFILES="qos/Monitoring.xml;qos/FactoryQos.xml"
+
+-->
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:noNamespaceSchemaLocation="https://community.rti.com/schema/7.3.1/rti_dds_profiles.xsd">
+
+
+    <configuration_variables>
+        <value>
+            <!-- Env: DDS_MONITOR_PROFILE
+            This variable is used to select the monitoring profile to use for the Observability Participant.
+            The value of this variable can be set to one of the following:
+                - Production: This profile is optimized for performance and is suitable for production environments.
+                - Development: This profile is optimized for debugging and is suitable for development environments.
+                - Discovery: This profile is optimized for profiling discovery events and timing and is suitable for testing environments.
+            -->
+            <element>
+                <name>DDS_MONITOR_PROFILE</name>
+                <value>Production</value>
+            </element>
+        </value>
+    </configuration_variables>
+
+    <qos_library name="Monitoring">
+
+        <!-- ==================================================================
+             Production
+             ──────────────────────────────────────────────────────────────────
+             Tier intent : System health, freshness, delay, loss, saturation,
+                           critical log alerting.
+             Polling     : 15 s  (low overhead; suitable for steady-state)
+             Event pub   : 1 s   (near-real-time event delivery)
+             Logs        : 1 s, WARNING and above (middleware + user channels)
+             Metrics     : Core protocol counters, cache saturation, liveliness,
+                           deadlines, process memory, network usage.
+        ================================================================== -->
+        <qos_profile name="Production">
+            <?rti-qos_snippet?>
+            <participant_factory_qos>
+                <monitoring>
+                    <distribution_settings>
+
+                        <!-- Periodic polling period: 15 s for Production -->
+                        <periodic_settings>
+                            <polling_period>
+                                <sec>15</sec>
+                                <nanosec>0</nanosec>
+                            </polling_period>
+                        </periodic_settings>
+
+                        <!-- Event publication period: max 1 s batching delay -->
+                        <event_settings>
+                            <publication_period>
+                                <sec>1</sec>
+                                <nanosec>0</nanosec>
+                            </publication_period>
+                        </event_settings>
+
+                        <!-- Logging publication period: max 1 s batching delay -->
+                        <logging_settings>
+                            <publication_period>
+                                <sec>1</sec>
+                                <nanosec>0</nanosec>
+                            </publication_period>
+                        </logging_settings>
+                    </distribution_settings>
+
+                    <telemetry_data>
+                        <metrics>
+
+                            <!-- ── Application: process resource health ────────
+                             -->
+                            <element>
+                                <resource_selection>//applications/*</resource_selection>
+                                <enabled_metrics_selection>
+                                    <!-- Periodic metrics -->
+                                    <element>dds_application_process_memory_usage_*</element>
+                                </enabled_metrics_selection>
+                            </element>
+
+                            <!-- ── DomainParticipant: network and presence ─────
+                             -->
+                            <element>
+                                <resource_selection>//domain_participants/*</resource_selection>
+                                <enabled_metrics_selection>
+                                    <!-- Periodic metrics -->
+                                    <element>dds_domain_participant_udpv4_usage_in_net_pkts_*</element>
+                                    <element>dds_domain_participant_udpv4_usage_in_net_bytes_*</element>
+                                    <element>dds_domain_participant_udpv4_usage_out_net_pkts_*</element>
+                                    <element>dds_domain_participant_udpv4_usage_out_net_bytes_*</element>
+                                </enabled_metrics_selection>
+                            </element>
+
+                            <!-- ── Topic: core health metrics ────────────
+                             -->
+                            <element>
+                                <resource_selection>//topics/*</resource_selection>
+                                <enabled_metrics_selection>
+                                    <!-- Event metrics -->
+                                    <element>dds_topic_inconsistent_total</element>
+                                </enabled_metrics_selection>
+                            </element>
+
+                            <!-- ── DataWriter: core health metrics ────────────
+                             -->
+                            <element>
+                                <resource_selection>//data_writers/*</resource_selection>
+                                <enabled_metrics_selection>
+                                    <!-- Periodic metrics -->
+                                    <element>dds_data_writer_reliable_cache_*</element>
+                                    <!-- Event metrics -->
+                                    <element>dds_data_writer_liveliness_lost_total</element>
+                                    <element>dds_data_writer_deadline_missed_total</element>
+                                    <element>dds_data_writer_incompatible_qos_total</element>
+                                    <element>dds_data_writer_publication_matched_*</element>
+                                    <element>dds_data_writer_reliable_reader_activity_*</element>
+                                </enabled_metrics_selection>
+                            </element>
+
+                            <!-- ── DataReader: core health metrics ────────────
+                             -->
+                            <element>
+                                <resource_selection>//data_readers/*</resource_selection>
+                                <enabled_metrics_selection>
+                                    <!-- Periodic metrics -->
+                                    <element>dds_data_reader_cache_*</element>
+                                    <element>dds_data_reader_protocol_*</element>
+                                    <!-- Event metrics -->
+                                    <element>dds_data_reader_liveliness_*</element>
+                                    <element>dds_data_reader_deadline_missed_total</element>
+                                    <element>dds_data_reader_incompatible_qos_total</element>
+                                    <element>dds_data_reader_sample_lost_total</element>
+                                    <element>dds_data_reader_subscription_matched_*</element>
+                                </enabled_metrics_selection>
+                            </element>
+
+                        </metrics>
+
+                        <logs>
+                            <!-- Forward WARNING and above to Collector Service. -->
+                            <middleware_forwarding_level>WARNING</middleware_forwarding_level>
+                            <security_event_forwarding_level>WARNING</security_event_forwarding_level>
+                            <service_forwarding_level>WARNING</service_forwarding_level>
+                            <user_forwarding_level>WARNING</user_forwarding_level>
+                        </logs>
+                    </telemetry_data>
+
+                </monitoring>
+            </participant_factory_qos>
+        </qos_profile>
+
+
+        <!-- ==================================================================
+             Development
+             ──────────────────────────────────────────────────────────────────
+             Tier intent : Active debugging. Writer throughput, protocol
+                           stats, cache detail, QoS/status changes, sample
+                           rejection.
+             Polling     : 5 s   (faster refresh for active debugging)
+             Event pub   : 0 s   (immediate — DDS_DURATION_ZERO)
+             Metrics     : All Production metrics, plus DataWriter protocol
+                           (pushed/pulled samples & bytes, heartbeats, NACKs,
+                           send window) and DataWriter cache stats, plus
+                           DataReader sample rejection counts.
+             Log level   : INFORMATIONAL and above (middleware + all channels).
+        ================================================================== -->
+        <qos_profile name="Development">
+            <?rti-qos_snippet?>
+            <participant_factory_qos>
+                <monitoring>
+                    <distribution_settings>
+
+                        <!-- Periodic polling period: 5 s for Development -->
+                        <periodic_settings>
+                            <polling_period>
+                                <sec>5</sec>
+                                <nanosec>0</nanosec>
+                            </polling_period>
+                        </periodic_settings>
+
+                        <!-- Event publication: immediate -->
+                        <event_settings>
+                            <publication_period>
+                                <sec>0</sec>
+                                <nanosec>0</nanosec>
+                            </publication_period>
+                        </event_settings>
+                    </distribution_settings>
+
+                    <telemetry_data>
+                        <metrics>
+
+                            <!-- ── Application: process resource health ────────
+                             -->
+                            <element>
+                                <resource_selection>//applications/*</resource_selection>
+                                <enabled_metrics_selection>
+                                    <!-- Periodic metrics -->
+                                    <element>dds_application_process_memory_usage_*</element>
+                                </enabled_metrics_selection>
+                            </element>
+
+                            <!-- ── DomainParticipant: network and presence ─────
+                             -->
+                            <element>
+                                <resource_selection>//domain_participants/*</resource_selection>
+                                <enabled_metrics_selection>
+                                    <!-- Periodic metrics -->
+                                    <element>dds_domain_participant_udpv4_usage_in_net_pkts_*</element>
+                                    <element>dds_domain_participant_udpv4_usage_in_net_bytes_*</element>
+                                    <element>dds_domain_participant_udpv4_usage_out_net_pkts_*</element>
+                                    <element>dds_domain_participant_udpv4_usage_out_net_bytes_*</element>
+                                </enabled_metrics_selection>
+                            </element>
+
+                            <!-- ── Topic: core health metrics ────────────
+                             -->
+                            <element>
+                                <resource_selection>//topics/*</resource_selection>
+                                <enabled_metrics_selection>
+                                    <!-- Event metrics -->
+                                    <element>dds_topic_inconsistent_total</element>
+                                </enabled_metrics_selection>
+                            </element>
+
+                            <!-- ── DataWriter: throughput, cache, reliability and match ─
+                             -->
+                            <element>
+                                <resource_selection>//data_writers/*</resource_selection>
+                                <enabled_metrics_selection>
+                                    <!-- Periodic metrics -->
+                                    <element>dds_data_writer_protocol_*</element>
+                                    <element>dds_data_writer_cache_*</element>
+                                    <element>dds_data_writer_reliable_cache_*</element>
+                                    <!-- Event metrics -->
+                                    <element>dds_data_writer_liveliness_lost_total</element>
+                                    <element>dds_data_writer_deadline_missed_total</element>
+                                    <element>dds_data_writer_incompatible_qos_total</element>
+                                    <element>dds_data_writer_publication_matched_*</element>
+                                    <element>dds_data_writer_reliable_reader_activity_*</element>
+                                </enabled_metrics_selection>
+                            </element>
+
+                            <!-- ── DataReader: reliability, protocol and match ─
+                             -->
+                            <element>
+                                <resource_selection>//data_readers/*</resource_selection>
+                                <enabled_metrics_selection>
+                                    <!-- Periodic metrics -->
+                                    <element>dds_data_reader_cache_*</element>
+                                    <element>dds_data_reader_protocol_*</element>
+                                    <!-- Event metrics -->
+                                    <element>dds_data_reader_liveliness_*</element>
+                                    <element>dds_data_reader_deadline_missed_total</element>
+                                    <element>dds_data_reader_incompatible_qos_total</element>
+                                    <element>dds_data_reader_sample_lost_total</element>
+                                    <element>dds_data_reader_sample_rejected_total</element>
+                                    <element>dds_data_reader_subscription_matched_*</element>
+                                </enabled_metrics_selection>
+                            </element>
+
+                        </metrics>
+
+                        <logs>
+                            <!-- Forward INFORMATIONAL and above (all channels) -->
+                            <middleware_forwarding_level>INFORMATIONAL</middleware_forwarding_level>
+                            <security_event_forwarding_level>INFORMATIONAL</security_event_forwarding_level>
+                            <service_forwarding_level>INFORMATIONAL</service_forwarding_level>
+                            <user_forwarding_level>INFORMATIONAL</user_forwarding_level>
+                        </logs>
+                    </telemetry_data>
+
+                </monitoring>
+            </participant_factory_qos>
+        </qos_profile>
+
+
+        <!-- ==================================================================
+             Discovery
+             ──────────────────────────────────────────────────────────────────
+             Tier intent : QoS compatibility, match/unmatch churn, startup
+                           timing, discovery diagnostics.
+             Polling     : 1 s   (high-frequency for startup/convergence tracing)
+             Event pub   : 0 s   (immediate — DDS_DURATION_ZERO)
+             Metrics     : QoS incompatibility and match status for writers
+                           and readers. Minimal resource metrics (memory, UDP4)
+                           for baseline. No cache or protocol traffic.
+             Log level   : INFORMATIONAL (middleware) / WARNING (security) /
+                           ERROR (service, user).
+
+             CAUTION: 1 s polling generates ~15x more Prometheus samples than
+             Production. Use only during startup debugging or convergence
+             analysis. Switch to Production or Development once stable.
+        ================================================================== -->
+        <qos_profile name="Discovery">
+            <?rti-qos_snippet?>
+            <participant_factory_qos>
+                <monitoring>
+                    <distribution_settings>
+
+                        <!-- Periodic polling period: 1 s for discovery tracing -->
+                        <periodic_settings>
+                            <polling_period>
+                                <sec>1</sec>
+                                <nanosec>0</nanosec>
+                            </polling_period>
+                        </periodic_settings>
+
+                        <!-- Event publication: immediate -->
+                        <event_settings>
+                            <publication_period>
+                                <sec>0</sec>
+                                <nanosec>0</nanosec>
+                            </publication_period>
+                        </event_settings>
+                    </distribution_settings>
+
+                    <telemetry_data>
+                        <metrics>
+
+                            <!-- ── Application: process resource health ────────
+                             -->
+                            <element>
+                                <resource_selection>//applications/*</resource_selection>
+                                <enabled_metrics_selection>
+                                    <!-- Periodic metrics -->
+                                    <element>dds_application_process_memory_usage_*</element>
+                                </enabled_metrics_selection>
+                            </element>
+
+                            <!-- ── DomainParticipant: network and presence ─────
+                             -->
+                            <element>
+                                <resource_selection>//domain_participants/*</resource_selection>
+                                <enabled_metrics_selection>
+                                    <!-- Periodic metrics -->
+                                    <element>dds_domain_participant_udpv4_usage_in_net_pkts_*</element>
+                                    <element>dds_domain_participant_udpv4_usage_in_net_bytes_*</element>
+                                    <element>dds_domain_participant_udpv4_usage_out_net_pkts_*</element>
+                                    <element>dds_domain_participant_udpv4_usage_out_net_bytes_*</element>
+                                </enabled_metrics_selection>
+                            </element>
+
+                            <!-- ── Topic: core health metrics ────────────
+                             -->
+                            <element>
+                                <resource_selection>//topics/*</resource_selection>
+                                <enabled_metrics_selection>
+                                    <!-- Event metrics -->
+                                    <element>dds_topic_inconsistent_total</element>
+                                </enabled_metrics_selection>
+                            </element>
+
+                            <!-- ── DataWriter: QoS compatibility and match status
+                             -->
+                            <element>
+                                <resource_selection>//data_writers/*</resource_selection>
+                                <enabled_metrics_selection>
+                                    <!-- Event metrics -->
+                                    <element>dds_data_writer_incompatible_qos_total</element>
+                                    <element>dds_data_writer_publication_matched_*</element>
+                                </enabled_metrics_selection>
+                            </element>
+
+                            <!-- ── DataReader: QoS compatibility and match status
+                             -->
+                            <element>
+                                <resource_selection>//data_readers/*</resource_selection>
+                                <enabled_metrics_selection>
+                                    <!-- Event metrics -->
+                                    <element>dds_data_reader_incompatible_qos_total</element>
+                                    <element>dds_data_reader_subscription_matched_*</element>
+                                </enabled_metrics_selection>
+                            </element>
+
+                        </metrics>
+
+                        <logs>
+                            <!-- INFORMATIONAL middleware; WARNING security; ERROR service/user -->
+                            <middleware_forwarding_level>INFORMATIONAL</middleware_forwarding_level>
+                            <security_event_forwarding_level>WARNING</security_event_forwarding_level>
+                            <service_forwarding_level>ERROR</service_forwarding_level>
+                            <user_forwarding_level>ERROR</user_forwarding_level>
+                        </logs>
+                    </telemetry_data>
+
+                </monitoring>
+            </participant_factory_qos>
+        </qos_profile>
+
+        <!-- ==================================================================
+             Main
+             ──────────────────────────────────────────────────────────────────
+             This profile configures all things RTI Monitoring for the process.
+             It is intended to be used as a base profile for a singular participant
+             factory QoS profile that is marked as the default participant factory profile.
+        ================================================================== -->
+        <qos_profile name="Main">
+            <participant_factory_qos>
+                <base_name>
+                    <element>$(DDS_MONITOR_PROFILE)</element>
+                </base_name>
+
+                <!-- Configure Observability here -->
+                <monitoring>
+                    <enable>true</enable>
+
+                    <!-- Application name (Resource: /applications/<AppName>).
+                    Left unset: Monitoring Library 2.0 auto-assigns a unique
+                    resource identifier per process
+                    (/applications/<host_name:process_id:uuid>), so no manual
+                    naming is required to distinguish multiple processes on
+                    the same host. Set explicitly only for human-readable
+                    naming.
+                    https://community.rti.com/static/documentation/connext-dds/7.3.1/doc/manuals/connext_dds_professional/observability/library.html#setting-the-application-name
+            -->
+                    <application_name></application_name>
+
+
+                    <distribution_settings>
+                        <!-- Configure how the monitoring data is propagated to RTI Collector Service -->
+                        <dedicated_participant>
+                            <!-- Domain ID for the Observability Participant. Must match the domain ID configured in the RTI Collector Service (env: OBSERVABILITY_DOMAIN).
+                                    https://community.rti.com/static/documentation/connext-dds/7.3.1/doc/manuals/connext_dds_professional/observability/library.html#changing-the-default-observability-domain-id
+                            -->
+                            <domain_id>101</domain_id>
+
+                            <!-- Custom QoS profile for the dedicated monitoring participant itself:
+                                    enables fast multicast-based discovery and sets the domain_tag
+                                    required for RTI Collector Service >= 7.7.0. See qos_profile
+                                    "MonitoringParticipant" below.
+                            -->
+                            <participant_qos_profile_name>Monitoring::MonitoringParticipant</participant_qos_profile_name>
+
+                            <!-- Initial peers for the Observability Participant. Set to the
+                                    well-known Collector Service discovery multicast address
+                                    (239.255.0.1), matching "MonitoringParticipant"'s
+                                    multicast_receive_addresses below. If Collector Service is on
+                                    a different machine/subnet where this multicast group isn't
+                                    routed, replace with an explicit unicast peer instead
+                                    (e.g. <element>192.168.1.2</element>).
+                                    https://community.rti.com/static/documentation/connext-dds/7.3.1/doc/manuals/connext_dds_professional/observability/library.html#setting-collector-service-initial-peers
+                            -->
+                            <collector_initial_peers>
+                                <element>239.255.0.1</element>
+                            </collector_initial_peers>
+                        </dedicated_participant>
+                    </distribution_settings>
+                    <telemetry_data>
+
+                        
+                        <!-- Configure metrics to enable/disable per resource group to propagate to RTI Collector Service
+                                https://community.rti.com/static/documentation/connext-dds/7.3.1/doc/manuals/connext_dds_professional/observability/library.html#setting-the-initial-metrics-and-log-configuration 
+                             *Metric and resource configurations are derived from the "Monitoring" library snippet.
+                        -->
+                        <!-- <metrics>
+                            <element>
+                                <resource_selection>//*</resource_selection>
+                                <enabled_metrics_selection>
+                                    <element>*</element>
+                                </enabled_metrics_selection>
+                            </element>
+                        </metrics> -->
+
+                        <!-- Set log level per category to propagate to RTI Collector Service
+                                https://community.rti.com/static/documentation/connext-dds/7.3.1/doc/manuals/connext_dds_professional/observability/library.html#setting-the-initial-metrics-and-log-configuration 
+                             *Log configurations are derived from the "Monitoring" library snippet.
+                        -->
+                        <!-- <logs>
+                            <middleware_forwarding_level>SILENT</middleware_forwarding_level>
+                            <security_event_forwarding_level>SILENT</security_event_forwarding_level>
+                            <service_forwarding_level>SILENT</service_forwarding_level>
+                            <user_forwarding_level>SILENT</user_forwarding_level>
+                        </logs> -->
+                    </telemetry_data>
+                </monitoring>
+            </participant_factory_qos>
+        </qos_profile>
+
+        <!-- ==================================================================
+             MonitoringParticipant
+             ──────────────────────────────────────────────────────────────────
+             QoS profile for the DEDICATED MONITORING PARTICIPANT itself
+             (domain 101), referenced by Main's
+             distribution_settings.dedicated_participant.participant_qos_profile_name.
+
+             - Adds RTI's built-in fast-discovery QoS snippets
+               (Optimization.Discovery.*) to minimize discovery/startup
+               latency for the monitoring participant.
+             - Enables multicast discovery (239.255.0.1) so monitored
+               processes and Collector Service find each other quickly
+               without per-process peer configuration.
+             - Sets domain_tag "RTI_o11y", required for compatibility with
+               RTI Collector Service >= 7.7.0's Observability traffic
+               changes. Comment out the <property> element below if using
+               Collector Service < 7.7.0.
+               https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/migration_guide/770/product770/observability770.html#changes-to-domain-id-and-domain-tag-for-observability-traffic
+
+             Base: BuiltinQosLib::Generic.Monitoring2 (the default profile
+             used when participant_qos_profile_name is not set).
+        ================================================================== -->
+        <qos_profile name="MonitoringParticipant" base_name="BuiltinQosLib::Generic.Monitoring2">
+            <base_name>
+                <element>BuiltinQosSnippetLib::Optimization.Discovery.Common</element>
+                <element>BuiltinQosSnippetLib::Optimization.Discovery.Endpoint.Fast</element>
+                <element>BuiltinQosSnippetLib::Optimization.Discovery.Participant.Compact</element>
+            </base_name>
+            <domain_participant_qos>
+                <discovery>
+                    <!-- Enable multicast reception for discovery -->
+                    <multicast_receive_addresses>
+                        <element>239.255.0.1</element>
+                    </multicast_receive_addresses>
+                </discovery>
+                <property>
+                    <value>
+                        <!-- Required for compatibility with RTI Collector Service >= 7.7.0.
+                             Comment out this property to connect to Collector Service < 7.7.0.
+                             https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/migration_guide/770/product770/observability770.html#changes-to-domain-id-and-domain-tag-for-observability-traffic
+                        -->
+                        <element>
+                            <name>dds.domain_participant.domain_tag</name>
+                            <value>RTI_o11y</value>
+                            <propagate>false</propagate>
+                        </element>
+                    </value>
+                </property>
+            </domain_participant_qos>
+        </qos_profile>
+
+    </qos_library>
+</dds>
