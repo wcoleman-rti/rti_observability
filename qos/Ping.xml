@@ -12,19 +12,19 @@
 
   Ping::Base
       Common base: BuiltinQosLib::Generic.Common
-      Simulates 35% random sample loss at the DataReader level via
+      Simulates 5% random sample loss at the DataReader level via
       dds.data_reader.loss_percentage property. All scenario profiles
       inherit this loss simulation so Collector Service receives realistic
       fault events (sample_lost, NACKs, retransmits, deadline misses).
 
   Ping::Reliable     (inherits Base)
       Reliable delivery + KeepAll history.
-      35% reader-side loss causes NACK/retransmit traffic — exercises
+      5% reader-side loss causes NACK/retransmit traffic — exercises
       reliable_cache, sent_heartbeats, received_nacks metrics.
 
   Ping::BestEffort   (inherits Base)
       Best-effort delivery + KeepLast(1) + 1 s writer / 2 s reader deadline.
-      35% loss is unrecoverable → generates sample_lost and deadline_missed
+      5% loss is unrecoverable → generates sample_lost and deadline_missed
       events — best for demonstrating data-loss and timing-fault dashboards.
 
   Ping::Durable      (inherits Base)
@@ -50,7 +50,7 @@
                     <value>
                         <element>
                             <name>dds.data_reader.loss_percentage</name>
-                            <value>R,35,-1,-1</value>
+                            <value>R,5,-1,-1</value>
                         </element>
                     </value>
                 </property>

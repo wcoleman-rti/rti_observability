@@ -103,7 +103,7 @@ services:
   # ──────────────────────────────────────────────────────────────────────────
 
   dds-ping-pub:
-    image: rticom/dds-ping:7.3.1.2
+    image: rticom/dds-ping:7.3.0
     container_name: dds_ping_pub
     profiles:
       - dds-ping
@@ -133,7 +133,7 @@ services:
       org.label-schema.group: "observability"
 
   dds-ping-sub:
-    image: rticom/dds-ping:7.3.1.2
+    image: rticom/dds-ping:7.3.0
     container_name: dds_ping_sub
     profiles:
       - dds-ping

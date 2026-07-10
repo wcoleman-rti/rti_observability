@@ -501,7 +501,7 @@
             "type": "prometheus",
             "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
           },
-          "expr": "sum by (topic_name) (rate(dds_data_writer_incompatible_qos_total[$__rate_interval]))",
+          "expr": "sum by (topic_name) (rate(dds_data_writer_incompatible_qos_total[$__rate_interval]) * on (guid) group_left(topic_name) dds_data_writer_presence{topic_name=~\"$topic_name\", hostname=~\"$hostname\"})",
           "legendFormat": "Writer incompat \u2014 {{topic_name}}",
           "refId": "A"
         },
@@ -510,7 +510,7 @@
             "type": "prometheus",
             "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
           },
-          "expr": "sum by (topic_name) (rate(dds_data_reader_incompatible_qos_total[$__rate_interval]))",
+          "expr": "sum by (topic_name) (rate(dds_data_reader_incompatible_qos_total[$__rate_interval]) * on (guid) group_left(topic_name) dds_data_reader_presence{topic_name=~\"$topic_name\", hostname=~\"$hostname\"})",
           "legendFormat": "Reader incompat \u2014 {{topic_name}}",
           "refId": "B"
         },
@@ -519,7 +519,7 @@
             "type": "prometheus",
             "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
           },
-          "expr": "sum by (topic_name) (rate(dds_topic_inconsistent_total[$__rate_interval]))",
+          "expr": "sum by (topic_name) (rate(dds_topic_inconsistent_total[$__rate_interval]) * on (guid) group_left(topic_name) dds_topic_presence{topic_name=~\"$topic_name\", hostname=~\"$hostname\"})",
           "legendFormat": "Topic inconsistent \u2014 {{topic_name}}",
           "refId": "C"
         }
@@ -583,7 +583,7 @@
             "type": "prometheus",
             "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
           },
-          "expr": "dds_data_writer_publication_matched_current_count",
+          "expr": "dds_data_writer_publication_matched_current_count * on (guid) group_left(name) dds_data_writer_presence{topic_name=~\"$topic_name\", hostname=~\"$hostname\"}",
           "legendFormat": "{{name}}",
           "refId": "A"
         }
@@ -635,7 +635,7 @@
             "type": "prometheus",
             "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
           },
-          "expr": "dds_data_reader_subscription_matched_current_count",
+          "expr": "dds_data_reader_subscription_matched_current_count * on (guid) group_left(name) dds_data_reader_presence{topic_name=~\"$topic_name\", hostname=~\"$hostname\"}",
           "legendFormat": "{{name}}",
           "refId": "A"
         }
@@ -687,7 +687,7 @@
             "type": "prometheus",
             "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
           },
-          "expr": "sum by (name) (rate(dds_data_writer_publication_matched_current_count_change[$__rate_interval]))",
+          "expr": "sum by (name) (rate(dds_data_writer_publication_matched_current_count_change[$__rate_interval]) * on (guid) group_left(name) dds_data_writer_presence{topic_name=~\"$topic_name\", hostname=~\"$hostname\"})",
           "legendFormat": "Writer \u2014 {{name}}",
           "refId": "A"
         }
@@ -739,7 +739,7 @@
             "type": "prometheus",
             "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
           },
-          "expr": "sum by (name) (rate(dds_data_reader_subscription_matched_current_count_change[$__rate_interval]))",
+          "expr": "sum by (name) (rate(dds_data_reader_subscription_matched_current_count_change[$__rate_interval]) * on (guid) group_left(name) dds_data_reader_presence{topic_name=~\"$topic_name\", hostname=~\"$hostname\"})",
           "legendFormat": "Reader \u2014 {{name}}",
           "refId": "A"
         }
@@ -764,68 +764,7 @@
         "type": "prometheus",
         "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
       },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "lineWidth": 1
-          },
-          "unit": "bytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 46
-      },
-      "id": 40,
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean",
-            "max"
-          ],
-          "displayMode": "table",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "10.1.4",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
-          },
-          "expr": "dds_application_process_memory_usage_resident_memory_bytes",
-          "legendFormat": "RSS \u2014 {{name}}",
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
-          },
-          "expr": "dds_application_process_memory_usage_virtual_memory_bytes",
-          "legendFormat": "VSZ \u2014 {{name}}",
-          "refId": "B"
-        }
-      ],
-      "title": "Application Memory (RSS and VSZ)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
-      },
+      "description": "Outbound UDPv4 bandwidth per DomainParticipant (not per host \u2014 hosts/processes may run multiple participants). hostname/process_id are the application-reported identifiers for that participant; guid identifies the participant itself.",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -841,7 +780,7 @@
       "gridPos": {
         "h": 8,
         "w": 12,
-        "x": 12,
+        "x": 0,
         "y": 46
       },
       "id": 41,
@@ -866,8 +805,115 @@
             "type": "prometheus",
             "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
           },
-          "expr": "rate(dds_domain_participant_udpv4_usage_out_net_bytes_mean[$__rate_interval])",
-          "legendFormat": "UDP4 out \u2014 {{hostname}}",
+          "expr": "rate(dds_domain_participant_udpv4_usage_out_net_bytes_mean[$__rate_interval]) * on (guid) group_left(hostname, process_id) dds_domain_participant_presence{hostname=~\"$hostname\", name=~\"$name\"}",
+          "legendFormat": "{{hostname}} (pid {{process_id}}) \u2014 {{guid}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Outbound Network Rate per Participant",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "description": "Inbound UDPv4 bandwidth per DomainParticipant (not per host \u2014 hosts/processes may run multiple participants). hostname/process_id are the application-reported identifiers for that participant; guid identifies the participant itself.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "Bps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 46
+      },
+      "id": 42,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "rate(dds_domain_participant_udpv4_usage_in_net_bytes_mean[$__rate_interval]) * on (guid) group_left(hostname, process_id) dds_domain_participant_presence{hostname=~\"$hostname\", name=~\"$name\"}",
+          "legendFormat": "{{hostname}} (pid {{process_id}}) \u2014 {{guid}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Inbound Network Rate per Participant",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "lineWidth": 1
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 54
+      },
+      "id": 40,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+          },
+          "expr": "dds_application_process_memory_usage_resident_memory_bytes * on (guid) group_left(name) dds_application_presence{hostname=~\"$hostname\", name=~\"$name\"}",
+          "legendFormat": "RSS \u2014 {{name}}",
           "refId": "A"
         },
         {
@@ -875,12 +921,12 @@
             "type": "prometheus",
             "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
           },
-          "expr": "rate(dds_domain_participant_udpv4_usage_in_net_bytes_mean[$__rate_interval])",
-          "legendFormat": "UDP4 in \u2014 {{hostname}}",
+          "expr": "dds_application_process_memory_usage_virtual_memory_bytes * on (guid) group_left(name) dds_application_presence{hostname=~\"$hostname\", name=~\"$name\"}",
+          "legendFormat": "VSZ \u2014 {{name}}",
           "refId": "B"
         }
       ],
-      "title": "Network \u2014 UDP4 (bytes/s by host)",
+      "title": "Application Memory (RSS and VSZ)",
       "type": "timeseries"
     }
   ],
@@ -894,7 +940,80 @@
     "discovery"
   ],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": ".*",
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_topic_presence, topic_name)",
+        "description": "Filter all panels down to one or more topics.",
+        "includeAll": true,
+        "label": "Topic",
+        "multi": true,
+        "name": "topic_name",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_topic_presence, topic_name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_domain_participant_presence, hostname)",
+        "description": "Filter all panels down to one or more hosts.",
+        "includeAll": true,
+        "label": "Host",
+        "multi": true,
+        "name": "hostname",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_domain_participant_presence, hostname)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "81986feed9c29d0d32fbfd3b4f57bcacf159ddb3"
+        },
+        "definition": "label_values(dds_domain_participant_presence{hostname=~\"$hostname\"}, name)",
+        "description": "Filter Resources panels down to one or more applications on the selected host(s).",
+        "includeAll": true,
+        "label": "Application",
+        "multi": true,
+        "name": "name",
+        "options": [],
+        "query": {
+          "query": "label_values(dds_domain_participant_presence{hostname=~\"$hostname\"}, name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
   },
   "time": {
     "from": "now-15m",
